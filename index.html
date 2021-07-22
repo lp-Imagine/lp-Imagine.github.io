@@ -1,0 +1,579 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>imagine - imagine🍂的搬砖日志</title><meta name="keywords" content="JavaScript、Vue、React"><meta name="author" content="peng"><meta name="copyright" content="peng"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="referrer" content="no-referrer"><meta name="description" content="imagine|HTML|CSS|Javascript|WEB前端|Vue|React"><meta property="og:type" content="website"><meta property="og:title" content="imagine"><meta property="og:url" content="https://imagineblog.vercel.app/index.html"><meta property="og:site_name" content="imagine"><meta property="og:description" content="imagine|HTML|CSS|Javascript|WEB前端|Vue|React"><meta property="og:locale" content="zh_CN"><meta property="og:image" content="https://imagineblog.vercel.app/img/avatar.jpg"><meta property="article:author" content="peng"><meta property="article:tag" content="JavaScript、Vue、React"><meta name="twitter:card" content="summary"><meta name="twitter:image" content="https://imagineblog.vercel.app/img/avatar.jpg"><link rel="shortcut icon" href="/img/imagine.png"><link rel="canonical" href="https://imagineblog.vercel.app/"><link rel="preconnect" href="//cdn.jsdelivr.net"><link rel="preconnect" href="//fonts.googleapis.com" crossorigin=""><link rel="preconnect" href="//busuanzi.ibruce.info"><meta name="baidu-site-verification" content="0Qj7ycZ0V2fVCZQ6"><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload='this.media="all"'><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.css" media="print" onload='this.media="all"'><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Titillium+Web&amp;display=swap" media="print" onload='this.media="all"'><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"簡"},
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"limitCount":50,"languages":{"author":"作者: peng","link":"链接: ","source":"来源: imagine","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。"}},
+  lightbox: 'mediumZoom',
+  Snackbar: {"chs_to_cht":"你已切换为繁体","cht_to_chs":"你已切换为简体","day_to_night":"你已切换为深色模式","night_to_day":"你已切换为浅色模式","bgLight":"#49b1f5","bgDark":"#121212","position":"top-right"},
+  source: {
+    jQuery: 'https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js',
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+    },
+    fancybox: {
+      js: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isanchor: true
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE={isPost:!1,isHome:!0,isHighlightShrink:!1,isToc:!1,postUpdate:"2021-07-22 10:19:51"}</script><noscript><style>#nav{opacity:1}.justified-gallery img{opacity:1}#post-meta time,#recent-posts time{display:inline!important}</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          const now = new Date()
+          const hour = now.getHours()
+          const isNight = hour <= 6 || hour >= 18
+          if (t === undefined) isNight ? activateDarkMode() : activateLightMode()
+          else if (t === 'light') activateLightMode()
+          else activateDarkMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const fontSizeVal = saveToLocal.get('global-font-size')
+    if (fontSizeVal !== undefined) {
+      document.documentElement.style.setProperty('--global-font-size', fontSizeVal + 'px')
+    }
+    })(window)</script><link rel="stylesheet" href="//at.alicdn.com/t/font_2492407_8oo6gz3p5l.css"><style>#toggle-sidebar{bottom:80px}</style><link rel="stylesheet" href="/css/macblack.css"><link rel="stylesheet" href="/css/veditor.css"><link rel="stylesheet" href="/css/close.css"><link rel="stylesheet" href="/css/iconColor.css"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" media="defer" onload='this.media="all"'><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Zfour/Butterfly-double-row-display@1.00/cardlistpost.min.css"><style>#recent-posts>.recent-post-item>.recent-post-info>.article-meta-wrap>.tags:before{content:"\A";white-space:pre}#recent-posts>.recent-post-item>.recent-post-info>.article-meta-wrap>.tags>.article-meta__separator{display:none}</style><meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="imagine" type="application/atom+xml"></head><body><a href="javascript:void(0);" onclick="preloader.endLoading()" title="点击跳过动画"><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="wizard-scene"><div class="wizard-objects"><div class="wizard-square"></div><div class="wizard-circle"></div><div class="wizard-triangle"></div></div><div class="wizard"><div class="wizard-body"></div><div class="wizard-right-arm"><div class="wizard-right-hand"></div></div><div class="wizard-left-arm"><div class="wizard-left-hand"></div></div><div class="wizard-head"><div class="wizard-beard"></div><div class="wizard-face"><div class="wizard-adds"></div></div><div class="wizard-hat"><div class="wizard-hat-of-the-hat"></div><div class="wizard-four-point-star --first"></div><div class="wizard-four-point-star --second"></div><div class="wizard-four-point-star --third"></div></div></div></div></div></div></a><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="author-avatar"><img class="avatar-img" data-lazy-src="/img/avatar.jpg" onerror='onerror=null,src="/img/friend_404.gif"' alt="avatar"></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">29</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">标签</div><div class="length-num">17</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">分类</div><div class="length-num">12</div></a></div></div></div><hr><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw iconfont icon-zhuye-copy-copy-copy"></i> <span>主页</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw iconfont icon-mulu1"></i> <span>目录</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/archives/"><i class="fa-fw iconfont icon-guidang1"></i> <span>归档</span></a></li><li><a class="site-page" href="/tags/"><i class="fa-fw iconfont icon-biaoqian"></i> <span>标签</span></a></li><li><a class="site-page" href="/categories/"><i class="fa-fw iconfont icon-category"></i> <span>分类</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw iconfont icon-yule"></i> <span>娱乐</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/playlist/"><i class="fa-fw iconfont icon-gedan"></i> <span>歌单</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw iconfont icon-link_2"></i> <span>链接</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/link/"><i class="fa-fw iconfont icon-youlianguanli"></i> <span>友情链接</span></a></li><li><a class="site-page" href="/friends_link"><i class="fa-fw iconfont icon-pengyouquan"></i> <span>友链朋友圈</span></a></li><li><a class="site-page" href="/collect/"><i class="fa-fw iconfont icon-shoucang"></i> <span>收藏</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i> <span>关于我</span></a></div></div></div></div><div class="page" id="body-wrap"><header class="full_page" id="page-header"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">imagine</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i> <span>搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw iconfont icon-zhuye-copy-copy-copy"></i> <span>主页</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw iconfont icon-mulu1"></i> <span>目录</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/archives/"><i class="fa-fw iconfont icon-guidang1"></i> <span>归档</span></a></li><li><a class="site-page" href="/tags/"><i class="fa-fw iconfont icon-biaoqian"></i> <span>标签</span></a></li><li><a class="site-page" href="/categories/"><i class="fa-fw iconfont icon-category"></i> <span>分类</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw iconfont icon-yule"></i> <span>娱乐</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/playlist/"><i class="fa-fw iconfont icon-gedan"></i> <span>歌单</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw iconfont icon-link_2"></i> <span>链接</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/link/"><i class="fa-fw iconfont icon-youlianguanli"></i> <span>友情链接</span></a></li><li><a class="site-page" href="/friends_link"><i class="fa-fw iconfont icon-pengyouquan"></i> <span>友链朋友圈</span></a></li><li><a class="site-page" href="/collect/"><i class="fa-fw iconfont icon-shoucang"></i> <span>收藏</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i> <span>关于我</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="site-info"><h1 id="site-title">imagine</h1><div id="site-subtitle"><span id="subtitle"></span></div><div id="site_social_icons"><a class="social-icon" href="https://www.cnblogs.com/imagine-lp/" target="_blank" title="博客园"><i class="iconfont icon-icon9-blog"></i></a><a class="social-icon" href="https://gitee.com/lp-Imagine" target="_blank" title="Gitee"><i class="iconfont icon-Gitee"></i></a><a class="social-icon" href="https://github.com/lp-Imagine" target="_blank" title="GitHub"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:luopeng101297@163.com" target="_blank" title="Email"><i class="iconfont icon-youxiang"></i></a></div></div><div id="scroll-down"><i class="fas fa-angle-down scroll-down-effects"></i></div></header><main class="layout" id="content-inner"><div class="recent-posts" id="recent-posts"><div class="recent-post-item" style="width:100%;overflow:hidden"><div class="gitcalendar" id="gitcalendar"><div id="gitmessage" :style="{top:y+px,left:x+px,position: fixed,zIndex:9999}"><div class="angle-wrapper"><span>{{span1}} &nbsp;</span><span>{{span2}} 次上传</span></div></div><div class="position-relative"><div class="border py-2 graph-before-activity-overview"><div class="js-gitcalendar-graph mx-md-2 mx-3 d-flex flex-column flex-items-end flex-xl-items-center overflow-hidden pt-1 is-graph-loading graph-canvas gitcalendar-graph height-full text-center"><div id="gitcalendarcanvasbox" v-if="simplemode"><canvas id="gitcanvas" style="animation:none"></canvas></div><svg class="js-gitcalendar-graph-svg" width="100%" viewBox="0 0 770 128" v-if="!simplemode"><text class="month" :x="32 + monthindex*64" y="20" v-for="(month,monthindex) in monthchange">{{month}}</text><text class="wday" text-anchor="start" dx="0" dy="40">日</text><text class="wday" text-anchor="start" dx="0" dy="65">二</text><text class="wday" text-anchor="start" dx="0" dy="90">四</text><text class="wday" text-anchor="start" dx="0" dy="115">六</text><g v-for="(weekitem,weekIndex) in data" :transform="'translate('+ (16 + weekIndex*14) + ',' + '0)'"><rect @mouseover="selectStyle(dayitem,$event)" @mouseleave="outStyle()" v-for="(dayitem,dayIndex) in weekitem" :style="{fill:thiscolor(dayitem.count),shapeRendering:crispedges}" :data-score="dayitem.count" :data-date="dayitem.date" x="0" :y=" 30 + dayIndex*13 " width="11" height="11"></rect></g></svg></div><div class="contrib-footer clearfix mt-1 mx-3 px-3 pb-1"><div class="float-left text-gray">数据来源<a :href="'https://github.com/'+ user " target="blank">@{{user}}</a></div><div class="contrib-legend text-gray">Less<ul class="legend"><li :style="{backgroundColor:color[0]}"></li><li :style="{backgroundColor:color[2]}"></li><li :style="{backgroundColor:color[4]}"></li><li :style="{backgroundColor:color[6]}"></li><li :style="{backgroundColor:color[8]}"></li></ul>More</div></div></div></div><div class="contrib-column contrib-column-first table-column"><span class="text-muted">过去一年提交</span><span class="contrib-number">{{total}}</span><span class="text-muted">{{oneyearbeforeday}}&nbsp;-&nbsp;{{thisday}}</span></div><div class="contrib-column table-column"><span class="text-muted">最近一月提交</span><span class="contrib-number">{{thisweekdatacore}}</span><span class="text-muted">{{amonthago}}&nbsp;-&nbsp;{{thisday}}</span></div><div class="contrib-column table-column"><span class="text-muted">最近一周提交</span><span class="contrib-number">{{weekdatacore}}</span><span class="text-muted">{{aweekago}}&nbsp;-&nbsp;{{thisday}}</span></div></div></div><div class="recent-post-item" style="height:auto;width:100%"><div class="blog-slider swiper-container-fade swiper-container-horizontal" id="swiper_container"><div class="blog-slider__wrp swiper-wrapper" style="transition-duration:0s"><div class="blog-slider__item swiper-slide" style="width:750px;opacity:1;transform:translate3d(0,0,0);transition-duration:0s"><a class="blog-slider__img" href="/yuque/fk3tzn/" alt=""><img width="48" height="48" src="https://z3.ax1x.com/2021/07/20/WN1SED.jpg" onerror='this.onerror=null,this.src="/img/404.jpg"' alt=""></a><div class="blog-slider__content"><span class="blog-slider__code">2021-04-06</span><a class="blog-slider__title" href="/yuque/fk3tzn/" alt="">前端常用公共方法工具类</a><div class="blog-slider__text">工具类方法归纳，后续添加...</div><a class="blog-slider__button" href="/yuque/fk3tzn/" alt="">🎃详情</a></div></div><div class="blog-slider__item swiper-slide" style="width:750px;opacity:1;transform:translate3d(0,0,0);transition-duration:0s"><a class="blog-slider__img" href="/yuque/pnzuz1/" alt=""><img width="48" height="48" src="https://z3.ax1x.com/2021/07/20/WttkSH.jpg" onerror='this.onerror=null,this.src="/img/404.jpg"' alt=""></a><div class="blog-slider__content"><span class="blog-slider__code">2021-04-12</span><a class="blog-slider__title" href="/yuque/pnzuz1/" alt="">Promise(一)：Promise认识.</a><div class="blog-slider__text">Promise认识</div><a class="blog-slider__button" href="/yuque/pnzuz1/" alt="">🎈详情</a></div></div><div class="blog-slider__item swiper-slide" style="width:750px;opacity:1;transform:translate3d(0,0,0);transition-duration:0s"><a class="blog-slider__img" href="/yuque/ymm751/" alt=""><img width="48" height="48" src="https://z3.ax1x.com/2021/07/20/Wttife.jpg" onerror='this.onerror=null,this.src="/img/404.jpg"' alt=""></a><div class="blog-slider__content"><span class="blog-slider__code">2021-04-13</span><a class="blog-slider__title" href="/yuque/ymm751/" alt="">Promise(二)：手动实现一个Promise</a><div class="blog-slider__text">手动实现一个Promise.</div><a class="blog-slider__button" href="/yuque/ymm751/" alt="">🎈详情</a></div></div><div class="blog-slider__item swiper-slide" style="width:750px;opacity:1;transform:translate3d(0,0,0);transition-duration:0s"><a class="blog-slider__img" href="/yuque/ddv8fu/" alt=""><img width="48" height="48" src="https://z3.ax1x.com/2021/07/20/WttE6A.gif" onerror='this.onerror=null,this.src="/img/404.jpg"' alt=""></a><div class="blog-slider__content"><span class="blog-slider__code">2021-04-14</span><a class="blog-slider__title" href="/yuque/ddv8fu/" alt="">Promise(三)：拓展方法实现</a><div class="blog-slider__text">拓展方法实现.</div><a class="blog-slider__button" href="/yuque/ddv8fu/" alt="">🎈详情</a></div></div><div class="blog-slider__item swiper-slide" style="width:750px;opacity:1;transform:translate3d(0,0,0);transition-duration:0s"><a class="blog-slider__img" href="/yuque/xu4nht/" alt=""><img width="48" height="48" src="https://z3.ax1x.com/2021/07/20/WN1nUg.jpg" onerror='this.onerror=null,this.src="/img/404.jpg"' alt=""></a><div class="blog-slider__content"><span class="blog-slider__code">2021-04-22</span><a class="blog-slider__title" href="/yuque/xu4nht/" alt="">React(一)：核心概念</a><div class="blog-slider__text">React基础-核心概念.</div><a class="blog-slider__button" href="/yuque/xu4nht/" alt="">✨详情</a></div></div></div><div class="blog-slider__pagination swiper-pagination-clickable swiper-pagination-bullets"></div></div><script defer src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.1.6/js/swiper.min.js"></script><script defer data-pjax="data-pjax" src="/js/swiper_init.js"></script></div><div class="recent-post-item"><div class="post_cover left_radius"><a href="/yuque/fk3tzn/" title="前端常用公共方法工具类"><img class="post_bg" data-lazy-src="https://z3.ax1x.com/2021/07/20/WN1SED.jpg" onerror='this.onerror=null,this.src="/img/404.jpg"' alt="前端常用公共方法工具类"></a></div><div class="recent-post-info"><a class="article-title" href="/yuque/fk3tzn/" title="前端常用公共方法工具类">前端常用公共方法工具类</a><div class="article-meta-wrap"><span class="article-meta"><i class="fas fa-thumbtack sticky"></i><span class="sticky">置顶</span><span class="article-meta__separator">|</span></span><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2021-04-06T11:14:02.000Z" title="发表于 2021-04-06 11:14:02">2021-04-06</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/javascript/">javascript</a></span><span class="article-meta tags"><span class="article-meta__separator">|</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/utils/">utils</a></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-comments"></i><a href="/yuque/fk3tzn/#post-comment" itemprop="discussionUrl"><span class="valine-comment-count" data-xid="/yuque/fk3tzn/" itemprop="commentCount"></span></a> <span class="article-meta-label">条评论</span></span></div><div class="content">关于时间的处理1. 时间格式化12345678910111213141516171819202122232425262728293031323334353637383940414243444546/** * @param &#123;(Object|string|number)&#125; time * @param &#123;string&#125; TimeFormat 想要返回时间的格式 例如 &#x27;&#123;y&#125;-&#123;m&#125;-&#123;d&#125; &#123;h&#125;:&#123;i&#125;:&#123;s&#125; &#123;a&#125;&#x27; &#123;a&#125;为周 * @returns &#123;string&#125; */function parseTime(time, TimeFormat) &#123; if (!time) &#123; return null; &#125; if (arguments.length === 0) &#123; return null ...</div></div></div><div class="recent-post-item"><div class="post_cover right_radius"><a href="/yuque/gqs30l/" title="css水平垂直居中"><img class="post_bg" data-lazy-src="https://z3.ax1x.com/2021/07/22/WwHeR1.png" onerror='this.onerror=null,this.src="/img/404.jpg"' alt="css水平垂直居中"></a></div><div class="recent-post-info"><a class="article-title" href="/yuque/gqs30l/" title="css水平垂直居中">css水平垂直居中</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2021-07-22T11:37:03.000Z" title="发表于 2021-07-22 11:37:03">2021-07-22</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/CSS/">CSS</a></span><span class="article-meta tags"><span class="article-meta__separator">|</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/CSS/">CSS</a></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-comments"></i><a href="/yuque/gqs30l/#post-comment" itemprop="discussionUrl"><span class="valine-comment-count" data-xid="/yuque/gqs30l/" itemprop="commentCount"></span></a> <span class="article-meta-label">条评论</span></span></div><div class="content">这是一个很常见的样式布局，网上也有很多的实现方式，本文主要是针对一些比较常用到的方法做一下总结，记录一下。 现有实现方式大致的思路归纳为以下几种： 固定宽高居中 absolute + margin auto absolute + 负 margin absolute + calc 不定宽高居中 ​ lineheight ​flex absolute + transform ​grid table-cell 公共代码（后面代码都基于这里） 123&lt;div class=&quot;out&quot;&gt; &lt;div class=&quot;inner&quot;&gt;水平垂直居中&lt;/div&gt;&lt;/div&gt; 实现的效果： absolute + margin auto123456789101112131415161718.out &#123; width: 500px; height: 500px; border: 1px solid #000; position: relative;&#125;.inner &#123; b ...</div></div></div><div class="recent-post-item"><div class="post_cover left_radius"><a href="/yuque/sp8d6i/" title="js if/else 语句优化策略"><img class="post_bg" data-lazy-src="https://z3.ax1x.com/2021/07/20/WttAld.png" onerror='this.onerror=null,this.src="/img/404.jpg"' alt="js if/else 语句优化策略"></a></div><div class="recent-post-info"><a class="article-title" href="/yuque/sp8d6i/" title="js if/else 语句优化策略">js if/else 语句优化策略</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2021-07-20T20:18:01.000Z" title="发表于 2021-07-20 20:18:01">2021-07-20</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/javascript/">javascript</a></span><span class="article-meta tags"><span class="article-meta__separator">|</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/javascript/">javascript</a></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-comments"></i><a href="/yuque/sp8d6i/#post-comment" itemprop="discussionUrl"><span class="valine-comment-count" data-xid="/yuque/sp8d6i/" itemprop="commentCount"></span></a> <span class="article-meta-label">条评论</span></span></div><div class="content">前言 在项目当中，都会遇到需要做大量分支判断的情况，最常用到的就是用 if/else；但是用起来并不是很美观；所以当遇到大量分支判断嵌套在一起时，就会显得很难阅读。就要对应地做出一些优化。 简单逻辑判断提前 return123456789101112let a = 1;if (a) &#123; a = 2;&#125; else &#123; return;&#125;// 写成if (!a) &#123; return;&#125;a = 2; ||123456789let a = 1;if (a) &#123; a = 1;&#125; else &#123; a = 2;&#125;// 修改为a = a || 0; 三元表达式12345678910111213let a = 1, b = 2, c = 3, d = 4;if (a === b) &#123; a = d;&#125; else &#123; a = c;&#125;// 修改为a = a === b ? d : c; 按位异或运算符^123456789let a =1,b=2,c= ...</div></div></div><div class="recent-post-item"><div class="post_cover right_radius"><a href="/yuque/pt9g3x/" title="数组对象求和"><img class="post_bg" data-lazy-src="/img/banner/4.jpg" onerror='this.onerror=null,this.src="/img/404.jpg"' alt="数组对象求和"></a></div><div class="recent-post-info"><a class="article-title" href="/yuque/pt9g3x/" title="数组对象求和">数组对象求和</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2021-06-20T15:51:55.000Z" title="发表于 2021-06-20 15:51:55">2021-06-20</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/javascript/">javascript</a></span><span class="article-meta tags"><span class="article-meta__separator">|</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/javascript/">javascript</a></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-comments"></i><a href="/yuque/pt9g3x/#post-comment" itemprop="discussionUrl"><span class="valine-comment-count" data-xid="/yuque/pt9g3x/" itemprop="commentCount"></span></a> <span class="article-meta-label">条评论</span></span></div><div class="content">数组对象求和问题，在项目中有时会遇到列表求和的情况，这里记录一下。 12345let list = [ &#123; id: 1, value1: 5, value2: 10, value3: 20 &#125;, &#123; id: 2, value1: 15, value2: 10, value3: 50 &#125;, &#123; id: 3, value1: 40, value2: 20, value3: 20 &#125;,]; 利用 reduce()和 Object.keys()1234567891011function mergeArr(arr, data) &#123; let result = arr.reduce((acc, cur) =&gt; &#123; Object.keys(acc).forEach((item) =&gt; (acc[item] += cur[item])); return acc; &#125;, data); return result;&#125;const data = &#123; value1 ...</div></div></div><div class="recent-post-item"><div class="post_cover left_radius"><a href="/yuque/rs7zqd/" title="JavaScript 数组去重"><img class="post_bg" data-lazy-src="https://z3.ax1x.com/2021/07/20/WtYFrq.jpg" onerror='this.onerror=null,this.src="/img/404.jpg"' alt="JavaScript 数组去重"></a></div><div class="recent-post-info"><a class="article-title" href="/yuque/rs7zqd/" title="JavaScript 数组去重">JavaScript 数组去重</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2021-06-10T11:18:01.000Z" title="发表于 2021-06-10 11:18:01">2021-06-10</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/javascript/">javascript</a></span><span class="article-meta tags"><span class="article-meta__separator">|</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/javascript/">javascript</a></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-comments"></i><a href="/yuque/rs7zqd/#post-comment" itemprop="discussionUrl"><span class="valine-comment-count" data-xid="/yuque/rs7zqd/" itemprop="commentCount"></span></a> <span class="article-meta-label">条评论</span></span></div><div class="content">主要记录一下前端数组去重的几种方法，也方便后面查看。 ES6 new Set() + … || Array.fromES6 提供了新的数据结构 Set。类似于数组，但是成员的值都是唯一的，没有重复的值。Set 本身是一个构造函数，可以接受一个具有 iterable 接口数据结构作为参数（如数组，字符串），用来初始化。 不考虑兼容性，这种去重的方法代码最少。这种方法还无法去掉“{}”空对象 12345const arr = [1, 2, 3, null, &quot;a&quot;, &quot;b&quot;, 2, 3, null, &quot;a&quot;];let newArr = [...new Set(arr)]; // [1, 2, 3, null, &quot;a&quot;, &quot;b&quot;]let newArr1 = Array.from(new Set(arr)); // [1, 2, 3, null, &quot;a&quot;, &quot;b&quot;] ES6 new Map()ES6 提供了新的数据结构 Map 。类似于对象，也是 ...</div></div></div><div class="recent-post-item"><div class="post_cover right_radius"><a href="/yuque/eya8ra/" title="ES6-ES12 特性"><img class="post_bg" data-lazy-src="https://z3.ax1x.com/2021/07/20/WN11vq.jpg" onerror='this.onerror=null,this.src="/img/404.jpg"' alt="ES6-ES12 特性"></a></div><div class="recent-post-info"><a class="article-title" href="/yuque/eya8ra/" title="ES6-ES12 特性">ES6-ES12 特性</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2021-05-31T15:29:03.000Z" title="发表于 2021-05-31 15:29:03">2021-05-31</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/ES6/">ES6</a></span><span class="article-meta tags"><span class="article-meta__separator">|</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/ES6/">ES6</a></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-comments"></i><a href="/yuque/eya8ra/#post-comment" itemprop="discussionUrl"><span class="valine-comment-count" data-xid="/yuque/eya8ra/" itemprop="commentCount"></span></a> <span class="article-meta-label">条评论</span></span></div><div class="content">本文集合了 ES6 至 ES11 常用到的特性，包括还在规划的 ES12。 ES6（2015）类（class）12345678910class People &#123; constructor(name) &#123; this.name = &quot;a&quot;; &#125; console() &#123; console.log(this.name); &#125;&#125;const people = new People(&quot;a&quot;);people.console(); // a 模块化（ES Module）123456// A.js 导出一个方法export const addNum = (a, b) =&gt; a + b;// B.js 导入并使用import &#123; addNum &#125; from &quot;./A.js&quot;;addNum(1, 2); // 3 箭头函数12const addNum = (a, b) =&gt; a + b;addNum(1, 2); // 3 函数参数默认值 ...</div></div></div><div class="recent-post-item"><div class="post_cover left_radius"><a href="/yuque/lomf3x/" title="Chrome Extension（扩展程序）开发"><img class="post_bg" data-lazy-src="https://z3.ax1x.com/2021/07/20/WtYmiF.png" onerror='this.onerror=null,this.src="/img/404.jpg"' alt="Chrome Extension（扩展程序）开发"></a></div><div class="recent-post-info"><a class="article-title" href="/yuque/lomf3x/" title="Chrome Extension（扩展程序）开发">Chrome Extension（扩展程序）开发</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2021-05-21T15:51:55.000Z" title="发表于 2021-05-21 15:51:55">2021-05-21</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/Chrome/">Chrome</a></span><span class="article-meta tags"><span class="article-meta__separator">|</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/javascript/">javascript</a><span class="article-meta__link">•</span><a class="article-meta__tags" href="/tags/Chrome/">Chrome</a></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-comments"></i><a href="/yuque/lomf3x/#post-comment" itemprop="discussionUrl"><span class="valine-comment-count" data-xid="/yuque/lomf3x/" itemprop="commentCount"></span></a> <span class="article-meta-label">条评论</span></span></div><div class="content">基本概念chrome 扩展是什么？一个应用（扩展）其实是压缩（.crx 后缀）在一起的一组文件，包括 HTML，CSS，Javascript 脚本，图片文件，还有其它任何需要的文件。 应用（扩展）本质上来说就是 web 页面，它们可以使用所有的浏览器提供的 API，从 XMLHttpRequest 到 JSON 到 HTML5 全都有。 应用（扩展）可以与 Web 页面交互，或者通过 content script 或 cross-origin XMLHttpRequests 与服务器交互。应用（扩展）还可以访问浏览器提供的内部功能，例如标签或书签等。 chrome 扩展用处增强浏览器的功能，可以向页面注入 js 脚本作一些操作，实现属于自己的“定制版”浏览器。提供了很多 API 供我们来使用： 标签 书签 Cookies Events 开发者工具 历史记录 插件管理 视窗等等… 开发与调试Chrome 插件没有严格的项目结构要求，只要保证本目录有一个 manifest.json 即可，也不需要专门的 IDE，普通的 web 开发工具即可。从右上角菜单-&gt;更多工具-&gt;扩 ...</div></div></div><div class="recent-post-item"><div class="post_cover right_radius"><a href="/yuque/ilr5wg/" title="async/await"><img class="post_bg" data-lazy-src="https://z3.ax1x.com/2021/07/20/WN1Q8s.png" onerror='this.onerror=null,this.src="/img/404.jpg"' alt="async/await"></a></div><div class="recent-post-info"><a class="article-title" href="/yuque/ilr5wg/" title="async/await">async/await</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2021-05-10T15:29:03.000Z" title="发表于 2021-05-10 15:29:03">2021-05-10</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/ES6/">ES6</a></span><span class="article-meta tags"><span class="article-meta__separator">|</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/ES6/">ES6</a></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-comments"></i><a href="/yuque/ilr5wg/#post-comment" itemprop="discussionUrl"><span class="valine-comment-count" data-xid="/yuque/ilr5wg/" itemprop="commentCount"></span></a> <span class="article-meta-label">条评论</span></span></div><div class="content">JavaScript 中的 async/await 是 AsyncFunction 特性 中的关键字。目前为止，除了 IE 之外，常用浏览器和 Node (v7.6+) 都已经支持该特性。具体支持情况可以在这里查看。 async 和 await 在干什么任意一个名称都是有意义的，先从字面意思来理解。async 是“异步”的简写，而 await 可以认为是 async wait 的简写。所以应该很好理解 async 用于申明一个 function 是异步的，而 await 用于等待一个异步方法执行完成。 另外还有一个很有意思的语法规定，await 只能出现在 async 函数中。然后细心的朋友会产生一个疑问，如果 await 只能出现在 async 函数中，那这个 async 函数应该怎么调用？ 如果需要通过 await 来调用一个 async 函数，那这个调用的外面必须得再包一个 async 函数，然后……进入死循环，永无出头之日…… 如果 async 函数不需要 await 来调用，那 async 到底起个啥作用？ async 起什么作用这个问题的关键在于，async 函数是怎么处理 ...</div></div></div><div class="recent-post-item"><div class="post_cover left_radius"><a href="/yuque/zw2gqe/" title="Axios 封装"><img class="post_bg" data-lazy-src="https://z3.ax1x.com/2021/07/20/WtG7n0.jpg" onerror='this.onerror=null,this.src="/img/404.jpg"' alt="Axios 封装"></a></div><div class="recent-post-info"><a class="article-title" href="/yuque/zw2gqe/" title="Axios 封装">Axios 封装</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2021-05-09T11:18:01.000Z" title="发表于 2021-05-09 11:18:01">2021-05-09</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/javascript/">javascript</a></span><span class="article-meta tags"><span class="article-meta__separator">|</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/Axios/">Axios</a></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-comments"></i><a href="/yuque/zw2gqe/#post-comment" itemprop="discussionUrl"><span class="valine-comment-count" data-xid="/yuque/zw2gqe/" itemprop="commentCount"></span></a> <span class="article-meta-label">条评论</span></span></div><div class="content">axios 的封装在 vue 项目中，和后台交互获取数据这块，我们通常使用的是 axios 库，它是基于 promise 的 http 库，可运行在浏览器端和 node.js 中。他有很多优秀的特性，例如拦截请求和响应、取消请求、转换 json、客户端防御 XSRF 等。所以我们的尤大大也是果断放弃了对其官方库vue-resource的维护，直接推荐我们使用 axios 库。如果还对 axios 不了解的，可以移步axios 文档。 安装1npm install axios; // 安装axios 引入在项目的 src 目录中，新建一个 request 文件夹，然后在里面新建一个 http.js 和一个 api.js 文件。http.js 文件用来封装我们的 axios，api.js 用来统一管理我们的接口。 12345// 在http.js中引入axiosimport axios from &quot;axios&quot;; // 引入axiosimport QS from &quot;qs&quot;; // 引入qs模块，用来序列化post类型的数据// element的me ...</div></div></div><div class="recent-post-item"><div class="post_cover right_radius"><a href="/yuque/gc6agg/" title="浏览器渲染过程简介"><img class="post_bg" data-lazy-src="https://z3.ax1x.com/2021/07/20/WtGoXq.jpg" onerror='this.onerror=null,this.src="/img/404.jpg"' alt="浏览器渲染过程简介"></a></div><div class="recent-post-info"><a class="article-title" href="/yuque/gc6agg/" title="浏览器渲染过程简介">浏览器渲染过程简介</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2021-04-29T10:37:05.000Z" title="发表于 2021-04-29 10:37:05">2021-04-29</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E6%B5%8F%E8%A7%88%E5%99%A8/">浏览器</a></span><span class="article-meta tags"><span class="article-meta__separator">|</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/Browser/">Browser</a></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-comments"></i><a href="/yuque/gc6agg/#post-comment" itemprop="discussionUrl"><span class="valine-comment-count" data-xid="/yuque/gc6agg/" itemprop="commentCount"></span></a> <span class="article-meta-label">条评论</span></span></div><div class="content">浏览器工作流程话不多说，先来看个图： 从上面这个图中，我们可以看到那么几个事： 浏览器会解析三个东西： 一个是 HTML/SVG/XHTML，事实上，Webkit 有三个 C++的类对应这三类文档。解析这三种文件会产生一个 DOM Tree。 CSS，解析 CSS 会产生 CSS 规则树。 Javascript 脚本，主要是通过 DOM API 和 CSSOM API 来操作 DOM Tree 和 CSS Rule Tree（CSS 规则树）。 解析完成后，浏览器引擎会通过 DOM Tree 和 CSS Rule Tree 来构造 Rendering Tree（渲染树）。 注意：Rendering Tree 渲染树并不等同于 DOM 树，因为一些像 Header 或 display:none 的东西就没必要放在渲染树中了。CSS 的 Rule Tree 主要是为了完成匹配并把 CSS Rule 附加上 Rendering Tree 上的每个 Element（元素）。也就是 DOM 节点。也就是所谓的 Frame（框架）。然后，计算每个 Frame（也就是每个 Eleme ...</div></div></div><div class="recent-post-item"><div class="post_cover left_radius"><a href="/yuque/xu4nht/" title="React(一)：核心概念"><img class="post_bg" data-lazy-src="https://z3.ax1x.com/2021/07/20/WN1nUg.jpg" onerror='this.onerror=null,this.src="/img/404.jpg"' alt="React(一)：核心概念"></a></div><div class="recent-post-info"><a class="article-title" href="/yuque/xu4nht/" title="React(一)：核心概念">React(一)：核心概念</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2021-04-22T15:18:19.000Z" title="发表于 2021-04-22 15:18:19">2021-04-22</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/React/">React</a></span><span class="article-meta tags"><span class="article-meta__separator">|</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/javascript/">javascript</a><span class="article-meta__link">•</span><a class="article-meta__tags" href="/tags/React/">React</a></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-comments"></i><a href="/yuque/xu4nht/#post-comment" itemprop="discussionUrl"><span class="valine-comment-count" data-xid="/yuque/xu4nht/" itemprop="commentCount"></span></a> <span class="article-meta-label">条评论</span></span></div><div class="content">React 简介背景React 起源于 Facebook 的内部项目，因为该公司对市场上所有 JavaScript MVC 框架，都不满意，就决定自己写一套，用来架设 Instagram 的网站。做出来以后，发现这套东西很好用，就在 2013 年 5 月开源了。 react 是什么？React 是一个用于构建用户界面的 JavaScript 库。用于构建快速、高效的用户界面；它是一个轻量级库，遵循组件化设计模式、声明式编程范式以及函数式编程概念。它使用虚拟 DOM 来有效地操作 DOM；遵循从高阶组件到低阶组件的单向数据流。 在整个 Web 应用的 MVC 架构中，你可以将 React 看作为视图层，并且是一个高效的视图。React 提供了和以往不一样的方式来看待视图，它以组件开发为基础。对 React 应用而言，你需要分割你的页面，使其成为一个个的组件。也就是说，你的应用是由这些组件组合而成的。你可以通过分割组件的方式去开发复杂的页面或某个功能区块，并且组件是可以被复用的。这个过程大概类似于用乐高积木去拼装不同的物体。 特点 采用组件化模式、声明式编码；提高开发效率和组件复用率 ...</div></div></div><div class="recent-post-item"><div class="post_cover right_radius"><a href="/yuque/ehgc3o/" title="JS forEach 踩坑"><img class="post_bg" data-lazy-src="https://z3.ax1x.com/2021/07/20/WtYazd.jpg" onerror='this.onerror=null,this.src="/img/404.jpg"' alt="JS forEach 踩坑"></a></div><div class="recent-post-info"><a class="article-title" href="/yuque/ehgc3o/" title="JS forEach 踩坑">JS forEach 踩坑</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2021-04-21T15:51:55.000Z" title="发表于 2021-04-21 15:51:55">2021-04-21</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/javascript/">javascript</a></span><span class="article-meta tags"><span class="article-meta__separator">|</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/javascript/">javascript</a></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-comments"></i><a href="/yuque/ehgc3o/#post-comment" itemprop="discussionUrl"><span class="valine-comment-count" data-xid="/yuque/ehgc3o/" itemprop="commentCount"></span></a> <span class="article-meta-label">条评论</span></span></div><div class="content">在 js 做遍历数组的时候会用到很多数组的遍历方法，例如 for 循环、forEach 之类的方法，今天主要来说说 forEach 方法的一些坑。来看一下这段代码： 1234567let arr = [1, 2];arr.forEach((item, indec) =&gt; &#123; arr.splice(index, 1); console.log(&quot;执行&quot;); // 输出了几次？？？&#125;);console.log(arr); // arr ???? 上述代码中，循环体内“执行”打印了几次？arr 的输出是多少？👌 好，我们带着这些疑问继续往下看。 forEach 参数与 for 循环一样，forEach 也属于完整遍历数组的方法，并会对数组每项元素执行提供的回调函数，一个完整的 forEach 应该是这样，我们一一解释回调函数的参数，与后方的 this 有何作用。arr.forEach(function(self,index,arr)&#123;&#125;,this) **self**：数组当前遍历的元素，默认从左往右依次获取数组元素 ...</div></div></div><nav id="pagination"><div class="pagination"><span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/"><i class="fas fa-chevron-right fa-fw"></i></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="card-info-avatar is-center"><img class="avatar-img" data-lazy-src="/img/avatar.jpg" onerror='this.onerror=null,this.src="/img/friend_404.gif"' alt="avatar"><div class="author-info__name">peng</div><div class="author-info__description">imagine|HTML|CSS|Javascript|WEB前端|Vue|React</div></div><div class="card-info-data"><div class="card-info-data-item is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">29</div></a></div><div class="card-info-data-item is-center"><a href="/tags/"><div class="headline">标签</div><div class="length-num">17</div></a></div><div class="card-info-data-item is-center"><a href="/categories/"><div class="headline">分类</div><div class="length-num">12</div></a></div></div><a class="button--animated" id="card-info-btn" href="https://imagineblog.vercel.app/about/"><i class="fas fa-heart"></i><span>About me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://www.cnblogs.com/imagine-lp/" target="_blank" title="博客园"><i class="iconfont icon-icon9-blog"></i></a><a class="social-icon" href="https://gitee.com/lp-Imagine" target="_blank" title="Gitee"><i class="iconfont icon-Gitee"></i></a><a class="social-icon" href="https://github.com/lp-Imagine" target="_blank" title="GitHub"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:luopeng101297@163.com" target="_blank" title="Email"><i class="iconfont icon-youxiang"></i></a></div></div><div class="sticky_layout"><div class="card-widget card-clock"><div id="clock"><img v-if="clockshow == &quot;false&quot;" alt="" src="https://i.loli.net/2021/04/01/JnT3Q8iq2plVdSM.gif" height="120px" width="100%"><table class="clock" v-if="clockshow"><tbody><tr><td class="clockdate">{{date}}</td><td class="weatherimg"><img id="weatherimg" :src="weatherimg" alt=""></td><td class="temperature">{{temperature}}</td><td class="humidityimg"><img id="humidityimg" :src="humidityimg" alt=""></td><td class="humidity">{{humidity}}</td></tr><tr class="time"><td colspan="5">{{time}}</td></tr><tr><td class="usaqi" colspan="1"><span>{{ip}}</span></td><td class="city" colspan="2">{{city}}</td><td class="daylight" colspan="2">{{daylight}}</td></tr></tbody></table></div></div><script defer data-pjax="data-pjax" src="/js/card_clock.js"></script><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/yuque/gqs30l/" title="css水平垂直居中"><img data-lazy-src="https://z3.ax1x.com/2021/07/22/WwHeR1.png" onerror='this.onerror=null,this.src="/img/404.jpg"' alt="css水平垂直居中"></a><div class="content"><a class="title" href="/yuque/gqs30l/" title="css水平垂直居中">css水平垂直居中</a><time datetime="2021-07-22T11:37:03.000Z" title="发表于 2021-07-22 11:37:03">2021-07-22</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/yuque/sp8d6i/" title="js if/else 语句优化策略"><img data-lazy-src="https://z3.ax1x.com/2021/07/20/WttAld.png" onerror='this.onerror=null,this.src="/img/404.jpg"' alt="js if/else 语句优化策略"></a><div class="content"><a class="title" href="/yuque/sp8d6i/" title="js if/else 语句优化策略">js if/else 语句优化策略</a><time datetime="2021-07-20T20:18:01.000Z" title="发表于 2021-07-20 20:18:01">2021-07-20</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/yuque/pt9g3x/" title="数组对象求和"><img data-lazy-src="/img/banner/4.jpg" onerror='this.onerror=null,this.src="/img/404.jpg"' alt="数组对象求和"></a><div class="content"><a class="title" href="/yuque/pt9g3x/" title="数组对象求和">数组对象求和</a><time datetime="2021-06-20T15:51:55.000Z" title="发表于 2021-06-20 15:51:55">2021-06-20</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/yuque/rs7zqd/" title="JavaScript 数组去重"><img data-lazy-src="https://z3.ax1x.com/2021/07/20/WtYFrq.jpg" onerror='this.onerror=null,this.src="/img/404.jpg"' alt="JavaScript 数组去重"></a><div class="content"><a class="title" href="/yuque/rs7zqd/" title="JavaScript 数组去重">JavaScript 数组去重</a><time datetime="2021-06-10T11:18:01.000Z" title="发表于 2021-06-10 11:18:01">2021-06-10</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/yuque/eya8ra/" title="ES6-ES12 特性"><img data-lazy-src="https://z3.ax1x.com/2021/07/20/WN11vq.jpg" onerror='this.onerror=null,this.src="/img/404.jpg"' alt="ES6-ES12 特性"></a><div class="content"><a class="title" href="/yuque/eya8ra/" title="ES6-ES12 特性">ES6-ES12 特性</a><time datetime="2021-05-31T15:29:03.000Z" title="发表于 2021-05-31 15:29:03">2021-05-31</time></div></div></div></div><div class="card-widget card-categories"><div class="card-content"><div class="item-headline"><i class="fa fa-folder-open"></i><span>分类</span></div><ul class="card-category-list"><li class="card-category-list-item"><div class="card-category-list-link"><a class="card-category-list-name" href="/categories/CSS/">CSS</a><span class="card-category-list-count">1</span><i class="fa fa-chevron-left" onclick="classifyclick(this)"></i></div></li><ul class="card-post-list child card-category-list child"><li class="card-post-list-item card-category-list-item"><div class="card-post-list-link card-category-list-link"><a class="card-post-name" title="css水平垂直居中" href="/yuque/gqs30l/">css水平垂直居中</a></div></li></ul><li class="card-category-list-item"><div class="card-category-list-link"><a class="card-category-list-name" href="/categories/Chrome/">Chrome</a><span class="card-category-list-count">1</span><i class="fa fa-chevron-left" onclick="classifyclick(this)"></i></div></li><ul class="card-post-list child card-category-list child"><li class="card-post-list-item card-category-list-item"><div class="card-post-list-link card-category-list-link"><a class="card-post-name" title="Chrome Extension（扩展程序）开发" href="/yuque/lomf3x/">Chrome Extension（扩展程序）开发</a></div></li></ul><li class="card-category-list-item"><div class="card-category-list-link"><a class="card-category-list-name" href="/categories/ES6/">ES6</a><span class="card-category-list-count">2</span><i class="fa fa-chevron-left" onclick="classifyclick(this)"></i></div></li><ul class="card-post-list child card-category-list child"><li class="card-post-list-item card-category-list-item"><div class="card-post-list-link card-category-list-link"><a class="card-post-name" title="ES6-ES12 特性" href="/yuque/eya8ra/">ES6-ES12 特性</a></div></li><li class="card-post-list-item card-category-list-item"><div class="card-post-list-link card-category-list-link"><a class="card-post-name" title="async/await" href="/yuque/ilr5wg/">async/await</a></div></li></ul><li class="card-category-list-item"><div class="card-category-list-link"><a class="card-category-list-name" href="/categories/GitHub/">GitHub</a><span class="card-category-list-count">1</span><i class="fa fa-chevron-left" onclick="classifyclick(this)"></i></div></li><ul class="card-post-list child card-category-list child"><li class="card-post-list-item card-category-list-item"><div class="card-post-list-link card-category-list-link"><a class="card-post-name" title="GitHub 精选—前端" href="/yuque/ebgc4u/">GitHub 精选—前端</a></div></li></ul><li class="card-category-list-item"><div class="card-category-list-link"><a class="card-category-list-name" href="/categories/Markdown/">Markdown</a><span class="card-category-list-count">1</span><i class="fa fa-chevron-left" onclick="classifyclick(this)"></i></div></li><ul class="card-post-list child card-category-list child"><li class="card-post-list-item card-category-list-item"><div class="card-post-list-link card-category-list-link"><a class="card-post-name" title="Markdown 基本语法" href="/yuque/ag8qtu/">Markdown 基本语法</a></div></li></ul><li class="card-category-list-item"><div class="card-category-list-link"><a class="card-category-list-name" href="/categories/MySQL/">MySQL</a><span class="card-category-list-count">1</span><i class="fa fa-chevron-left" onclick="classifyclick(this)"></i></div></li><ul class="card-post-list child card-category-list child"><li class="card-post-list-item card-category-list-item"><div class="card-post-list-link card-category-list-link"><a class="card-post-name" title="MySQL 数据库常用操作" href="/yuque/wsh1gw/">MySQL 数据库常用操作</a></div></li></ul><li class="card-category-list-item"><div class="card-category-list-link"><a class="card-category-list-name" href="/categories/React/">React</a><span class="card-category-list-count">1</span><i class="fa fa-chevron-left" onclick="classifyclick(this)"></i></div></li><ul class="card-post-list child card-category-list child"><li class="card-post-list-item card-category-list-item"><div class="card-post-list-link card-category-list-link"><a class="card-post-name" title="React(一)：核心概念" href="/yuque/xu4nht/">React(一)：核心概念</a></div></li></ul><li class="card-category-list-item"><div class="card-category-list-link"><a class="card-category-list-name" href="/categories/Vue/">Vue</a><span class="card-category-list-count">2</span><i class="fa fa-chevron-left" onclick="classifyclick(this)"></i></div></li><ul class="card-post-list child card-category-list child"><li class="card-post-list-item card-category-list-item"><div class="card-post-list-link card-category-list-link"><a class="card-post-name" title="vue 组件—常用选项(methods、watch、filters、props、computed)" href="/yuque/hczb69/">vue 组件—常用选项(methods、watch、filters、props、computed)</a></div></li><li class="card-post-list-item card-category-list-item"><div class="card-post-list-link card-category-list-link"><a class="card-post-name" title="解决 element 表格数据量过大导致页面渲染缓慢、卡顿问题" href="/yuque/np4k2h/">解决 element 表格数据量过大导致页面渲染缓慢、卡顿问题</a></div></li></ul><li class="card-category-list-item"><div class="card-category-list-link"><a class="card-category-list-name" href="/categories/git/">git</a><span class="card-category-list-count">1</span><i class="fa fa-chevron-left" onclick="classifyclick(this)"></i></div></li><ul class="card-post-list child card-category-list child"><li class="card-post-list-item card-category-list-item"><div class="card-post-list-link card-category-list-link"><a class="card-post-name" title="git 命令" href="/yuque/egd000/">git 命令</a></div></li></ul><li class="card-category-list-item"><div class="card-category-list-link"><a class="card-category-list-name" href="/categories/javascript/">javascript</a><span class="card-category-list-count">16</span><i class="fa fa-chevron-left" onclick="classifyclick(this)"></i></div></li><ul class="card-post-list child card-category-list child"><li class="card-post-list-item card-category-list-item"><div class="card-post-list-link card-category-list-link"><a class="card-post-name" title="javascript 正则表达式校验" href="/yuque/ctko47/">javascript 正则表达式校验</a></div></li><li class="card-post-list-item card-category-list-item"><div class="card-post-list-link card-category-list-link"><a class="card-post-name" title="使用 NProgress 为页面/接口添加加载进度条" href="/yuque/cy0ics/">使用 NProgress 为页面/接口添加加载进度条</a></div></li><li class="card-post-list-item card-category-list-item"><div class="card-post-list-link card-category-list-link"><a class="card-post-name" title="Promise(三)：拓展方法实现" href="/yuque/ddv8fu/">Promise(三)：拓展方法实现</a></div></li><li class="card-post-list-item card-category-list-item"><div class="card-post-list-link card-category-list-link"><a class="card-post-name" title="JS 声明提升" href="/yuque/df4477/">JS 声明提升</a></div></li><li class="card-post-list-item card-category-list-item"><div class="card-post-list-link card-category-list-link"><a class="card-post-name" title="JS forEach 踩坑" href="/yuque/ehgc3o/">JS forEach 踩坑</a></div></li><li class="card-post-list-item card-category-list-item"><div class="card-post-list-link card-category-list-link"><a class="card-post-name" title="JS 循环遍历方法" href="/yuque/nn7ncb/">JS 循环遍历方法</a></div></li><li class="card-post-list-item card-category-list-item"><div class="card-post-list-link card-category-list-link"><a class="card-post-name" title="JS 合并数组对象中 key 值相同的数据" href="/yuque/nt8dtc/">JS 合并数组对象中 key 值相同的数据</a></div></li><li class="card-post-list-item card-category-list-item"><div class="card-post-list-link card-category-list-link"><a class="card-post-name" title="Promise(一)：Promise 认识" href="/yuque/pnzuz1/">Promise(一)：Promise 认识</a></div></li><li class="card-post-list-item card-category-list-item"><div class="card-post-list-link card-category-list-link"><a class="card-post-name" title="数组对象求和" href="/yuque/pt9g3x/">数组对象求和</a></div></li><li class="card-post-list-item card-category-list-item"><div class="card-post-list-link card-category-list-link"><a class="card-post-name" title="JavaScript 数组去重" href="/yuque/rs7zqd/">JavaScript 数组去重</a></div></li><li class="card-post-list-item card-category-list-item"><div class="card-post-list-link card-category-list-link"><a class="card-post-name" title="js if/else 语句优化策略" href="/yuque/sp8d6i/">js if/else 语句优化策略</a></div></li><li class="card-post-list-item card-category-list-item"><div class="card-post-list-link card-category-list-link"><a class="card-post-name" title="js 深拷贝总结" href="/yuque/va1sn5/">js 深拷贝总结</a></div></li><li class="card-post-list-item card-category-list-item"><div class="card-post-list-link card-category-list-link"><a class="card-post-name" title="javascript 之 this 指向问题" href="/yuque/vtadwe/">javascript 之 this 指向问题</a></div></li><li class="card-post-list-item card-category-list-item"><div class="card-post-list-link card-category-list-link"><a class="card-post-name" title="Promise(二)：手动实现一个 Promise" href="/yuque/ymm751/">Promise(二)：手动实现一个 Promise</a></div></li><li class="card-post-list-item card-category-list-item"><div class="card-post-list-link card-category-list-link"><a class="card-post-name" title="Axios 封装" href="/yuque/zw2gqe/">Axios 封装</a></div></li><li class="card-post-list-item card-category-list-item"><div class="card-post-list-link card-category-list-link"><a class="card-post-name" title="前端常用公共方法工具类" href="/yuque/fk3tzn/">前端常用公共方法工具类</a></div></li></ul><li class="card-category-list-item"><div class="card-category-list-link"><a class="card-category-list-name" href="/categories/%E6%B5%8F%E8%A7%88%E5%99%A8/">浏览器</a><span class="card-category-list-count">1</span><i class="fa fa-chevron-left" onclick="classifyclick(this)"></i></div></li><ul class="card-post-list child card-category-list child"><li class="card-post-list-item card-category-list-item"><div class="card-post-list-link card-category-list-link"><a class="card-post-name" title="浏览器渲染过程简介" href="/yuque/gc6agg/">浏览器渲染过程简介</a></div></li></ul><li class="card-category-list-item"><div class="card-category-list-link"><a class="card-category-list-name" href="/categories/%E8%B7%AF%E7%94%B1/">路由</a><span class="card-category-list-count">1</span><i class="fa fa-chevron-left" onclick="classifyclick(this)"></i></div></li><ul class="card-post-list child card-category-list child"><li class="card-post-list-item card-category-list-item"><div class="card-post-list-link card-category-list-link"><a class="card-post-name" title="前端路由实现" href="/yuque/bhkocy/">前端路由实现</a></div></li></ul></ul></div></div><div class="card-widget card-tags"><div class="item-headline"><i class="fas fa-tags"></i><span>标签</span></div><div class="card-tag-cloud"><a href="/tags/Markdown/" style="font-size:1.1em;color:#c4871f">Markdown</a><a href="/tags/Router/" style="font-size:1.1em;color:#608dc2">Router</a><a href="/tags/javascript/" style="font-size:1.5em;color:#b55eaa">javascript</a><a href="/tags/RegExp/" style="font-size:1.1em;color:#b3c77f">RegExp</a><a href="/tags/Promise/" style="font-size:1.37em;color:#a7bd13">Promise</a><a href="/tags/git/" style="font-size:1.1em;color:#28b38f">git</a><a href="/tags/ES6/" style="font-size:1.23em;color:#c6135b">ES6</a><a href="/tags/Browser/" style="font-size:1.1em;color:#3d7554">Browser</a><a href="/tags/CSS/" style="font-size:1.1em;color:#553c83">CSS</a><a href="/tags/Vue/" style="font-size:1.23em;color:#4d1f17">Vue</a><a href="/tags/Table/" style="font-size:1.1em;color:#5a5696">Table</a><a href="/tags/MySQL/" style="font-size:1.1em;color:#595f0c">MySQL</a><a href="/tags/GitHub/" style="font-size:1.1em;color:#0ba270">GitHub</a><a href="/tags/Axios/" style="font-size:1.1em;color:#999da0">Axios</a><a href="/tags/Chrome/" style="font-size:1.1em;color:#37885a">Chrome</a><a href="/tags/React/" style="font-size:1.1em;color:#c105c2">React</a><a href="/tags/utils/" style="font-size:1.1em;color:#b674a9">utils</a></div></div><div class="card-widget card-archives"><div class="item-headline"><i class="fas fa-archive"></i><span>归档</span><a class="card-more-btn" href="/archives/" title="查看更多"><i class="fas fa-angle-right"></i></a></div><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2021/07/"><span class="card-archive-list-date">七月 2021</span><span class="card-archive-list-count">2</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2021/06/"><span class="card-archive-list-date">六月 2021</span><span class="card-archive-list-count">2</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2021/05/"><span class="card-archive-list-date">五月 2021</span><span class="card-archive-list-count">4</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2021/04/"><span class="card-archive-list-date">四月 2021</span><span class="card-archive-list-count">8</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2021/03/"><span class="card-archive-list-date">三月 2021</span><span class="card-archive-list-count">1</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2020/12/"><span class="card-archive-list-date">十二月 2020</span><span class="card-archive-list-count">1</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2020/10/"><span class="card-archive-list-date">十月 2020</span><span class="card-archive-list-count">1</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2020/06/"><span class="card-archive-list-date">六月 2020</span><span class="card-archive-list-count">1</span></a></li></ul></div><div class="card-widget card-webinfo"><div class="item-headline"><i class="fas fa-chart-line"></i><span>网站资讯</span></div><div class="webinfo"><div class="webinfo-item"><div class="item-name">文章数目 :</div><div class="item-count">29</div></div><div class="webinfo-item"><div class="item-name">本站总字数 :</div><div class="item-count">63.7k</div></div><div class="webinfo-item"><div class="item-name">本站访客数 :</div><div class="item-count" id="busuanzi_value_site_uv"></div></div><div class="webinfo-item"><div class="item-name">本站总访问量 :</div><div class="item-count" id="busuanzi_value_site_pv"></div></div><div class="webinfo-item"><div class="item-name">最后更新时间 :</div><div class="item-count" id="last-push-date" data-lastpushdate="2021-07-22T10:19:51.216Z"></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"></div><div class="github-div"><div></div><div class="github-badge"><a style="color:#fff" rel="external nofollow noopener noreferrer" href="https://hexo.io/" target="_blank" title="由 Hexo 强力驱动" data-pjax-state=""><span class="badge-subject">🌴Powered</span><span class="badge-value bg-blue">Hexo</span></a></div><div class="github-badge"><a style="color:#fff" rel="external nofollow noopener noreferrer" href="https://imgtu.com/" target="_blank" title="本站图片使用路过图床" data-pjax-state=""><span class="badge-subject">🌈Drawing bed</span><span class="badge-value bg-brightgreen">imagtu</span></a></div><div class="github-badge"><a style="color:#fff" rel="external nofollow noopener noreferrer" href="https://github.com/" target="_blank" title="静态网页托管于 GitHub Pages" data-pjax-state=""><span class="badge-subject">📖Pages</span><span class="badge-value bg-brightgreen">GitHub</span></a></div><div class="github-badge"><a style="color:#fff" rel="external nofollow noopener noreferrer" href="https://www.jsdelivr.com/" target="_blank" title="jsDelivr 提供 CDN 加速服务" data-pjax-state=""><span class="badge-subject">🎈CDN</span><span class="badge-value bg-orange">jsDelivr</span></a></div><div class="github-badge"><a style="color:#fff" rel="external nofollow noopener noreferrer" href="https://vercel.com/" target="_blank" title="vercel 提供 CDN 加速服务" data-pjax-state=""><span class="badge-subject">🎃Server</span><span class="badge-value bg-orange">vercel</span></a></div><div class="github-badge"><a style="color:#fff" rel="external nofollow noopener noreferrer" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" title="本站点采用知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议进行许可" data-pjax-state=""><span class="badge-subject"><i class="fa fa-copyright"></i></span><span class="badge-value bg-gradient">BY-NC-SA 4.0</span></a></div><div class="github-badge"><a style="color:#fff" rel="external nofollow noopener noreferrer" href="https://github.com/jerryc127/hexo-theme-butterfly" target="_blank" title="主题" data-pjax-state=""><span class="badge-subject">🎨Theme</span><span class="badge-value bg-blueviolet">Butterfly</span></a></div><div class="github-badge"><a style="color:#fff" rel="external nofollow noopener noreferrer" href="https://imagineblog.host" target="_blank" title="copyright" data-pjax-state=""><span class="badge-subject">📑copyright</span><span class="badge-value bg-gradient"><div class="copyright">&copy;2020 - 2021<i id="heartbeat" class="fa fas fa-heartbeat"></i> peng</div></span></a></div><div class="github-badge"><span class="badge-subject">安全运行</span><a style="text-decoration:none;color:#fff;padding:4px 4px 4px 6px;border-top-right-radius:4px;border-bottom-right-radius:4px;min-width:180px;display:inline-block" id="running-time" rel="external nofollow noopener noreferrer" href="" target="_blank" title="网站运行时间" data-pjax-state=""></a></div><div id="running-time"><script>//- setInterval(()=>{let create_time=Math.round(new Date('2020-02-18 00:00:00').getTime()/1000);let timestamp=Math.round((new Date().getTime()+8*60*60*1000)/1000);let second=timestamp-create_time;let time=new Array(0,0,0,0,0);if(second>=365*24*3600){time[0]=parseInt(second/(365*24*3600));second%=365*24*3600;}if(second>=24*3600){time[1]=parseInt(second/(24*3600));second%=24*3600;}if(second>=3600){time[2]=parseInt(second/3600);second%=3600;}if(second>=60){time[3]=parseInt(second/60);second%=60;}if(second>0){time[4]=second;}currentTimeHtml=time[0]+'年'+time[1]+'天'+time[2]+'时'+time[3]+'分'+time[4]+'秒';document.getElementById("running-time").innerHTML=currentTimeHtml;},1000);
+setInterval(()=>{
+  let create_time=Math.round(new Date('2020-01-03 00:00:00').getTime()/1000);
+  let timestamp=Math.round((new Date().getTime()+8*60*60*1000)/1000);
+  let second=timestamp-create_time;
+  let time=new Array(0,0,0,0,0);
+  if(second>=365*24*3600){
+    time[0]=parseInt(second/(365*24*3600));
+    second%=365*24*3600;
+  }
+  if(second>=24*3600){
+    time[1]=parseInt(second/(24*3600));
+    second%=24*3600;
+  }
+  if(second>=3600){
+    time[2]=parseInt(second/3600);second%=3600;
+  }
+  if(second>=60){
+    time[3]=parseInt(second/60);second%=60;
+  }
+  if(second>0){
+    time[4]=second;
+  }
+  currentTimeHtml=`<span style="color:#fff;"><span style="color:#000">${time[0]}</span> 年 <span style="color:#9253A8">${time[1]}</span> 天 <span style="color:#50ABF1">${time[2]}</span> 时<span style="color:#666">${time[3]}</span> 分<span style="color:red">${time[4]}</span> 秒</span>`;
+  document.getElementById("running-time").innerHTML=currentTimeHtml;
+},1000);</script></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="font-plus" type="button" title="放大字体"><i class="fas fa-plus"></i></button><button id="font-minus" type="button" title="缩小字体"><i class="fas fa-minus"></i></button><button id="translateLink" type="button" title="简繁转换">繁</button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="chat_btn" type="button" title="rightside.chat_btn"><i class="fas fa-sms"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><div class="search-dialog__title" id="local-search-title">本地搜索</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"></div></div></div><hr><div id="local-search-results"></div><span class="search-close-button"><i class="fas fa-times"></i></span></div><div id="search-mask"></div></div><div><script src="https://cdn.jsdelivr.net/npm/vue@2.6.11"></script><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.jsdelivr.net/npm/medium-zoom/dist/medium-zoom.min.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js"></script><script src="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.js"></script><script>function panguFn () {
+  if (typeof pangu === 'object') pangu.autoSpacingPage()
+  else {
+    getScript('https://cdn.jsdelivr.net/npm/pangu/dist/browser/pangu.min.js')
+      .then(() => {
+        pangu.autoSpacingPage()
+      })
+  }
+}
+
+function panguInit () {
+  if (true){
+    GLOBAL_CONFIG_SITE.isPost && panguFn()
+  } else {
+    panguFn()
+  }
+}
+
+document.addEventListener('DOMContentLoaded', panguInit)</script><script src="/js/search/local-search.js"></script><script async>var preloader = {
+  endLoading: () => {
+    document.body.style.overflow = 'auto';
+    document.getElementById('loading-box').classList.add("loaded")
+  },
+  initLoading: () => {
+    document.body.style.overflow = '';
+    document.getElementById('loading-box').classList.remove("loaded")
+
+  }
+}
+window.addEventListener('load',preloader.endLoading())
+setTimeout(function(){preloader.endLoading();}, 5000)</script><div class="js-pjax"><script>(() => {
+  function loadValine () {
+    function initValine () {
+      let initData = {
+        el: '#vcomment',
+        appId: 'WXoR4cXdqFU4kHT8iYPY7lRh-gzGzoHsz',
+        appKey: 'SCey1PDfaDFK60cfsPwhRykf',
+      }
+      
+      const valine = new Valine(initData)
+    }
+
+    if (typeof Valine === 'function') initValine() 
+    else getScript('https://cdn.jsdelivr.net/gh/HCLonely/Valine@latest/dist/Valine.min.js').then(initValine)
+  }
+
+  window.pjax ? loadValine() : window.addEventListener('load', loadValine)
+})()</script><script>function subtitleType () {
+  getScript('https://sdk.jinrishici.com/v2/browser/jinrishici.js').then(() => {
+    jinrishici.load(function (result) {
+      if (true) {
+        var sub = "Welcome to imagine's Blog!,欢迎来到imagine🍂的搬砖日志！".length == 0 ? new Array() : "Welcome to imagine's Blog!,欢迎来到imagine🍂的搬砖日志！".split(',')
+        var content = result.data.content
+        var both = sub.unshift(content)
+        var typed = new Typed('#subtitle', {
+          strings: sub,
+          startDelay: 300,
+          typeSpeed: 150,
+          loop: true,
+          backSpeed: 50,
+        })
+      } else {
+        document.getElementById('subtitle').innerHTML = result.data.content
+      }
+    })
+  })
+}
+
+if (true) {
+  if (typeof Typed === 'function') {
+    subtitleType()
+  } else {
+    getScript('https://cdn.jsdelivr.net/npm/typed.js/lib/typed.min.js').then(subtitleType)
+  }
+} else {
+  subtitleType()
+}</script><script>if (document.getElementsByClassName('mermaid').length) {
+  if (window.mermaidJsLoad) mermaid.init()
+  else {
+    getScript('https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js').then(() => {
+      window.mermaidJsLoad = true
+      mermaid.initialize({
+        theme: 'default',
+      })
+      true && mermaid.init()
+    })
+  }
+}</script><script>var gitcalendar = new Vue({
+  el: '#gitcalendar',
+  data: {
+    simplemode: false,
+    user: 'lp-Imagine',
+    fixed: 'fixed',
+    px: 'px',
+    x: '',
+    y: '',
+    span1: '',
+    span2: '',
+    month: ['一月', '二月', '三月', '四月', '五月', '六月', '七月', '八月', '九月', '十月', '十一月', '十二月'],
+    monthchange: [],
+    oneyearbeforeday: '',
+    thisday: '',
+    amonthago: '',
+    aweekago: '',
+    weekdatacore: 0,
+    datacore: 0,
+    total: 0,
+    datadate: '',
+    data: [],
+    positionplusdata: [],
+    firstweek: [],
+    lastweek: [],
+    beforeweek: [],
+    thisweekdatacore: 0,
+    mounthbeforeday: 0,
+    mounthfirstindex: 0,
+    crispedges: 'crispedges',
+    thisdayindex: 0,
+    amonthagoindex: 0,
+    amonthagoweek: [],
+    firstdate: [],
+    first2date: [],
+    montharrbefore: [],
+    monthindex: 0,
+    color: ['#ebedf0', '#f0fff4', '#dcffe4', '#bef5cb', '#85e89d', '#34d058', '#28a745', '#22863a', '#176f2c', '#165c26', '#144620']
+  },
+  methods: {
+    selectStyle(data, event) {
+      document.querySelector('.angle-wrapper').style.display = 'block'
+      this.span1 = data.date;
+      this.span2 = data.count;
+      this.x = event.clientX - 100;
+      this.y = event.clientY - 60
+    },
+    outStyle() {
+      document.querySelector('.angle-wrapper').style.display = 'none'
+    },
+    thiscolor(x) {
+      if (x === 0) {
+        let i = parseInt(x / 2);
+        return this.color[0]
+      } else if (x < 2) {
+        return this.color[1]
+      } else if (x < 20) {
+        let i = parseInt(x / 2);
+        return this.color[i]
+      } else {
+        return this.color[9]
+      }
+    },
+  }
+});
+var apiurl = 'python-github-calendar-api-zfour.vercel.app' ? 'https://python-github-calendar-api-zfour.vercel.app/api?' : 'https://githubapi.ryanchristian.dev/user/'
+var githubapiurl = apiurl + gitcalendar.user;
+//canvas绘图
+function responsiveChart() {
+  let c = document.getElementById("gitcanvas");
+  if (c) {
+    let cmessage = document.getElementById("gitmessage");
+    let ctx = c.getContext("2d");
+    c.width = document.getElementById("gitcalendarcanvasbox").offsetWidth;
+    let linemaxwitdh = 0.96 * c.width / gitcalendar.data.length;
+    c.height = 9 * linemaxwitdh;
+    let lineminwitdh = 0.8 * linemaxwitdh;
+    let setposition = {
+      x: 0.02 * c.width,
+      y: 0.025 * c.width
+    };
+    for (let week in gitcalendar.data) {
+      weekdata = gitcalendar.data[week];
+      for (let day in weekdata) {
+        let dataitem = {
+          date: "",
+          count: "",
+          x: 0,
+          y: 0
+        };
+        gitcalendar.positionplusdata.push(dataitem);
+        ctx.fillStyle = gitcalendar.thiscolor(weekdata[day].count);
+        setposition.y = Math.round(setposition.y * 100) / 100;
+        dataitem.date = weekdata[day].date;
+        dataitem.count = weekdata[day].count;
+        dataitem.x = setposition.x;
+        dataitem.y = setposition.y;
+        ctx.fillRect(setposition.x, setposition.y, lineminwitdh, lineminwitdh);
+        setposition.y = setposition.y + linemaxwitdh
+      };
+      setposition.y = 0.025 * c.width;
+      setposition.x = setposition.x + linemaxwitdh
+    };
+    ctx.font = "600  Arial";
+    ctx.fillStyle = '#aaa';
+    ctx.fillText("日", 0, 1.9 * linemaxwitdh);
+    ctx.fillText("二", 0, 3.9 * linemaxwitdh);
+    ctx.fillText("四", 0, 5.9 * linemaxwitdh);
+    ctx.fillText("六", 0, 7.9 * linemaxwitdh);
+    let monthindexlist = c.width / 24;
+    for (let index in gitcalendar.monthchange) {
+      ctx.fillText(gitcalendar.monthchange[index], monthindexlist, 0.7 * linemaxwitdh);
+      monthindexlist = monthindexlist + c.width / 12
+    };
+    cmessage.onmousemove = function(event) {
+      document.querySelector('.angle-wrapper').style.display = 'none'
+    };
+    c.onmousemove = function(event) {
+      document.querySelector('.angle-wrapper').style.display = 'none'
+      getMousePos(c, event);
+    };
+
+    function getMousePos(canvas, event) {
+      var rect = canvas.getBoundingClientRect();
+      var x = event.clientX - rect.left * (canvas.width / rect.width);
+      var y = event.clientY - rect.top * (canvas.height / rect.height);
+      //console.log("x:"+x+",y:"+y);
+      for (let item of gitcalendar.positionplusdata) {
+        let lenthx = x - item.x;
+        let lenthy = y - item.y;
+        //console.log(lenthx,lenthy);
+        if (0 < lenthx && lenthx < lineminwitdh) {
+          if (0 < lenthy && lenthy < lineminwitdh) {
+            //console.log(item.date,item.count)
+            document.querySelector('.angle-wrapper').style.display = 'block'
+            gitcalendar.span1 = item.date;
+            gitcalendar.span2 = item.count;
+            gitcalendar.x = event.clientX - 100;
+            gitcalendar.y = event.clientY - 60
+          }
+        }
+        //if(0< x - item.x <lineminwitdh&&0< y - item.y <lineminwitdh){
+        //console.log(item.count,item.date);
+        //}
+      }
+    }
+  }
+}
+//数据统计算法
+function addlastmonth() {
+  if (gitcalendar.thisdayindex === 0) {
+    thisweekcore(52);
+    thisweekcore(51);
+    thisweekcore(50);
+    thisweekcore(49);
+    thisweekcore(48);
+    gitcalendar.thisweekdatacore += gitcalendar.firstdate[6].count;
+    gitcalendar.amonthago = gitcalendar.firstdate[6].date
+  } else {
+    thisweekcore(52);
+    thisweekcore(51);
+    thisweekcore(50);
+    thisweekcore(49);
+    thisweek2core();
+    gitcalendar.amonthago = gitcalendar.first2date[gitcalendar.thisdayindex - 1].date
+  }
+};
+
+function thisweek2core() {
+  for (let i = gitcalendar.thisdayindex - 1; i < gitcalendar.first2date.length; i++) {
+    gitcalendar.thisweekdatacore += gitcalendar.first2date[i].count
+  }
+};
+
+function thisweekcore(index) {
+  for (let item of gitcalendar.data[index]) {
+    gitcalendar.thisweekdatacore += item.count
+  }
+};
+
+function addlastweek() {
+  for (let item of gitcalendar.lastweek) {
+    gitcalendar.weekdatacore += item.count
+  }
+};
+
+function addbeforeweek() {
+  for (let i = gitcalendar.thisdayindex; i < gitcalendar.beforeweek.length; i++) {
+    gitcalendar.weekdatacore += gitcalendar.beforeweek[i].count
+  }
+};
+
+function addweek(data) {
+  if (gitcalendar.thisdayindex === 6) {
+    gitcalendar.aweekago = gitcalendar.lastweek[0].date;
+    addlastweek()
+  } else {
+    lastweek = data.contributions[51];
+    gitcalendar.aweekago = lastweek[gitcalendar.thisdayindex + 1].date;
+    addlastweek();
+    addbeforeweek()
+  }
+}
+
+fetch(githubapiurl)
+  .then(data => data.json())
+  .then(data => {
+    gitcalendar.data = data.contributions;
+    gitcalendar.total = data.total;
+    gitcalendar.first2date = gitcalendar.data[48];
+    gitcalendar.firstdate = gitcalendar.data[47];
+    gitcalendar.firstweek = data.contributions[0];
+    gitcalendar.lastweek = data.contributions[52];
+    gitcalendar.beforeweek = data.contributions[51];
+    gitcalendar.thisdayindex = gitcalendar.lastweek.length - 1;
+    gitcalendar.thisday = gitcalendar.lastweek[gitcalendar.thisdayindex].date;
+    gitcalendar.oneyearbeforeday = gitcalendar.firstweek[0].date;
+    gitcalendar.monthindex = gitcalendar.thisday.substring(5, 7) * 1;
+    gitcalendar.montharrbefore = gitcalendar.month.splice(gitcalendar.monthindex, 12 - gitcalendar.monthindex);
+    gitcalendar.monthchange = gitcalendar.montharrbefore.concat(gitcalendar.month);
+    addweek(data);
+    addlastmonth();
+    responsiveChart();
+  })
+  .catch(function(error) {
+    console.log(error);
+  });
+
+//手机版更换为svg绘制
+if (document.getElementById("gitcalendarcanvasbox") && document.getElementById("gitcalendarcanvasbox").offsetWidth < 500) {
+  gitcalendar.simplemode = false
+}
+
+//当改变窗口大小时重新绘制canvas
+window.onresize = function() {
+  if (gitcalendar.simplemode) responsiveChart()
+}
+
+//解决滚动滑轮时出现的标签显示
+window.onscroll = function() {
+  if (document.querySelector('.angle-wrapper')) {
+    document.querySelector('.angle-wrapper').style.display = 'none'
+  }
+};</script></div><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="/js/valine.js"></script><script src="/js/close.js"></script><script defer data-pjax src="/js/maopao.js"></script><script defer src="https://cdn.jsdelivr.net/gh/graingert/wow@1.3.0/dist/wow.min.js"></script><script defer data-pjax src="/js/wow-init.js"></script><script src="https://myhkw.cn/api/player/1618646380121" id="myhk" key="1618646380121" m="1"></script><script defer data-pjax src="https://cdn.jsdelivr.net/gh/xiabo2/CDN@latest/fishes.js"></script><script src="/js/moments.js"></script><canvas class="fireworks" mobile="false"></canvas><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/fireworks.min.js"></script><script id="canvas_nest" defer color="67,173,127" opacity="0.7" zindex="-1" count="99" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/canvas-nest.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful=!0,POWERMODE.shake=!1,POWERMODE.mobile=!1,document.body.addEventListener("input",POWERMODE)</script><script src="//code.tidio.co/bisrc3ghmylr0jd2ikrwcv8xp5i2nkwz.js" async></script><script>function onTidioChatApiReady() {
+  window.tidioChatApi.hide();
+  window.tidioChatApi.on("close", function() {
+    window.tidioChatApi.hide();
+  });
+}
+if (window.tidioChatApi) {
+  window.tidioChatApi.on("ready", onTidioChatApiReady);
+} else {
+  document.addEventListener("tidioChat-ready", onTidioChatApiReady);
+}
+
+var chatBtnFn = () => {
+  document.getElementById("chat_btn").addEventListener("click", function(){
+    window.tidioChatApi.show();
+    window.tidioChatApi.open();
+  });
+}
+chatBtnFn()</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css" media="print" onload='this.media="all"'><script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script><script src="https://cdn.jsdelivr.net/gh/metowolf/MetingJS@1.2/dist/Meting.min.js"></script><script src="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script><script>let pjaxSelectors = [
+  'title',
+  '#config-diff',
+  '#body-wrap',
+  '#rightside-config-hide',
+  '#rightside-config-show',
+  '.js-pjax'
+]
+
+if (false) {
+  pjaxSelectors.unshift('meta[property="og:image"]', 'meta[property="og:title"]', 'meta[property="og:url"]')
+}
+
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: false,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+  //- document.querySelectorAll("script[data-pjax], .pjax-reload script").forEach((item) => {
+  //-   const newScript = document.createElement("script");
+  //-   const content = item.text || item.textContent || item.innerHTML || "";
+  //-   Array.from(item.attributes).forEach((attr) =>
+  //-   newScript.setAttribute(attr.name, attr.value));
+  //-   newScript.appendChild(document.createTextNode(content));
+  //-   item.parentNode.replaceChild(newScript, item);
+  //- });
+
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+  typeof chatBtnFn === 'function' && chatBtnFn()
+  typeof panguInit === 'function' && panguInit()
+
+  if (typeof gtag === 'function') {
+    gtag('config', '', {'page_path': window.location.pathname});
+  }
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // Analytics
+  if (false) {
+    MtaH5.pgv()
+  }
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+
+  typeof preloader === 'object' && preloader.endLoading()
+})
+
+
+document.addEventListener('pjax:send', function () {
+  typeof preloader === 'object' && preloader.initLoading()
+  
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
+
+  typeof typed === 'object' && typed.destroy()
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+
+})
+
+document.addEventListener('pjax:error', (e) => {
+  if (e.request.status === 404) {
+    pjax.loadUrl('/404.html')
+  }
+})</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><script data-pjax>if(document.getElementById("recent-posts")&&(location.pathname,1)){var parent=document.getElementById("recent-posts"),child='<div class="recent-post-item" style="width:100%;height: auto"><div id="catalog_magnet"><div class="magnet_item"><a class="magnet_link" href="https://imagineblog.vercel.app/categories/javascript/"><div class="magnet_link_context" style=""><span style="font-weight:500;flex:1">📚 JavaScript学习 (16)</span><span style="padding:0px 4px;border-radius: 8px;"><i class="fas fa-arrow-circle-right"></i></span></div></a></div><div class="magnet_item"><a class="magnet_link" href="https://imagineblog.vercel.app/categories/Vue/"><div class="magnet_link_context" style=""><span style="font-weight:500;flex:1">📔 Vue笔记 (2)</span><span style="padding:0px 4px;border-radius: 8px;"><i class="fas fa-arrow-circle-right"></i></span></div></a></div><div class="magnet_item"><a class="magnet_link" href="https://imagineblog.vercel.app/categories/React/"><div class="magnet_link_context" style=""><span style="font-weight:500;flex:1">📓 React学习记录 (1)</span><span style="padding:0px 4px;border-radius: 8px;"><i class="fas fa-arrow-circle-right"></i></span></div></a></div><div class="magnet_item"><a class="magnet_link" href="https://imagineblog.vercel.app/categories/MySQL/"><div class="magnet_link_context" style=""><span style="font-weight:500;flex:1">💻 数据库知识 (1)</span><span style="padding:0px 4px;border-radius: 8px;"><i class="fas fa-arrow-circle-right"></i></span></div></a></div><a class="magnet_link_more"  href="https://imagineblog.vercel.app/categories" style="flex:1;text-align: center;margin-bottom: 10px;">查看更多...</a></div></div>';console.log("已挂载magnet"),parent.insertAdjacentHTML("afterbegin",child)}</script><style>#catalog_magnet{flex-wrap:wrap;display:flex;width:100%;justify-content:space-between;padding:10px 10px 0 10px;align-content:flex-start}.magnet_item{flex-basis:calc(50% - 5px);background:#f2f2f2;margin-bottom:10px;border-radius:8px;transition:all .2s ease-in-out}.magnet_item:hover{background:#3de1ad}.magnet_link_more{color:#555}.magnet_link{color:#000}.magnet_link:hover{color:#fff}@media screen and (max-width:600px){.magnet_item{flex-basis:100%}}.magnet_link_context{display:flex;padding:10px;font-size:16px;transition:all .2s ease-in-out}.magnet_link_context:hover{padding:10px 20px}</style><style></style><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({model:{jsonPath:"/live2dw/assets/wanko.model.json"},display:{position:"right",width:150,height:200},mobile:{show:!1},log:!1,pluginJsPath:"lib/",pluginModelPath:"assets/",pluginRootPath:"live2dw/",tagMode:!1})</script></body></html>
