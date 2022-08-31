@@ -1,0 +1,660 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Promise(一)：Promise认识 | IMAGINE</title><meta name="keywords" content="javascript,Promise"><meta name="author" content="Peng"><meta name="copyright" content="Peng"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="Promise 是什么？Promise 是 ES6 中的一个重要特性，那 Promise 究竟长什么样子呢？我们来 console.dir()打印一下就知道了。从打印的结果可以看出，Promise 是一个构造函数，身上有许多方法: all,any,race,reject,resolve；原型上有 then,catch 等常用到的方法。 那我们来 new 一个 Promise 来看看。 123456"><meta property="og:type" content="article"><meta property="og:title" content="Promise(一)：Promise认识"><meta property="og:url" content="http://imagineblog.host/pnzuz1/index.html"><meta property="og:site_name" content="IMAGINE"><meta property="og:description" content="Promise 是什么？Promise 是 ES6 中的一个重要特性，那 Promise 究竟长什么样子呢？我们来 console.dir()打印一下就知道了。从打印的结果可以看出，Promise 是一个构造函数，身上有许多方法: all,any,race,reject,resolve；原型上有 then,catch 等常用到的方法。 那我们来 new 一个 Promise 来看看。 123456"><meta property="og:locale" content="zh_CN"><meta property="og:image" content="https://z3.ax1x.com/2021/07/20/WttkSH.jpg"><meta property="article:published_time" content="2021-04-12T03:29:24.000Z"><meta property="article:modified_time" content="2022-08-31T08:04:19.377Z"><meta property="article:author" content="Peng"><meta property="article:tag" content="javascript"><meta property="article:tag" content="Promise"><meta name="twitter:card" content="summary"><meta name="twitter:image" content="https://z3.ax1x.com/2021/07/20/WttkSH.jpg"><link rel="shortcut icon" href="https://lovelijunyi.gitee.io/img/avatar.gif"><link rel="canonical" href="http://imagineblog.host/pnzuz1/"><link rel="preconnect" href="//cdn.jsdelivr.net"><link rel="preconnect" href="//hm.baidu.com"><link rel="preconnect" href="//fonts.googleapis.com" crossorigin=""><link rel="preconnect" href="//busuanzi.ibruce.info"><meta name="google-site-verification" content="oUu4V6mTgP_CWLbYPUuUK0dzxO1r5vMPXCM6QXwiOv8"><meta name="baidu-site-verification" content="code-mOtCM04zOU"><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload='this.media="all"'><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.css" media="print" onload='this.media="all"'><script>var _hmt=_hmt||[];!function(){var e=document.createElement("script");e.src="https://hm.baidu.com/hm.js?6ede5b235a26f80d0b78937205b49f6f";var t=document.getElementsByTagName("script")[0];t.parentNode.insertBefore(e,t)}()</script><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Titillium+Web&amp;display=swap" media="print" onload='this.media="all"'><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":200},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"limitCount":50,"languages":{"author":"作者: Peng","link":"链接: ","source":"来源: IMAGINE","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。"}},
+  lightbox: 'mediumZoom',
+  Snackbar: {"chs_to_cht":"你已切换为繁体","cht_to_chs":"你已切换为简体","day_to_night":"你已切换为深色模式","night_to_day":"你已切换为浅色模式","bgLight":"#00c4b6","bgDark":"#121212","position":"top-right"},
+  source: {
+    jQuery: 'https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js',
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+    },
+    fancybox: {
+      js: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css'
+    }
+  },
+  isPhotoFigcaption: true,
+  islazyload: true,
+  isanchor: true
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE={isPost:!0,isHome:!1,isHighlightShrink:!1,isToc:!0,postUpdate:"2022-08-31 16:04:19"}</script><noscript><style>#nav{opacity:1}.justified-gallery img{opacity:1}#post-meta time,#recent-posts time{display:inline!important}</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          const now = new Date()
+          const hour = now.getHours()
+          const isNight = hour <= 6 || hour >= 18
+          if (t === undefined) isNight ? activateDarkMode() : activateLightMode()
+          else if (t === 'light') activateLightMode()
+          else activateDarkMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const fontSizeVal = saveToLocal.get('global-font-size')
+    if (fontSizeVal !== undefined) {
+      document.documentElement.style.setProperty('--global-font-size', fontSizeVal + 'px')
+    }
+    })(window)</script><link rel="stylesheet" href="/css/custom.css" media="defer" onload='this.media="all"'><link rel="stylesheet" href="//at.alicdn.com/t/font_2492407_3wz9sdgpeam.css"><style>#toggle-sidebar{bottom:80px}</style><link rel="stylesheet" href="/css/macblack.css"><link rel="stylesheet" href="/css/veditor.css"><link rel="stylesheet" href="/css/close.css"><link rel="stylesheet" href="/css/iconColor.css"><link rel="stylesheet" href="/css/copyright.css"><link rel="stylesheet" href="/css/notice.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/HexoPlusPlus/HexoPlusPlus@latest/talk.css"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" media="defer" onload='this.media="all"'><script src="https://cdn.jsdelivr.net/npm/echarts@4.7.0/dist/echarts.min.js"></script><script src="https://cdn.jsdelivr.net/npm/echarts@4.7.0/map/js/china.js"></script><script src="https://cdn.jsdelivr.net/gh/HexoPlusPlus/HexoPlusPlus@latest/talk_user.js"></script><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/l-lin/font-awesome-animation/dist/font-awesome-animation.min.css" media="defer" onload='this.media="all"'><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-butterfly-tag-plugins-plus@latest/lib/tag_plugins.min.css" media="defer" onload='this.media="all"'><script async src="https://cdn.jsdelivr.net/npm/hexo-butterfly-tag-plugins-plus@latest/lib/carousel-touch.min.js"></script><meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="IMAGINE" type="application/atom+xml"></head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="author-avatar"><img class="avatar-img" data-lazy-src="/img/avatar.jpg" onerror='onerror=null,src="/img/friend_404.gif"' alt="avatar"></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">37</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">标签</div><div class="length-num">20</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">分类</div><div class="length-num">14</div></a></div></div></div><hr><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw iconfont icon-zhuye"></i> <span>主页</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw iconfont icon-mulu1"></i> <span>目录</span><i class="fas fa-chevron-down expand hide"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/archives/"><i class="fa-fw iconfont icon-guidang1"></i> <span>归档</span></a></li><li><a class="site-page" href="/tags/"><i class="fa-fw iconfont icon-biaoqian"></i> <span>标签</span></a></li><li><a class="site-page" href="/categories/"><i class="fa-fw iconfont icon-category"></i> <span>分类</span></a></li><li><a class="site-page" href="/collect/"><i class="fa-fw iconfont icon-shoucang"></i> <span>收藏</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw iconfont icon-yule"></i> <span>清单</span><i class="fas fa-chevron-down expand hide"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/playlist/"><i class="fa-fw iconfont icon-gedan"></i> <span>歌单</span></a></li><li><a class="site-page" href="/books/"><i class="fa-fw iconfont icon-yuedumoshi"></i> <span>书单</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw iconfont icon-caozuojiemiantubiao---_gongju"></i> <span>工具</span><i class="fas fa-chevron-down expand hide"></i></a><ul class="menus_item_child"><li><a class="site-page" target="_blank" rel="noopener" href="https://imgtu.com/"><i class="fa-fw iconfont icon-cloud"></i> <span>imgtu</span></a></li><li><a class="site-page" target="_blank" rel="noopener" href="https://www.leancloud.cn/"><i class="fa-fw iconfont icon-pinglun"></i> <span>LeanCloud</span></a></li><li><a class="site-page" target="_blank" rel="noopener" href="https://www.cloudflare.com/zh-cn/"><i class="fa-fw iconfont icon-cloudcomputing"></i> <span>Cloudflare</span></a></li><li><a class="site-page" target="_blank" rel="noopener" href="https://vercel.com/lp-imagine"><i class="fa-fw iconfont icon-webx"></i> <span>Vercel</span></a></li><li><a class="site-page" target="_blank" rel="noopener" href="https://cloud.mongodb.com/v2#/org/610751ff4218af3732524482/projects"><i class="fa-fw iconfont icon-mongdbwapian"></i> <span>MongoDB</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw iconfont icon-guanyu"></i> <span>关于</span><i class="fas fa-chevron-down expand hide"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/about/"><i class="fa-fw iconfont icon-iconzhengli-"></i> <span>关于我</span></a></li><li><a class="site-page" href="/message/"><i class="fa-fw iconfont icon-liuyanmoban"></i> <span>留言板</span></a></li><li><a class="site-page" href="/talks/"><i class="fa-fw iconfont icon-fengche"></i> <span>说说</span></a></li><li><a class="site-page" href="/link/"><i class="fa-fw iconfont icon-youqinglianjie"></i> <span>友情链接</span></a></li><li><a class="site-page" href="/friends_link"><i class="fa-fw iconfont icon-pengyouquan"></i> <span>友链朋友圈</span></a></li><li><a class="site-page" target="_blank" rel="noopener" href="https://imagine-nav.vercel.app/"><i class="fa-fw iconfont icon-daohang1"></i> <span>导航站</span></a></li><li><a class="site-page" target="_blank" rel="noopener" href="https://imagine.imagineblog.workers.dev/hpp/admin/login"><i class="fa-fw iconfont icon-xiezuo"></i> <span>后台</span></a></li></ul></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image:url(https://z3.ax1x.com/2021/07/20/WttkSH.jpg)"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">IMAGINE</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw iconfont icon-zhuye"></i> <span>主页</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw iconfont icon-mulu1"></i> <span>目录</span><i class="fas fa-chevron-down expand hide"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/archives/"><i class="fa-fw iconfont icon-guidang1"></i> <span>归档</span></a></li><li><a class="site-page" href="/tags/"><i class="fa-fw iconfont icon-biaoqian"></i> <span>标签</span></a></li><li><a class="site-page" href="/categories/"><i class="fa-fw iconfont icon-category"></i> <span>分类</span></a></li><li><a class="site-page" href="/collect/"><i class="fa-fw iconfont icon-shoucang"></i> <span>收藏</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw iconfont icon-yule"></i> <span>清单</span><i class="fas fa-chevron-down expand hide"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/playlist/"><i class="fa-fw iconfont icon-gedan"></i> <span>歌单</span></a></li><li><a class="site-page" href="/books/"><i class="fa-fw iconfont icon-yuedumoshi"></i> <span>书单</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw iconfont icon-caozuojiemiantubiao---_gongju"></i> <span>工具</span><i class="fas fa-chevron-down expand hide"></i></a><ul class="menus_item_child"><li><a class="site-page" target="_blank" rel="noopener" href="https://imgtu.com/"><i class="fa-fw iconfont icon-cloud"></i> <span>imgtu</span></a></li><li><a class="site-page" target="_blank" rel="noopener" href="https://www.leancloud.cn/"><i class="fa-fw iconfont icon-pinglun"></i> <span>LeanCloud</span></a></li><li><a class="site-page" target="_blank" rel="noopener" href="https://www.cloudflare.com/zh-cn/"><i class="fa-fw iconfont icon-cloudcomputing"></i> <span>Cloudflare</span></a></li><li><a class="site-page" target="_blank" rel="noopener" href="https://vercel.com/lp-imagine"><i class="fa-fw iconfont icon-webx"></i> <span>Vercel</span></a></li><li><a class="site-page" target="_blank" rel="noopener" href="https://cloud.mongodb.com/v2#/org/610751ff4218af3732524482/projects"><i class="fa-fw iconfont icon-mongdbwapian"></i> <span>MongoDB</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw iconfont icon-guanyu"></i> <span>关于</span><i class="fas fa-chevron-down expand hide"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/about/"><i class="fa-fw iconfont icon-iconzhengli-"></i> <span>关于我</span></a></li><li><a class="site-page" href="/message/"><i class="fa-fw iconfont icon-liuyanmoban"></i> <span>留言板</span></a></li><li><a class="site-page" href="/talks/"><i class="fa-fw iconfont icon-fengche"></i> <span>说说</span></a></li><li><a class="site-page" href="/link/"><i class="fa-fw iconfont icon-youqinglianjie"></i> <span>友情链接</span></a></li><li><a class="site-page" href="/friends_link"><i class="fa-fw iconfont icon-pengyouquan"></i> <span>友链朋友圈</span></a></li><li><a class="site-page" target="_blank" rel="noopener" href="https://imagine-nav.vercel.app/"><i class="fa-fw iconfont icon-daohang1"></i> <span>导航站</span></a></li><li><a class="site-page" target="_blank" rel="noopener" href="https://imagine.imagineblog.workers.dev/hpp/admin/login"><i class="fa-fw iconfont icon-xiezuo"></i> <span>后台</span></a></li></ul></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">Promise(一)：Promise认识</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2021-04-12T03:29:24.000Z" title="发表于 2021-04-12 11:29:24">2021-04-12</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2022-08-31T08:04:19.377Z" title="更新于 2022-08-31 16:04:19">2022-08-31</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/javascript/">javascript</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">2.5k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>9分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h2 id="Promise-是什么？"><a href="#Promise-是什么？" class="headerlink" title="Promise 是什么？"></a>Promise 是什么？</h2><p>Promise 是 ES6 中的一个重要特性，那 Promise 究竟长什么样子呢？我们来 console.dir()打印一下就知道了。<br><img src="data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="https://cdn.jsdelivr.net/gh/lp-Imagine/lp-Imagine@main/images/p.png"><br>从打印的结果可以看出，Promise 是一个构造函数，身上有许多方法: all,any,race,reject,resolve；原型上有 then,catch 等常用到的方法。</p><p>那我们来 new 一个 Promise 来看看。</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> pro = <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="keyword">function</span> (<span class="params">resolve, reject</span>) </span>&#123;</span><br><span class="line">  <span class="comment">//** 在里面执行一些异步操作*/</span></span><br><span class="line">  <span class="built_in">setTimeout</span>(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&quot;三秒后执行&quot;</span>);</span><br><span class="line">    resolve(<span class="string">&quot;数据data&quot;</span>);</span><br><span class="line">  &#125;, <span class="number">3000</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure><p><img src="data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="https://cdn.jsdelivr.net/gh/lp-Imagine/lp-Imagine@main/images/p2.png"><br>Promise 构造函数接收一个参数，是一个函数，里面传入两个参数 resolve,reject;它们分别表示异步操作执行成功后的回调和异步操作执行失败的回调。</p><h3 id="Promise-概念"><a href="#Promise-概念" class="headerlink" title="Promise 概念"></a>Promise 概念</h3><p>Promise 的中文意思是‘承诺’，什么叫承诺？承诺就是现在没有发生，在将来的某个时刻一定会发生的事情。<br>放在编程语言的环境下，Promise 就是异步事件的结果的占位符。我们不用去管异步事件的结果什么时候来，只需要关心异步事件的结果产生的时候，你想要做什么就对了。</p><h3 id="生命周期"><a href="#生命周期" class="headerlink" title="生命周期"></a>生命周期</h3><p>异步事件不是立即执行程序，它的结果可能要在动作发生后一段时间才到，所以它有个生命周期。<br>一个 Promise 的生命周期主要有 2 个阶段：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">1: unsettled（pending） 处理中</span><br><span class="line">2: settled (fulfilled或者rejected) 处理完</span><br></pre></td></tr></table></figure><h3 id="Promise-有三个状态："><a href="#Promise-有三个状态：" class="headerlink" title="Promise 有三个状态："></a>Promise 有三个状态：</h3><ul><li>pending   初始状态（等待）</li><li>fulfiled   操作成功</li><li>rejected   操作失败</li></ul><blockquote><p><strong>resolve:</strong> 是指将 Promise 对象的状态从 pending 变为 fulfilled，在异步操作成功时调用，并将结果作为参数传递出去。<br><strong>reject:</strong> 是指将 Promise 对象的状态从 pending 变为 rejected，在异步操作失败时调用，并将异步操作报的错误作为参数传递出去。</p></blockquote><p>上面这段代码，执行了一个 setTimeout 异步操作，会在三秒后执行，打印“三秒后执行”并调用 resolve 方法。<br>需要注意的一点是，我们只是 new 了一个 Promise 对象并没有调用它，但传进去的函数去执行了；所以，一般使用 Promise 的时候我们都会在外面包一层函数，在需要的时候再去调用这个函数。</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">promiseAsync</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  <span class="keyword">let</span> pro = <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="keyword">function</span>(<span class="params">resolve,reject</span>)</span>&#123;</span><br><span class="line">    <span class="built_in">setTimeout</span>(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">      <span class="built_in">console</span>.log(<span class="string">&#x27;三秒后执行&#x27;</span>)</span><br><span class="line">      resolve(<span class="string">&#x27;数据data&#x27;</span>)</span><br><span class="line">    &#125;,<span class="number">3000</span>)</span><br><span class="line">  &#125;)</span><br><span class="line">  <span class="keyword">return</span> pro</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">promiseAsync()</span><br></pre></td></tr></table></figure><h3 id="链式调用"><a href="#链式调用" class="headerlink" title="链式调用"></a>链式调用</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">promiseAsync().then(<span class="function"><span class="keyword">function</span> (<span class="params">data</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(data);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure><p>在 promiseAsync()的返回上直接调用 then 方法，then 接收一个参数，是函数，并且会拿到我们在 promiseAsync 中调用 resolve 时传的的参数。运行这段代码，会在三秒后输出“三秒后执行”，紧接着输出“数据 data”。</p><blockquote><p>从这可以看出，原来 then 里面的函数就跟我们平时的回调函数一个意思，能够在 promiseAsync 这个异步任务执行完成之后被执行。这就是 Promise 的作用了，简单来讲，就是能把原来的回调写法分离出来，在异步操作执行完后，用链式调用的方式执行回调函数。<br>而 Promise 的优势在于，可以在 then 方法中继续写 Promise 对象并返回，然后继续调用 then 来进行回调操作。<br>所以，Promise 表面上只是简化了层层回调的写法，实质上通过维护状态、传递状态的方式来使得回调函数能够及时得到调用，相比于传递 callback 来说更加简单和灵活。<br>如下实例：</p></blockquote><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">promiseAsync1</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> pro1 = <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="keyword">function</span> (<span class="params">resolve, reject</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">setTimeout</span>(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">      <span class="built_in">console</span>.log(<span class="string">&quot;promiseAsync1执行成功&quot;</span>);</span><br><span class="line">      resolve(<span class="string">&quot;data1111&quot;</span>);</span><br><span class="line">    &#125;, <span class="number">3000</span>);</span><br><span class="line">  &#125;);</span><br><span class="line">  <span class="keyword">return</span> pro1;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">promiseAsync2</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> pro2 = <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="keyword">function</span> (<span class="params">resolve, reject</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">setTimeout</span>(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">      <span class="built_in">console</span>.log(<span class="string">&quot;promiseAsync2执行成功&quot;</span>);</span><br><span class="line">      resolve(<span class="string">&quot;data2222&quot;</span>);</span><br><span class="line">    &#125;, <span class="number">3000</span>);</span><br><span class="line">  &#125;);</span><br><span class="line">  <span class="keyword">return</span> pro2;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">promiseAsync3</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> pro3 = <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="keyword">function</span> (<span class="params">resolve, reject</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">setTimeout</span>(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">      <span class="built_in">console</span>.log(<span class="string">&quot;promiseAsync3执行成功&quot;</span>);</span><br><span class="line">      resolve(<span class="string">&quot;data3333&quot;</span>);</span><br><span class="line">    &#125;, <span class="number">3000</span>);</span><br><span class="line">  &#125;);</span><br><span class="line">  <span class="keyword">return</span> pro3;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//*链式调用*/</span></span><br><span class="line">promiseAsync1()</span><br><span class="line">  .then(<span class="function"><span class="keyword">function</span> (<span class="params">data</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(data); <span class="comment">// data1111</span></span><br><span class="line">    <span class="keyword">return</span> promiseAsync2();</span><br><span class="line">  &#125;)</span><br><span class="line">  .then(<span class="function"><span class="keyword">function</span> (<span class="params">data</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(data); <span class="comment">// data2222</span></span><br><span class="line">    <span class="keyword">return</span> promiseAsync3();</span><br><span class="line">  &#125;)</span><br><span class="line">  .then(<span class="function"><span class="keyword">function</span> (<span class="params">data</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(data); <span class="comment">// data3333</span></span><br><span class="line">    <span class="keyword">return</span> <span class="string">&quot;直接返回数据&quot;</span>;</span><br><span class="line">  &#125;)</span><br><span class="line">  .then(<span class="function"><span class="keyword">function</span> (<span class="params">data</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(data); <span class="comment">// 直接返回数据</span></span><br><span class="line">  &#125;);</span><br></pre></td></tr></table></figure><p>运行结果：<br><img src="data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="https://cdn.jsdelivr.net/gh/lp-Imagine/lp-Imagine@main/images/p3.png"></p><h2><a href="#" class="headerlink"></a><div class="note default modern"><p>总结：<br>1、主要用于异步计算<br>2、可以将异步操作队列化，按照期望的顺序执行，返回符合预期的结果<br>3、可以在对象之间传递和操作 Promise，帮助我们处理队列</p></div></h2><h2 id="错误处理"><a href="#错误处理" class="headerlink" title="错误处理"></a>错误处理</h2><p>Promise 会自动捕获内部异常，并交给 rejected 响应函数进行处理。</p><h3 id="1-throw-new-Error-‘错误信息’-catch-gt-错误处理逻辑"><a href="#1-throw-new-Error-‘错误信息’-catch-gt-错误处理逻辑" class="headerlink" title="1. throw new Error(‘错误信息’).catch( () =&gt; {错误处理逻辑})"></a>1. throw new Error(‘错误信息’).catch( () =&gt; {错误处理逻辑})</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="keyword">function</span> (<span class="params">resolve, reject</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">setTimeout</span>(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">&quot;抛出error&quot;</span>);</span><br><span class="line">  &#125;, <span class="number">3000</span>);</span><br><span class="line">&#125;)</span><br><span class="line">  .then(<span class="function">(<span class="params">res</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(res);</span><br><span class="line">  &#125;)</span><br><span class="line">  .catch(<span class="function">(<span class="params">err</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&quot;Error&quot;</span>, err);</span><br><span class="line">  &#125;);</span><br></pre></td></tr></table></figure><h3 id="2-reject-‘错误信息’-then-gt-gt-错误处理逻辑"><a href="#2-reject-‘错误信息’-then-gt-gt-错误处理逻辑" class="headerlink" title="2. reject(‘错误信息’).then(() =&gt; {}, () =&gt; {错误处理逻辑})"></a>2. reject(‘错误信息’).then(() =&gt; {}, () =&gt; {错误处理逻辑})</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="keyword">function</span> (<span class="params">resolve, reject</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">setTimeout</span>(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    reject(<span class="string">&quot;抛出err&quot;</span>);</span><br><span class="line">  &#125;, <span class="number">3000</span>);</span><br><span class="line">&#125;).then(</span><br><span class="line">  (res) =&gt; &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(res);</span><br><span class="line">  &#125;,</span><br><span class="line">  (err) =&gt; &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&quot;Error&quot;</span>, err);</span><br><span class="line">  &#125;</span><br><span class="line">);</span><br></pre></td></tr></table></figure><blockquote><p>推荐使用第一种方式，更加清晰好读，并且可以捕获前面所有的错误（可以捕获 N 个 then 回调错误）</p></blockquote><hr><h2 id="Promise-reject-执行失败操作"><a href="#Promise-reject-执行失败操作" class="headerlink" title="Promise.reject 执行失败操作"></a>Promise.reject 执行失败操作</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getNum</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> pro = <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="keyword">function</span> (<span class="params">resolve, reject</span>) </span>&#123;</span><br><span class="line">    <span class="comment">//做一些异步操作</span></span><br><span class="line">    <span class="built_in">setTimeout</span>(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">      <span class="keyword">var</span> num = <span class="built_in">Math</span>.ceil(<span class="built_in">Math</span>.random() * <span class="number">10</span>); <span class="comment">//生成1-10的随机数</span></span><br><span class="line">      <span class="keyword">if</span> (num &lt;= <span class="number">5</span>) &#123;</span><br><span class="line">        resolve(num);</span><br><span class="line">      &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        reject(<span class="string">&quot;数字太大了&quot;</span>);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;, <span class="number">3000</span>);</span><br><span class="line">  &#125;);</span><br><span class="line">  <span class="keyword">return</span> pro;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">getNum().then(</span><br><span class="line">  <span class="function"><span class="keyword">function</span> (<span class="params">data</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&quot;resolved&quot;</span>);</span><br><span class="line">    <span class="built_in">console</span>.log(data);</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="function"><span class="keyword">function</span> (<span class="params">reason, data</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&quot;rejected&quot;</span>);</span><br><span class="line">    <span class="built_in">console</span>.log(reason);</span><br><span class="line">  &#125;</span><br><span class="line">);</span><br></pre></td></tr></table></figure><blockquote><p>getNum 函数用来异步获取一个数字，3 秒后执行完成，如果数字小于等于 5，我们认为是“成功”了，调用 resolve 修改 Promise 的状态。否则我们认为是“失败”了，调用 reject 并传递一个参数，作为失败的原因。</p></blockquote><hr><h2 id="Promise-catch"><a href="#Promise-catch" class="headerlink" title="Promise.catch"></a>Promise.catch</h2><p>catch 方法和 then 方法的第二参数是差不多的作用，主要是用来指定 reject 的回调。还是拿 getNum 函数为例，用法如下：</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">getNum()</span><br><span class="line">  .then(<span class="function">(<span class="params">res</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&quot;resolved&quot;</span>);</span><br><span class="line">    <span class="built_in">console</span>.log(res);</span><br><span class="line">  &#125;)</span><br><span class="line">  .catch(<span class="function">(<span class="params">e</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&quot;rejected&quot;</span>);</span><br><span class="line">    <span class="built_in">console</span>.log(e);</span><br><span class="line">  &#125;);</span><br></pre></td></tr></table></figure><p>效果和写在 then 的第二个参数里面一样。不过它还有另外一个作用：在执行 resolve 的回调（也就是上面 then 中的第一个参数）时，如果抛出异常了（代码出错了），那么并不会报错卡死 js，而是会进到这个 catch 方法中。请看下面的代码：</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">getNum()</span><br><span class="line">  .then(<span class="function">(<span class="params">res</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&quot;resolved&quot;</span>);</span><br><span class="line">    cosnole.log(reslut); <span class="comment">// 一个未定义的变量</span></span><br><span class="line">  &#125;)</span><br><span class="line">  .catch(<span class="function">(<span class="params">e</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&quot;rejected&quot;</span>);</span><br><span class="line">    <span class="built_in">console</span>.log(e); <span class="comment">// ReferenceError: cosnole is not defined at &lt;anonymous&gt;:3:5</span></span><br><span class="line">  &#125;);</span><br></pre></td></tr></table></figure><h2 id="在-resolve-的回调中，我们-console-log-reslut-而-reslut-这个变量是没有被定义的。如果我们不用-Promise，代码运行到这里就直接在控制台报错了，不往下运行了。但是在这里，会得到这样的结果："><a href="#在-resolve-的回调中，我们-console-log-reslut-而-reslut-这个变量是没有被定义的。如果我们不用-Promise，代码运行到这里就直接在控制台报错了，不往下运行了。但是在这里，会得到这样的结果：" class="headerlink" title="在 resolve 的回调中，我们 console.log(reslut);而 reslut 这个变量是没有被定义的。如果我们不用 Promise，代码运行到这里就直接在控制台报错了，不往下运行了。但是在这里，会得到这样的结果："></a>在 resolve 的回调中，我们 console.log(reslut);而 reslut 这个变量是没有被定义的。如果我们不用 Promise，代码运行到这里就直接在控制台报错了，不往下运行了。但是在这里，会得到这样的结果：</h2><p><img src="data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="https://cdn.jsdelivr.net/gh/lp-Imagine/lp-Imagine@main/images/p4.png"><br>也就是说进到 catch 方法里面去了，而且把错误原因传到了 e 参数中。即便是有错误的代码也不会报错了，这与我们的 try/catch 语句有相同的功能。</p><h2 id="Promise-all-批量执行操作"><a href="#Promise-all-批量执行操作" class="headerlink" title="Promise.all 批量执行操作"></a>Promise.all 批量执行操作</h2><p>Promise 的 all 方法提供了并行执行异步操作的能力，并且在所有异步操作执行完后才执行回调。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Promise.all([pro1,pro2,pro3])用于将多个Promise实例，包装成一个新的Promise实例。</span><br><span class="line">他接收一个数组作为参数，数组里可以是Promise对象或者别的值，只有Promise会等待状态改变。</span><br><span class="line">当所有的子Promise实例全部完成，该Promise才完成，返回值是全部值的数组。</span><br><span class="line">有任何一个子Promise实例失败，该Promise将失败，并返回第一个失败的子Promise实例的结果。</span><br></pre></td></tr></table></figure><p>还是拿上面定义的 promiseAsync1,promiseAsync2,promiseAsync3 来用一下：</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Promise</span>.all([promiseAsync1(), promiseAsync2(), promiseAsync3()])</span><br><span class="line">  .then(<span class="function">(<span class="params">res</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&quot;全部值数组：&quot;</span>);</span><br><span class="line">    <span class="built_in">console</span>.log(res);</span><br><span class="line">  &#125;)</span><br><span class="line">  .catch(<span class="function">(<span class="params">e</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&quot;第一个实例失败结果：&quot;</span> + e);</span><br><span class="line">  &#125;);</span><br></pre></td></tr></table></figure><p><img src="data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="https://cdn.jsdelivr.net/gh/lp-Imagine/lp-Imagine@main/images/p5.png"></p><h2 id="-1"><a href="#-1" class="headerlink"></a></h2><p>有了 all，就可以并行执行多个异步操作，并且在一个回调中处理所有的返回数据。</p><h2 id="promise-race-类似于-Promise-all-，区别在于它有任意一个完成就算完成"><a href="#promise-race-类似于-Promise-all-，区别在于它有任意一个完成就算完成" class="headerlink" title="promise.race 类似于 Promise.all() ，区别在于它有任意一个完成就算完成"></a>promise.race 类似于 Promise.all() ，区别在于它有任意一个完成就算完成</h2><p>all 方法的效果实际上是「谁跑的慢，以谁为准执行回调」，那么相对的就有另一个方法「谁跑的快，以谁为准执行回调」，这就是 race 方法，这个词本来就是赛跑的意思。race 的用法与 all 一样，我们把上面 promsieAsync1 的延时改为 1 秒来看一下：</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Promise</span>.race([promiseAsync1(), promiseAsync2(), promiseAsync3()])</span><br><span class="line">  .then(<span class="function">(<span class="params">res</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&quot;第一个执行完成：&quot;</span>);</span><br><span class="line">    <span class="built_in">console</span>.log(res);</span><br><span class="line">  &#125;)</span><br><span class="line">  .catch(<span class="function">(<span class="params">e</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(e);</span><br><span class="line">  &#125;);</span><br></pre></td></tr></table></figure><p>这三个异步操作同样是并行执行的。结果你应该可以猜到，1 秒后 promiseAsync1 已经执行完了，此时 then 里面的就执行了。结果是这样的：</p><p><img src="data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="https://cdn.jsdelivr.net/gh/lp-Imagine/lp-Imagine@main/images/p6.png"></p><ul><li>常见用法：<br>回调包装成 Promise，他有两个显而易见的好处：<ol><li>可读性好</li><li>返回的结果可以加入任何 Promise 队列</li></ol></li></ul><p>异步操作和定时器放在一起，如果定时器先触发，就认为超时，告知用户；<br>例如我们要从远程的服务器在资源如果 5000ms 还没有加载过来我们就告知用户加载失败</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//请求某个图片资源</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">requestImg</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> pro = <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="keyword">function</span> (<span class="params">resolve, reject</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> img = <span class="keyword">new</span> Image();</span><br><span class="line">    img.onload = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">      resolve(img);</span><br><span class="line">    &#125;;</span><br><span class="line">    img.src = <span class="string">&quot;xxxxxx&quot;</span>;</span><br><span class="line">  &#125;);</span><br><span class="line">  <span class="keyword">return</span> pro;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//延时函数，用于给请求计时</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">timeout</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> pro = <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="keyword">function</span> (<span class="params">resolve, reject</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">setTimeout</span>(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">      reject(<span class="string">&quot;图片请求超时&quot;</span>);</span><br><span class="line">    &#125;, <span class="number">5000</span>);</span><br><span class="line">  &#125;);</span><br><span class="line">  <span class="keyword">return</span> pro;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">Promise</span>.race([requestImg(), timeout()])</span><br><span class="line">  .then(<span class="function">(<span class="params">res</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(res);</span><br><span class="line">  &#125;)</span><br><span class="line">  .catch(<span class="function">(<span class="params">e</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(e);</span><br><span class="line">  &#125;);</span><br></pre></td></tr></table></figure><a class="btn-beautify button--animated red larger block right" href="/ymm751" title="🔨 Promise(二)：手动实现一个Promise"><i class="iconfont icon-xuanzhongxiaoshou fa-fw"></i> <span>🔨 Promise(二)：手动实现一个Promise</span></a></article><div class="post-copyright"><div class="post-copyright__title"><span class="post-copyright-info"><h>Promise(一)：Promise认识</h></span></div><div class="post-copyright__type"><span class="post-copyright-info"><a href="http://imagineblog.host/pnzuz1/">http://imagineblog.host/pnzuz1/</a></span></div><div class="post-copyright-m"><div class="post-copyright-m-info"><div class="post-copyright-a" style="display:inline-block;width:120px"><h>作者</h><div class="post-copyright-cc-info"><h>Peng</h></div></div><div class="post-copyright-c" style="display:inline-block;width:120px"><h>发布于</h><div class="post-copyright-cc-info"><h>2021-04-12</h></div></div><div class="post-copyright-u" style="display:inline-block;width:120px"><h>更新于</h><div class="post-copyright-cc-info"><h>2022-08-31</h></div></div><div class="post-copyright-c" style="display:inline-block;width:120px"><h>许可协议</h><div class="post-copyright-cc-info"><a class="icon" rel="noopener" target="_blank" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a><a rel="noopener" target="_blank" title="CC BY 4.0" href="https://creativecommons.org/licenses/by/4.0/deed.zh">CC BY 4.0</a></div></div></div></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/javascript/">javascript</a><a class="post-meta__tags" href="/tags/Promise/">Promise</a></div><div class="post_share"><div class="social-share" data-image="https://z3.ax1x.com/2021/07/20/WttkSH.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload='this.media="all"'><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><div class="post-reward"><div class="reward-button button--animated"><i class="fas fa-qrcode"></i> 打赏</div><div class="reward-main"><ul class="reward-all"><li class="reward-item"><a href="/img/wechat.png" target="_blank"><img class="post-qr-code-img" data-lazy-src="/img/wechat.png" alt="wechat"></a><div class="post-qr-code-desc">wechat</div></li></ul></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/ymm751/"><img class="prev-cover" data-lazy-src="https://z3.ax1x.com/2021/07/20/Wttife.jpg" onerror='onerror=null,src="/img/banner/02.jpg"' alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">Promise(二)：手动实现一个 Promise</div></div></a></div><div class="next-post pull-right"><a href="/nt8dtc/"><img class="next-cover" data-lazy-src="https://z3.ax1x.com/2021/07/20/WtYtiD.jpg" onerror='onerror=null,src="/img/banner/02.jpg"' alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">JS 合并数组对象中 key 值相同的数据</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i> <span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/ddv8fu/" title="Promise(三)：拓展方法实现"><img class="cover" data-lazy-src="https://z3.ax1x.com/2021/07/20/WttE6A.gif" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-04-14</div><div class="title">Promise(三)：拓展方法实现</div></div></a></div><div><a href="/ymm751/" title="Promise(二)：手动实现一个 Promise"><img class="cover" data-lazy-src="https://z3.ax1x.com/2021/07/20/Wttife.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-04-13</div><div class="title">Promise(二)：手动实现一个 Promise</div></div></a></div><div><a href="/ctko47/" title="javascript 正则表达式校验"><img class="cover" data-lazy-src="https://z3.ax1x.com/2021/07/20/WttPYD.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-04-20</div><div class="title">javascript 正则表达式校验</div></div></a></div><div><a href="/cy0ics/" title="使用 NProgress 为页面/接口添加加载进度条"><img class="cover" data-lazy-src="https://z3.ax1x.com/2021/07/20/Wtt86s.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-06-15</div><div class="title">使用 NProgress 为页面/接口添加加载进度条</div></div></a></div><div><a href="/df4477/" title="JS 声明提升"><img class="cover" data-lazy-src="https://z3.ax1x.com/2021/07/20/WttnTf.gif" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-02-24</div><div class="title">JS 声明提升</div></div></a></div><div><a href="/ehgc3o/" title="JS forEach 踩坑"><img class="cover" data-lazy-src="https://z3.ax1x.com/2021/07/20/WtYazd.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-04-21</div><div class="title">JS forEach 踩坑</div></div></a></div></div></div><hr><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i> <span>评论</span></div></div><div class="comment-wrap"><div><div id="twikoo-wrap"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Promise-%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="toc-number">1.</span> <span class="toc-text">Promise 是什么？</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Promise-%E6%A6%82%E5%BF%B5"><span class="toc-number">1.1.</span> <span class="toc-text">Promise 概念</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F"><span class="toc-number">1.2.</span> <span class="toc-text">生命周期</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Promise-%E6%9C%89%E4%B8%89%E4%B8%AA%E7%8A%B6%E6%80%81%EF%BC%9A"><span class="toc-number">1.3.</span> <span class="toc-text">Promise 有三个状态：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%93%BE%E5%BC%8F%E8%B0%83%E7%94%A8"><span class="toc-number">1.4.</span> <span class="toc-text">链式调用</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">2.</span> <span class="toc-text">总结： 1、主要用于异步计算 2、可以将异步操作队列化，按照期望的顺序执行，返回符合预期的结果 3、可以在对象之间传递和操作 Promise，帮助我们处理队列</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%94%99%E8%AF%AF%E5%A4%84%E7%90%86"><span class="toc-number">3.</span> <span class="toc-text">错误处理</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-throw-new-Error-%E2%80%98%E9%94%99%E8%AF%AF%E4%BF%A1%E6%81%AF%E2%80%99-catch-gt-%E9%94%99%E8%AF%AF%E5%A4%84%E7%90%86%E9%80%BB%E8%BE%91"><span class="toc-number">3.1.</span> <span class="toc-text">1. throw new Error(‘错误信息’).catch( () &#x3D;&gt; {错误处理逻辑})</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-reject-%E2%80%98%E9%94%99%E8%AF%AF%E4%BF%A1%E6%81%AF%E2%80%99-then-gt-gt-%E9%94%99%E8%AF%AF%E5%A4%84%E7%90%86%E9%80%BB%E8%BE%91"><span class="toc-number">3.2.</span> <span class="toc-text">2. reject(‘错误信息’).then(() &#x3D;&gt; {}, () &#x3D;&gt; {错误处理逻辑})</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Promise-reject-%E6%89%A7%E8%A1%8C%E5%A4%B1%E8%B4%A5%E6%93%8D%E4%BD%9C"><span class="toc-number">4.</span> <span class="toc-text">Promise.reject 执行失败操作</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Promise-catch"><span class="toc-number">5.</span> <span class="toc-text">Promise.catch</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9C%A8-resolve-%E7%9A%84%E5%9B%9E%E8%B0%83%E4%B8%AD%EF%BC%8C%E6%88%91%E4%BB%AC-console-log-reslut-%E8%80%8C-reslut-%E8%BF%99%E4%B8%AA%E5%8F%98%E9%87%8F%E6%98%AF%E6%B2%A1%E6%9C%89%E8%A2%AB%E5%AE%9A%E4%B9%89%E7%9A%84%E3%80%82%E5%A6%82%E6%9E%9C%E6%88%91%E4%BB%AC%E4%B8%8D%E7%94%A8-Promise%EF%BC%8C%E4%BB%A3%E7%A0%81%E8%BF%90%E8%A1%8C%E5%88%B0%E8%BF%99%E9%87%8C%E5%B0%B1%E7%9B%B4%E6%8E%A5%E5%9C%A8%E6%8E%A7%E5%88%B6%E5%8F%B0%E6%8A%A5%E9%94%99%E4%BA%86%EF%BC%8C%E4%B8%8D%E5%BE%80%E4%B8%8B%E8%BF%90%E8%A1%8C%E4%BA%86%E3%80%82%E4%BD%86%E6%98%AF%E5%9C%A8%E8%BF%99%E9%87%8C%EF%BC%8C%E4%BC%9A%E5%BE%97%E5%88%B0%E8%BF%99%E6%A0%B7%E7%9A%84%E7%BB%93%E6%9E%9C%EF%BC%9A"><span class="toc-number">6.</span> <span class="toc-text">在 resolve 的回调中，我们 console.log(reslut);而 reslut 这个变量是没有被定义的。如果我们不用 Promise，代码运行到这里就直接在控制台报错了，不往下运行了。但是在这里，会得到这样的结果：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Promise-all-%E6%89%B9%E9%87%8F%E6%89%A7%E8%A1%8C%E6%93%8D%E4%BD%9C"><span class="toc-number">7.</span> <span class="toc-text">Promise.all 批量执行操作</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#-1"><span class="toc-number">8.</span><span class="toc-text"></span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#promise-race-%E7%B1%BB%E4%BC%BC%E4%BA%8E-Promise-all-%EF%BC%8C%E5%8C%BA%E5%88%AB%E5%9C%A8%E4%BA%8E%E5%AE%83%E6%9C%89%E4%BB%BB%E6%84%8F%E4%B8%80%E4%B8%AA%E5%AE%8C%E6%88%90%E5%B0%B1%E7%AE%97%E5%AE%8C%E6%88%90"><span class="toc-number">9.</span> <span class="toc-text">promise.race 类似于 Promise.all() ，区别在于它有任意一个完成就算完成</span></a></li></ol></div></div></div></div></main><footer id="footer"><div class="github-div"><div></div><div class="github-badge"><a style="color:#fff" rel="external nofollow noopener noreferrer" href="https://hexo.io/" target="_blank" title="由 Hexo 强力驱动" data-pjax-state=""><span class="badge-subject">🌴Powered</span><span class="badge-value bg-blue">Hexo</span></a></div><div class="github-badge"><a style="color:#fff" rel="external nofollow noopener noreferrer" href="https://imgtu.com/" target="_blank" title="本站图片使用路过图床" data-pjax-state=""><span class="badge-subject">🌈Drawing bed</span><span class="badge-value bg-brightgreen">imagtu</span></a></div><div class="github-badge"><a style="color:#fff" rel="external nofollow noopener noreferrer" href="https://github.com/" target="_blank" title="静态网页托管于 GitHub Pages" data-pjax-state=""><span class="badge-subject">📖Pages</span><span class="badge-value bg-brightgreen">GitHub</span></a></div><div class="github-badge"><a style="color:#fff" rel="external nofollow noopener noreferrer" href="https://www.jsdelivr.com/" target="_blank" title="jsDelivr 提供 CDN 加速服务" data-pjax-state=""><span class="badge-subject">🎈CDN</span><span class="badge-value bg-orange">jsDelivr</span></a></div><div class="github-badge"><a style="color:#fff" rel="external nofollow noopener noreferrer" href="https://vercel.com/" target="_blank" title="vercel 提供 CDN 加速服务" data-pjax-state=""><span class="badge-subject">🎃Server</span><span class="badge-value bg-orange">vercel</span></a></div><div class="github-badge"><a style="color:#fff" rel="external nofollow noopener noreferrer" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" title="本站点采用知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议进行许可" data-pjax-state=""><span class="badge-subject"><i class="fa fa-copyright"></i></span><span class="badge-value bg-gradient">BY-NC-SA 4.0</span></a></div><div class="github-badge"><a style="color:#fff" rel="external nofollow noopener noreferrer" href="https://github.com/jerryc127/hexo-theme-butterfly" target="_blank" title="主题" data-pjax-state=""><span class="badge-subject">🎨Theme</span><span class="badge-value bg-blueviolet">Butterfly</span></a></div><div class="github-badge"><a style="color:#fff" rel="external nofollow noopener noreferrer" href="https://beian.miit.gov.cn/" target="_blank" title="本站点已通过工信部ICP备案" data-pjax-state=""><span class="badge-subject">赣ICP备</span><span class="badge-value bg-gradient">2022000236号-1</span></a></div><div class="github-badge"><a style="color:#fff" rel="external nofollow noopener noreferrer" href="http://imagineblog.host" target="_blank" title="copyright" data-pjax-state=""><span class="badge-subject">📑copyright</span><span class="badge-value bg-gradient"><div class="copyright">&copy;2020 - 2022<i id="heartbeat" class="fa fas fa-heartbeat"></i> Peng</div></span></a></div><div class="github-badge"><span class="badge-subject">安全运行</span><a style="text-decoration:none;color:#fff;padding:4px 4px 4px 6px;border-top-right-radius:4px;border-bottom-right-radius:4px;min-width:180px;display:inline-block" id="running-time" rel="external nofollow noopener noreferrer" href="" target="_blank" title="网站运行时间" data-pjax-state=""></a></div><div id="running-time"><script>//- setInterval(()=>{let create_time=Math.round(new Date('2020-02-18 00:00:00').getTime()/1000);let timestamp=Math.round((new Date().getTime()+8*60*60*1000)/1000);let second=timestamp-create_time;let time=new Array(0,0,0,0,0);if(second>=365*24*3600){time[0]=parseInt(second/(365*24*3600));second%=365*24*3600;}if(second>=24*3600){time[1]=parseInt(second/(24*3600));second%=24*3600;}if(second>=3600){time[2]=parseInt(second/3600);second%=3600;}if(second>=60){time[3]=parseInt(second/60);second%=60;}if(second>0){time[4]=second;}currentTimeHtml=time[0]+'年'+time[1]+'天'+time[2]+'时'+time[3]+'分'+time[4]+'秒';document.getElementById("running-time").innerHTML=currentTimeHtml;},1000);
+setInterval(()=>{
+  let create_time=Math.round(new Date('2020-01-03 00:00:00').getTime()/1000);
+  let timestamp=Math.round((new Date().getTime()+8*60*60*1000)/1000);
+  let second=timestamp-create_time;
+  let time=new Array(0,0,0,0,0);
+  if(second>=365*24*3600){
+    time[0]=parseInt(second/(365*24*3600));
+    second%=365*24*3600;
+  }
+  if(second>=24*3600){
+    time[1]=parseInt(second/(24*3600));
+    second%=24*3600;
+  }
+  if(second>=3600){
+    time[2]=parseInt(second/3600);second%=3600;
+  }
+  if(second>=60){
+    time[3]=parseInt(second/60);second%=60;
+  }
+  if(second>0){
+    time[4]=second;
+  }
+  currentTimeHtml=`<span style="color:#fff;"><span style="color:#000">${time[0]}</span> 年 <span style="color:#9253A8">${time[1]}</span> 天 <span style="color:#50ABF1">${time[2]}</span> 时<span style="color:#666">${time[3]}</span> 分<span style="color:red">${time[4]}</span> 秒</span>`;
+  document.getElementById("running-time").innerHTML=currentTimeHtml;
+},1000);</script></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="iconfont icon-yuedumoshi"></i></button><button id="font-plus" type="button" title="放大字体"><i class="fas fa-plus"></i></button><button id="font-minus" type="button" title="缩小字体"><i class="fas fa-minus"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="chat_btn" type="button" title="SMS"><i class="iconfont icon-sms"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="iconfont icon-pinglun"></i></a><button id="go-up" type="button" title="回到顶部"><i class="iconfont icon-backtop"></i></button></div></div><div id="local-search"><div class="search-dialog"><div class="search-dialog__title" id="local-search-title">本地搜索</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"></div></div></div><hr><div id="local-search-results"></div><span class="search-close-button"><i class="fas fa-times"></i></span></div><div id="search-mask"></div></div><div><script src="https://cdn.jsdelivr.net/npm/vue@2.6.11"></script><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/medium-zoom/dist/medium-zoom.min.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js"></script><script src="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.js"></script><script>function panguFn () {
+  if (typeof pangu === 'object') pangu.autoSpacingPage()
+  else {
+    getScript('https://cdn.jsdelivr.net/npm/pangu/dist/browser/pangu.min.js')
+      .then(() => {
+        pangu.autoSpacingPage()
+      })
+  }
+}
+
+function panguInit () {
+  if (true){
+    GLOBAL_CONFIG_SITE.isPost && panguFn()
+  } else {
+    panguFn()
+  }
+}
+
+document.addEventListener('DOMContentLoaded', panguInit)</script><script src="/js/search/local-search.js"></script><div class="js-pjax"><script>if (document.getElementsByClassName('mermaid').length) {
+  if (window.mermaidJsLoad) mermaid.init()
+  else {
+    getScript('https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js').then(() => {
+      window.mermaidJsLoad = true
+      mermaid.initialize({
+        theme: 'default',
+      })
+      true && mermaid.init()
+    })
+  }
+}</script><script>(()=>{
+  const $countDom = document.getElementById('twikoo-count')
+  const init = () => {
+    let initData = {
+      el: '#twikoo-wrap',
+      envId: 'https://twikoo-talks.vercel.app/',
+      region: ''
+    }
+
+    if (false) {
+      const otherData = false
+      initData = Object.assign(initData, otherData)
+    }
+    
+    twikoo.init(initData)
+  }
+
+  const getCount = () => {
+    twikoo.getCommentsCount({
+      envId: 'https://twikoo-talks.vercel.app/',
+      region: '',
+      urls: [window.location.pathname],
+      includeReply: false
+    }).then(function (res) {
+      $countDom.innerText = res[0].count
+    }).catch(function (err) {
+      console.error(err);
+    });
+  }
+
+  const loadTwikoo = (bool = false) => {
+    if (typeof twikoo === 'object') {
+      init()
+      bool && $countDom && setTimeout(getCount,0)
+    } else {
+      getScript('https://cdn.jsdelivr.net/npm/twikoo/dist/twikoo.all.min.js').then(()=> {
+        init()
+        bool && $countDom && setTimeout(getCount,0)
+      })
+    }
+  }
+
+  if ('Twikoo' === 'Twikoo' || !true) {
+    if (true) btf.loadComment(document.getElementById('twikoo-wrap'), loadTwikoo)
+    else loadTwikoo(true)
+  } else {
+    window.loadOtherComment = () => {
+      loadTwikoo()
+    }
+  }
+})()</script><script>var gitcalendar = new Vue({
+  el: '#gitcalendar',
+  data: {
+    simplemode: false,
+    user: 'lp-Imagine',
+    fixed: 'fixed',
+    px: 'px',
+    x: '',
+    y: '',
+    span1: '',
+    span2: '',
+    month: ['一月', '二月', '三月', '四月', '五月', '六月', '七月', '八月', '九月', '十月', '十一月', '十二月'],
+    monthchange: [],
+    oneyearbeforeday: '',
+    thisday: '',
+    amonthago: '',
+    aweekago: '',
+    weekdatacore: 0,
+    datacore: 0,
+    total: 0,
+    datadate: '',
+    data: [],
+    positionplusdata: [],
+    firstweek: [],
+    lastweek: [],
+    beforeweek: [],
+    thisweekdatacore: 0,
+    mounthbeforeday: 0,
+    mounthfirstindex: 0,
+    crispedges: 'crispedges',
+    thisdayindex: 0,
+    amonthagoindex: 0,
+    amonthagoweek: [],
+    firstdate: [],
+    first2date: [],
+    montharrbefore: [],
+    monthindex: 0,
+    color: ['rgb(145, 145, 145, 0.2)', '#c6ecc1', '#a0e2bb', '#81D8CF', '#70c5d3', '#60a2ce', '#507ac9', '#4356c5', '#423cc4', '#5b3abc', '#7138b6']
+  },
+  methods: {
+    selectStyle(data, event) {
+      document.querySelector('.angle-wrapper').style.display = 'block'
+      this.span1 = data.date;
+      this.span2 = data.count;
+      this.x = event.clientX - 100;
+      this.y = event.clientY - 60
+    },
+    outStyle() {
+      document.querySelector('.angle-wrapper').style.display = 'none'
+    },
+    thiscolor(x) {
+      if (x === 0) {
+        let i = parseInt(x / 2);
+        return this.color[0]
+      } else if (x < 2) {
+        return this.color[1]
+      } else if (x < 20) {
+        let i = parseInt(x / 2);
+        return this.color[i]
+      } else {
+        return this.color[9]
+      }
+    },
+  }
+});
+var apiurl = 'python-github-calendar-api-zfour.vercel.app' ? 'https://python-github-calendar-api-zfour.vercel.app/api?' : 'https://githubapi.ryanchristian.dev/user/'
+var githubapiurl = apiurl + gitcalendar.user;
+//canvas绘图
+function responsiveChart() {
+  let c = document.getElementById("gitcanvas");
+  if (c) {
+    let cmessage = document.getElementById("gitmessage");
+    let ctx = c.getContext("2d");
+    c.width = document.getElementById("gitcalendarcanvasbox").offsetWidth;
+    let linemaxwitdh = 0.96 * c.width / gitcalendar.data.length;
+    c.height = 9 * linemaxwitdh;
+    let lineminwitdh = 0.8 * linemaxwitdh;
+    let setposition = {
+      x: 0.02 * c.width,
+      y: 0.025 * c.width
+    };
+    for (let week in gitcalendar.data) {
+      weekdata = gitcalendar.data[week];
+      for (let day in weekdata) {
+        let dataitem = {
+          date: "",
+          count: "",
+          x: 0,
+          y: 0
+        };
+        gitcalendar.positionplusdata.push(dataitem);
+        ctx.fillStyle = gitcalendar.thiscolor(weekdata[day].count);
+        setposition.y = Math.round(setposition.y * 100) / 100;
+        dataitem.date = weekdata[day].date;
+        dataitem.count = weekdata[day].count;
+        dataitem.x = setposition.x;
+        dataitem.y = setposition.y;
+        ctx.fillRect(setposition.x, setposition.y, lineminwitdh, lineminwitdh);
+        setposition.y = setposition.y + linemaxwitdh
+      };
+      setposition.y = 0.025 * c.width;
+      setposition.x = setposition.x + linemaxwitdh
+    };
+    ctx.font = "600  Arial";
+    ctx.fillStyle = '#aaa';
+    ctx.fillText("日", 0, 1.9 * linemaxwitdh);
+    ctx.fillText("二", 0, 3.9 * linemaxwitdh);
+    ctx.fillText("四", 0, 5.9 * linemaxwitdh);
+    ctx.fillText("六", 0, 7.9 * linemaxwitdh);
+    let monthindexlist = c.width / 24;
+    for (let index in gitcalendar.monthchange) {
+      ctx.fillText(gitcalendar.monthchange[index], monthindexlist, 0.7 * linemaxwitdh);
+      monthindexlist = monthindexlist + c.width / 12
+    };
+    cmessage.onmousemove = function(event) {
+      document.querySelector('.angle-wrapper').style.display = 'none'
+    };
+    c.onmousemove = function(event) {
+      document.querySelector('.angle-wrapper').style.display = 'none'
+      getMousePos(c, event);
+    };
+
+    function getMousePos(canvas, event) {
+      var rect = canvas.getBoundingClientRect();
+      var x = event.clientX - rect.left * (canvas.width / rect.width);
+      var y = event.clientY - rect.top * (canvas.height / rect.height);
+      //console.log("x:"+x+",y:"+y);
+      for (let item of gitcalendar.positionplusdata) {
+        let lenthx = x - item.x;
+        let lenthy = y - item.y;
+        //console.log(lenthx,lenthy);
+        if (0 < lenthx && lenthx < lineminwitdh) {
+          if (0 < lenthy && lenthy < lineminwitdh) {
+            //console.log(item.date,item.count)
+            document.querySelector('.angle-wrapper').style.display = 'block'
+            gitcalendar.span1 = item.date;
+            gitcalendar.span2 = item.count;
+            gitcalendar.x = event.clientX - 100;
+            gitcalendar.y = event.clientY - 60
+          }
+        }
+        //if(0< x - item.x <lineminwitdh&&0< y - item.y <lineminwitdh){
+        //console.log(item.count,item.date);
+        //}
+      }
+    }
+  }
+}
+//数据统计算法
+function addlastmonth() {
+  if (gitcalendar.thisdayindex === 0) {
+    thisweekcore(52);
+    thisweekcore(51);
+    thisweekcore(50);
+    thisweekcore(49);
+    thisweekcore(48);
+    gitcalendar.thisweekdatacore += gitcalendar.firstdate[6].count;
+    gitcalendar.amonthago = gitcalendar.firstdate[6].date
+  } else {
+    thisweekcore(52);
+    thisweekcore(51);
+    thisweekcore(50);
+    thisweekcore(49);
+    thisweek2core();
+    gitcalendar.amonthago = gitcalendar.first2date[gitcalendar.thisdayindex - 1].date
+  }
+};
+
+function thisweek2core() {
+  for (let i = gitcalendar.thisdayindex - 1; i < gitcalendar.first2date.length; i++) {
+    gitcalendar.thisweekdatacore += gitcalendar.first2date[i].count
+  }
+};
+
+function thisweekcore(index) {
+  for (let item of gitcalendar.data[index]) {
+    gitcalendar.thisweekdatacore += item.count
+  }
+};
+
+function addlastweek() {
+  for (let item of gitcalendar.lastweek) {
+    gitcalendar.weekdatacore += item.count
+  }
+};
+
+function addbeforeweek() {
+  for (let i = gitcalendar.thisdayindex; i < gitcalendar.beforeweek.length; i++) {
+    gitcalendar.weekdatacore += gitcalendar.beforeweek[i].count
+  }
+};
+
+function addweek(data) {
+  if (gitcalendar.thisdayindex === 6) {
+    gitcalendar.aweekago = gitcalendar.lastweek[0].date;
+    addlastweek()
+  } else {
+    lastweek = data.contributions[51];
+    gitcalendar.aweekago = lastweek[gitcalendar.thisdayindex + 1].date;
+    addlastweek();
+    addbeforeweek()
+  }
+}
+
+fetch(githubapiurl)
+  .then(data => data.json())
+  .then(data => {
+    gitcalendar.data = data.contributions;
+    gitcalendar.total = data.total;
+    gitcalendar.first2date = gitcalendar.data[48];
+    gitcalendar.firstdate = gitcalendar.data[47];
+    gitcalendar.firstweek = data.contributions[0];
+    gitcalendar.lastweek = data.contributions[52];
+    gitcalendar.beforeweek = data.contributions[51];
+    gitcalendar.thisdayindex = gitcalendar.lastweek.length - 1;
+    gitcalendar.thisday = gitcalendar.lastweek[gitcalendar.thisdayindex].date;
+    gitcalendar.oneyearbeforeday = gitcalendar.firstweek[0].date;
+    gitcalendar.monthindex = gitcalendar.thisday.substring(5, 7) * 1;
+    gitcalendar.montharrbefore = gitcalendar.month.splice(gitcalendar.monthindex, 12 - gitcalendar.monthindex);
+    gitcalendar.monthchange = gitcalendar.montharrbefore.concat(gitcalendar.month);
+    addweek(data);
+    addlastmonth();
+    responsiveChart();
+  })
+  .catch(function(error) {
+    console.log(error);
+  });
+
+//手机版更换为svg绘制
+if (document.getElementById("gitcalendarcanvasbox") && document.getElementById("gitcalendarcanvasbox").offsetWidth < 500) {
+  gitcalendar.simplemode = false
+}
+
+//当改变窗口大小时重新绘制canvas
+window.onresize = function() {
+  if (gitcalendar.simplemode) responsiveChart()
+}
+
+//解决滚动滑轮时出现的标签显示
+window.onscroll = function() {
+  if (document.querySelector('.angle-wrapper')) {
+    document.querySelector('.angle-wrapper').style.display = 'none'
+  }
+};</script></div><script>window.addEventListener('load', () => {
+  const changeContent = (content) => {
+    if (content === '') return content
+
+    content = content.replace(/<img.*?src="(.*?)"?[^\>]+>/ig, '[图片]') // replace image link
+    content = content.replace(/<a[^>]+?href=["']?([^"']+)["']?[^>]*>([^<]+)<\/a>/gi, '[链接]') // replace url
+    content = content.replace(/<pre><code>.*?<\/pre>/gi, '[代码]') // replace code
+    content = content.replace(/<[^>]+>/g,"") // remove html tag
+
+    if (content.length > 150) {
+      content = content.substring(0,150) + '...'
+    }
+    return content
+  }
+
+  const getComment = () => {
+    const runTwikoo = () => {
+      twikoo.getRecentComments({
+        envId: 'https://twikoo-talks.vercel.app/',
+        region: '',
+        pageSize: 6,
+        includeReply: true
+      }).then(function (res) {
+        const twikooArray = res.map(e => {
+          return {
+            'content': changeContent(e.comment),
+            'avatar': e.avatar,
+            'nick': e.nick,
+            'url': e.url + '#' + e.id,
+            'date': new Date(e.created).toISOString()
+          }
+        })
+
+        saveToLocal.set('twikoo-newest-comments', JSON.stringify(twikooArray), 10/(60*24))
+        generateHtml(twikooArray)
+      }).catch(function (err) {
+        const $dom = document.querySelector('#card-newest-comments .aside-list')
+        $dom.innerHTML= "无法获取评论，请确认相关配置是否正确"
+      })
+    }
+
+    if (typeof twikoo === 'object') {
+      runTwikoo()
+    } else {
+      getScript('https://cdn.jsdelivr.net/npm/twikoo/dist/twikoo.all.min.js').then(runTwikoo)
+    }
+  }
+
+  const generateHtml = array => {
+    let result = ''
+
+    if (array.length) {
+      for (let i = 0; i < array.length; i++) {
+        result += '<div class=\'aside-list-item\'>'
+
+        if (true) {
+          const name = 'data-lazy-src'
+          result += `<a href='${array[i].url}' class='thumbnail'><img ${name}='${array[i].avatar}' alt='${array[i].nick}'></a>`
+        }
+        
+        result += `<div class='content'>
+        <a class='comment' href='${array[i].url}'>${array[i].content}</a>
+        <div class='name'><span>${array[i].nick} / </span><time datetime="${array[i].date}">${btf.diffDate(array[i].date, true)}</time></div>
+        </div></div>`
+      }
+    } else {
+      result += '没有评论'
+    }
+
+    let $dom = document.querySelector('#card-newest-comments .aside-list')
+    $dom.innerHTML= result
+    window.lazyLoadInstance && window.lazyLoadInstance.update()
+    window.pjax && window.pjax.refresh($dom)
+  }
+
+  const newestCommentInit = () => {
+    if (document.querySelector('#card-newest-comments .aside-list')) {
+      const data = saveToLocal.get('twikoo-newest-comments')
+      if (data) {
+        generateHtml(JSON.parse(data))
+      } else {
+        getComment()
+      }
+    }
+  }
+
+  newestCommentInit()
+  document.addEventListener('pjax:complete', newestCommentInit)
+})</script><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="/js/close.js"></script><script defer data-pjax src="/js/maopao.js"></script><script defer src="https://cdn.jsdelivr.net/gh/graingert/wow@1.3.0/dist/wow.min.js"></script><script defer data-pjax src="/js/wow-init.js"></script><script src="https://myhkw.cn/api/player/1618646380121" id="myhk" key="1618646380121" m="1"></script><script defer data-pjax src="https://cdn.jsdelivr.net/gh/xiabo2/CDN@latest/fishes.js"></script><script src="/js/moments.js"></script><canvas class="fireworks" mobile="false"></canvas><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/fireworks.min.js"></script><script id="canvas_nest" defer color="67,173,127" opacity="0.7" zindex="-1" count="99" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/canvas-nest.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful=!0,POWERMODE.shake=!1,POWERMODE.mobile=!1,document.body.addEventListener("input",POWERMODE)</script><script src="//code.tidio.co/bisrc3ghmylr0jd2ikrwcv8xp5i2nkwz.js" async></script><script>function onTidioChatApiReady() {
+  window.tidioChatApi.hide();
+  window.tidioChatApi.on("close", function() {
+    window.tidioChatApi.hide();
+  });
+}
+if (window.tidioChatApi) {
+  window.tidioChatApi.on("ready", onTidioChatApiReady);
+} else {
+  document.addEventListener("tidioChat-ready", onTidioChatApiReady);
+}
+
+var chatBtnFn = () => {
+  document.getElementById("chat_btn").addEventListener("click", function(){
+    window.tidioChatApi.show();
+    window.tidioChatApi.open();
+  });
+}
+chatBtnFn()</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css" media="print" onload='this.media="all"'><script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script><script src="https://cdn.jsdelivr.net/gh/metowolf/MetingJS@1.2/dist/Meting.min.js"></script><script src="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script><script>let pjaxSelectors = [
+  'title',
+  '#config-diff',
+  '#body-wrap',
+  '#rightside-config-hide',
+  '#rightside-config-show',
+  '#web_bg',
+  '.js-pjax'
+]
+
+if (false) {
+  pjaxSelectors.unshift('meta[property="og:image"]', 'meta[property="og:title"]', 'meta[property="og:url"]')
+}
+
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: false,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+  //- document.querySelectorAll("script[data-pjax], .pjax-reload script").forEach((item) => {
+  //-   const newScript = document.createElement("script");
+  //-   const content = item.text || item.textContent || item.innerHTML || "";
+  //-   Array.from(item.attributes).forEach((attr) =>
+  //-   newScript.setAttribute(attr.name, attr.value));
+  //-   newScript.appendChild(document.createTextNode(content));
+  //-   item.parentNode.replaceChild(newScript, item);
+  //- });
+
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+  typeof chatBtnFn === 'function' && chatBtnFn()
+  typeof panguInit === 'function' && panguInit()
+
+  if (typeof gtag === 'function') {
+    gtag('config', '', {'page_path': window.location.pathname});
+  }
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // Analytics
+  if (false) {
+    MtaH5.pgv()
+  }
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+
+  typeof preloader === 'object' && preloader.endLoading()
+})
+
+
+document.addEventListener('pjax:send', function () {
+  typeof preloader === 'object' && preloader.initLoading()
+  
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
+
+  typeof typed === 'object' && typed.destroy()
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+
+})
+
+document.addEventListener('pjax:error', (e) => {
+  if (e.request.status === 404) {
+    pjax.loadUrl('/404.html')
+  }
+})</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><script async src="//at.alicdn.com/t/font_2032782_8d5kxvn09md.js"></script></body></html>

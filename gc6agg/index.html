@@ -1,0 +1,660 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>浏览器渲染过程简介 | IMAGINE</title><meta name="keywords" content="Browser"><meta name="author" content="Peng"><meta name="copyright" content="Peng"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="浏览器工作流程话不多说，先来看个图：  从上面这个图中，我们可以看到那么几个事：  浏览器会解析三个东西：   一个是 HTML&#x2F;SVG&#x2F;XHTML，事实上，Webkit 有三个 C++的类对应这三类文档。解析这三种文件会产生一个 DOM Tree。 CSS，解析 CSS 会产生 CSS 规则树。 Javascript 脚本，主要是通过 DOM API 和 CSSOM API 来操作 DOM Tr"><meta property="og:type" content="article"><meta property="og:title" content="浏览器渲染过程简介"><meta property="og:url" content="http://imagineblog.host/gc6agg/index.html"><meta property="og:site_name" content="IMAGINE"><meta property="og:description" content="浏览器工作流程话不多说，先来看个图：  从上面这个图中，我们可以看到那么几个事：  浏览器会解析三个东西：   一个是 HTML&#x2F;SVG&#x2F;XHTML，事实上，Webkit 有三个 C++的类对应这三类文档。解析这三种文件会产生一个 DOM Tree。 CSS，解析 CSS 会产生 CSS 规则树。 Javascript 脚本，主要是通过 DOM API 和 CSSOM API 来操作 DOM Tr"><meta property="og:locale" content="zh_CN"><meta property="og:image" content="https://z3.ax1x.com/2021/07/20/WtGoXq.jpg"><meta property="article:published_time" content="2021-04-29T02:37:05.000Z"><meta property="article:modified_time" content="2022-08-31T08:04:19.377Z"><meta property="article:author" content="Peng"><meta property="article:tag" content="Browser"><meta name="twitter:card" content="summary"><meta name="twitter:image" content="https://z3.ax1x.com/2021/07/20/WtGoXq.jpg"><link rel="shortcut icon" href="https://lovelijunyi.gitee.io/img/avatar.gif"><link rel="canonical" href="http://imagineblog.host/gc6agg/"><link rel="preconnect" href="//cdn.jsdelivr.net"><link rel="preconnect" href="//hm.baidu.com"><link rel="preconnect" href="//fonts.googleapis.com" crossorigin=""><link rel="preconnect" href="//busuanzi.ibruce.info"><meta name="google-site-verification" content="oUu4V6mTgP_CWLbYPUuUK0dzxO1r5vMPXCM6QXwiOv8"><meta name="baidu-site-verification" content="code-mOtCM04zOU"><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload='this.media="all"'><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.css" media="print" onload='this.media="all"'><script>var _hmt=_hmt||[];!function(){var e=document.createElement("script");e.src="https://hm.baidu.com/hm.js?6ede5b235a26f80d0b78937205b49f6f";var t=document.getElementsByTagName("script")[0];t.parentNode.insertBefore(e,t)}()</script><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Titillium+Web&amp;display=swap" media="print" onload='this.media="all"'><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":200},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"limitCount":50,"languages":{"author":"作者: Peng","link":"链接: ","source":"来源: IMAGINE","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。"}},
+  lightbox: 'mediumZoom',
+  Snackbar: {"chs_to_cht":"你已切换为繁体","cht_to_chs":"你已切换为简体","day_to_night":"你已切换为深色模式","night_to_day":"你已切换为浅色模式","bgLight":"#00c4b6","bgDark":"#121212","position":"top-right"},
+  source: {
+    jQuery: 'https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js',
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+    },
+    fancybox: {
+      js: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css'
+    }
+  },
+  isPhotoFigcaption: true,
+  islazyload: true,
+  isanchor: true
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE={isPost:!0,isHome:!1,isHighlightShrink:!1,isToc:!0,postUpdate:"2022-08-31 16:04:19"}</script><noscript><style>#nav{opacity:1}.justified-gallery img{opacity:1}#post-meta time,#recent-posts time{display:inline!important}</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          const now = new Date()
+          const hour = now.getHours()
+          const isNight = hour <= 6 || hour >= 18
+          if (t === undefined) isNight ? activateDarkMode() : activateLightMode()
+          else if (t === 'light') activateLightMode()
+          else activateDarkMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const fontSizeVal = saveToLocal.get('global-font-size')
+    if (fontSizeVal !== undefined) {
+      document.documentElement.style.setProperty('--global-font-size', fontSizeVal + 'px')
+    }
+    })(window)</script><link rel="stylesheet" href="/css/custom.css" media="defer" onload='this.media="all"'><link rel="stylesheet" href="//at.alicdn.com/t/font_2492407_3wz9sdgpeam.css"><style>#toggle-sidebar{bottom:80px}</style><link rel="stylesheet" href="/css/macblack.css"><link rel="stylesheet" href="/css/veditor.css"><link rel="stylesheet" href="/css/close.css"><link rel="stylesheet" href="/css/iconColor.css"><link rel="stylesheet" href="/css/copyright.css"><link rel="stylesheet" href="/css/notice.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/HexoPlusPlus/HexoPlusPlus@latest/talk.css"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" media="defer" onload='this.media="all"'><script src="https://cdn.jsdelivr.net/npm/echarts@4.7.0/dist/echarts.min.js"></script><script src="https://cdn.jsdelivr.net/npm/echarts@4.7.0/map/js/china.js"></script><script src="https://cdn.jsdelivr.net/gh/HexoPlusPlus/HexoPlusPlus@latest/talk_user.js"></script><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/l-lin/font-awesome-animation/dist/font-awesome-animation.min.css" media="defer" onload='this.media="all"'><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-butterfly-tag-plugins-plus@latest/lib/tag_plugins.min.css" media="defer" onload='this.media="all"'><script async src="https://cdn.jsdelivr.net/npm/hexo-butterfly-tag-plugins-plus@latest/lib/carousel-touch.min.js"></script><meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="IMAGINE" type="application/atom+xml"></head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="author-avatar"><img class="avatar-img" data-lazy-src="/img/avatar.jpg" onerror='onerror=null,src="/img/friend_404.gif"' alt="avatar"></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">37</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">标签</div><div class="length-num">20</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">分类</div><div class="length-num">14</div></a></div></div></div><hr><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw iconfont icon-zhuye"></i> <span>主页</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw iconfont icon-mulu1"></i> <span>目录</span><i class="fas fa-chevron-down expand hide"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/archives/"><i class="fa-fw iconfont icon-guidang1"></i> <span>归档</span></a></li><li><a class="site-page" href="/tags/"><i class="fa-fw iconfont icon-biaoqian"></i> <span>标签</span></a></li><li><a class="site-page" href="/categories/"><i class="fa-fw iconfont icon-category"></i> <span>分类</span></a></li><li><a class="site-page" href="/collect/"><i class="fa-fw iconfont icon-shoucang"></i> <span>收藏</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw iconfont icon-yule"></i> <span>清单</span><i class="fas fa-chevron-down expand hide"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/playlist/"><i class="fa-fw iconfont icon-gedan"></i> <span>歌单</span></a></li><li><a class="site-page" href="/books/"><i class="fa-fw iconfont icon-yuedumoshi"></i> <span>书单</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw iconfont icon-caozuojiemiantubiao---_gongju"></i> <span>工具</span><i class="fas fa-chevron-down expand hide"></i></a><ul class="menus_item_child"><li><a class="site-page" target="_blank" rel="noopener" href="https://imgtu.com/"><i class="fa-fw iconfont icon-cloud"></i> <span>imgtu</span></a></li><li><a class="site-page" target="_blank" rel="noopener" href="https://www.leancloud.cn/"><i class="fa-fw iconfont icon-pinglun"></i> <span>LeanCloud</span></a></li><li><a class="site-page" target="_blank" rel="noopener" href="https://www.cloudflare.com/zh-cn/"><i class="fa-fw iconfont icon-cloudcomputing"></i> <span>Cloudflare</span></a></li><li><a class="site-page" target="_blank" rel="noopener" href="https://vercel.com/lp-imagine"><i class="fa-fw iconfont icon-webx"></i> <span>Vercel</span></a></li><li><a class="site-page" target="_blank" rel="noopener" href="https://cloud.mongodb.com/v2#/org/610751ff4218af3732524482/projects"><i class="fa-fw iconfont icon-mongdbwapian"></i> <span>MongoDB</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw iconfont icon-guanyu"></i> <span>关于</span><i class="fas fa-chevron-down expand hide"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/about/"><i class="fa-fw iconfont icon-iconzhengli-"></i> <span>关于我</span></a></li><li><a class="site-page" href="/message/"><i class="fa-fw iconfont icon-liuyanmoban"></i> <span>留言板</span></a></li><li><a class="site-page" href="/talks/"><i class="fa-fw iconfont icon-fengche"></i> <span>说说</span></a></li><li><a class="site-page" href="/link/"><i class="fa-fw iconfont icon-youqinglianjie"></i> <span>友情链接</span></a></li><li><a class="site-page" href="/friends_link"><i class="fa-fw iconfont icon-pengyouquan"></i> <span>友链朋友圈</span></a></li><li><a class="site-page" target="_blank" rel="noopener" href="https://imagine-nav.vercel.app/"><i class="fa-fw iconfont icon-daohang1"></i> <span>导航站</span></a></li><li><a class="site-page" target="_blank" rel="noopener" href="https://imagine.imagineblog.workers.dev/hpp/admin/login"><i class="fa-fw iconfont icon-xiezuo"></i> <span>后台</span></a></li></ul></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image:url(https://z3.ax1x.com/2021/07/20/WtGoXq.jpg)"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">IMAGINE</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw iconfont icon-zhuye"></i> <span>主页</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw iconfont icon-mulu1"></i> <span>目录</span><i class="fas fa-chevron-down expand hide"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/archives/"><i class="fa-fw iconfont icon-guidang1"></i> <span>归档</span></a></li><li><a class="site-page" href="/tags/"><i class="fa-fw iconfont icon-biaoqian"></i> <span>标签</span></a></li><li><a class="site-page" href="/categories/"><i class="fa-fw iconfont icon-category"></i> <span>分类</span></a></li><li><a class="site-page" href="/collect/"><i class="fa-fw iconfont icon-shoucang"></i> <span>收藏</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw iconfont icon-yule"></i> <span>清单</span><i class="fas fa-chevron-down expand hide"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/playlist/"><i class="fa-fw iconfont icon-gedan"></i> <span>歌单</span></a></li><li><a class="site-page" href="/books/"><i class="fa-fw iconfont icon-yuedumoshi"></i> <span>书单</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw iconfont icon-caozuojiemiantubiao---_gongju"></i> <span>工具</span><i class="fas fa-chevron-down expand hide"></i></a><ul class="menus_item_child"><li><a class="site-page" target="_blank" rel="noopener" href="https://imgtu.com/"><i class="fa-fw iconfont icon-cloud"></i> <span>imgtu</span></a></li><li><a class="site-page" target="_blank" rel="noopener" href="https://www.leancloud.cn/"><i class="fa-fw iconfont icon-pinglun"></i> <span>LeanCloud</span></a></li><li><a class="site-page" target="_blank" rel="noopener" href="https://www.cloudflare.com/zh-cn/"><i class="fa-fw iconfont icon-cloudcomputing"></i> <span>Cloudflare</span></a></li><li><a class="site-page" target="_blank" rel="noopener" href="https://vercel.com/lp-imagine"><i class="fa-fw iconfont icon-webx"></i> <span>Vercel</span></a></li><li><a class="site-page" target="_blank" rel="noopener" href="https://cloud.mongodb.com/v2#/org/610751ff4218af3732524482/projects"><i class="fa-fw iconfont icon-mongdbwapian"></i> <span>MongoDB</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw iconfont icon-guanyu"></i> <span>关于</span><i class="fas fa-chevron-down expand hide"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/about/"><i class="fa-fw iconfont icon-iconzhengli-"></i> <span>关于我</span></a></li><li><a class="site-page" href="/message/"><i class="fa-fw iconfont icon-liuyanmoban"></i> <span>留言板</span></a></li><li><a class="site-page" href="/talks/"><i class="fa-fw iconfont icon-fengche"></i> <span>说说</span></a></li><li><a class="site-page" href="/link/"><i class="fa-fw iconfont icon-youqinglianjie"></i> <span>友情链接</span></a></li><li><a class="site-page" href="/friends_link"><i class="fa-fw iconfont icon-pengyouquan"></i> <span>友链朋友圈</span></a></li><li><a class="site-page" target="_blank" rel="noopener" href="https://imagine-nav.vercel.app/"><i class="fa-fw iconfont icon-daohang1"></i> <span>导航站</span></a></li><li><a class="site-page" target="_blank" rel="noopener" href="https://imagine.imagineblog.workers.dev/hpp/admin/login"><i class="fa-fw iconfont icon-xiezuo"></i> <span>后台</span></a></li></ul></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">浏览器渲染过程简介</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2021-04-29T02:37:05.000Z" title="发表于 2021-04-29 10:37:05">2021-04-29</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2022-08-31T08:04:19.377Z" title="更新于 2022-08-31 16:04:19">2022-08-31</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E6%B5%8F%E8%A7%88%E5%99%A8/">浏览器</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">2.3k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>8分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h2 id="浏览器工作流程"><a href="#浏览器工作流程" class="headerlink" title="浏览器工作流程"></a>浏览器工作流程</h2><p>话不多说，先来看个图：</p><p><img src="data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="https://cdn.jsdelivr.net/gh/lp-Imagine/lp-Imagine@main/images/Render-Process.jpg"></p><p>从上面这个图中，我们可以看到那么几个事：</p><ul><li>浏览器会解析三个东西：</li></ul><ol><li>一个是 HTML/SVG/XHTML，事实上，Webkit 有三个 C++的类对应这三类文档。解析这三种文件会产生一个 DOM Tree。</li><li>CSS，解析 CSS 会产生 CSS 规则树。</li><li>Javascript 脚本，主要是通过 DOM API 和 CSSOM API 来操作 DOM Tree 和 CSS Rule Tree（CSS 规则树）。</li></ol><ul><li>解析完成后，浏览器引擎会通过 DOM Tree 和 CSS Rule Tree 来构造 Rendering Tree（渲染树）。</li></ul><blockquote><p>注意：<br>Rendering Tree 渲染树并不等同于 DOM 树，因为一些像 Header 或 display:none 的东西就没必要放在渲染树中了。<br>CSS 的 Rule Tree 主要是为了完成匹配并把 CSS Rule 附加上 Rendering Tree 上的每个 Element（元素）。也就是 DOM 节点。也就是所谓的 Frame（框架）。<br>然后，计算每个 Frame（也就是每个 Element）的位置，这又叫 layout 和 reflow（重排/回流）过程。</p></blockquote><ul><li>最后通过调用操作系统 Native GUI 的 API 绘制。</li></ul><hr><h2 id="DOM-解析"><a href="#DOM-解析" class="headerlink" title="DOM 解析"></a>DOM 解析</h2><p>HTML 的 DOM Tree 解析如下：</p><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">title</span>&gt;</span>Web page parsing<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">h1</span>&gt;</span>Web page parsing<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">p</span>&gt;</span>This is an example Web page.<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure><p>上面这段 HTML 会解析成这样：</p><p><img src="data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="https://cdn.jsdelivr.net/gh/lp-Imagine/lp-Imagine@main/images/DOM-Tree-01.jpg"></p><p>有 SVG 标签的情况：</p><p><img src="data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="https://cdn.jsdelivr.net/gh/lp-Imagine/lp-Imagine@main/images/DOM-Tree-02.jpg"></p><hr><h2 id="CSS-解析"><a href="#CSS-解析" class="headerlink" title="CSS 解析"></a>CSS 解析</h2><p>CSS 的解析大概是下面这个样子（下面主要说的是 Gecko 也就是 Firefox 的玩法），假设我们有下面的 HTML 文档：</p><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">doc</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">title</span>&gt;</span>A few quotes<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">para</span>&gt;</span></span><br><span class="line">    Franklin said that <span class="tag">&lt;<span class="name">quote</span>&gt;</span>&quot;A penny saved is a penny earned.&quot;<span class="tag">&lt;/<span class="name">quote</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">para</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">para</span>&gt;</span></span><br><span class="line">    FDR said</span><br><span class="line">    <span class="tag">&lt;<span class="name">quote</span>&gt;</span>&quot;We have nothing to fear but <span class="tag">&lt;<span class="name">span</span>&gt;</span>fear itself.<span class="tag">&lt;/<span class="name">span</span>&gt;</span>&quot;<span class="tag">&lt;/<span class="name">quote</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">para</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">doc</span>&gt;</span></span><br></pre></td></tr></table></figure><p>DOM Tree 是这个样子：</p><p><img src="data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="https://cdn.jsdelivr.net/gh/lp-Imagine/lp-Imagine@main/images/DOM-Tree-Example.jpg"></p><p>css 文档：</p><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* rule 1 */</span></span><br><span class="line">doc &#123;</span><br><span class="line">  <span class="attribute">display</span>: block;</span><br><span class="line">  <span class="attribute">text-indent</span>: <span class="number">1em</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/* rule 2 */</span></span><br><span class="line">title &#123;</span><br><span class="line">  <span class="attribute">display</span>: block;</span><br><span class="line">  <span class="attribute">font-size</span>: <span class="number">3em</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/* rule 3 */</span></span><br><span class="line">para &#123;</span><br><span class="line">  <span class="attribute">display</span>: block;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/* rule 4 */</span></span><br><span class="line"><span class="selector-attr">[class=<span class="string">&quot;emph&quot;</span>]</span> &#123;</span><br><span class="line">  <span class="attribute">font-style</span>: italic;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>于是我们的 CSS Rule Tree 会是这个样子：</p><p><img src="data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="https://cdn.jsdelivr.net/gh/lp-Imagine/lp-Imagine@main/images/CSS-Rule-Tree-Example.jpg"></p><p>注意，图中的第 4 条规则出现了两次，一次是独立的，一次是在规则 3 的子节点。所以，我们可以知道，建立 CSS Rule Tree（CSS 规则树）是需要比照着 DOM Tree 来的。CSS 匹配 DOM Tree 主要是从右到左解析 CSS 的 Selector（选择器），好多人以为这个事会比较快，其实并不一定。关键还看我们的 CSS 的 Selector（选择器）怎么写了。</p><div class="note warning modern"><p>注意：<br>CSS 匹配 HTML 元素是一个相当复杂和有性能问题的事情。所以，你就会在 N 多地方看到很多人都告诉你，DOM 树要小，CSS 尽量用 id 和 class，千万不要过渡层叠下去……</p></div><p>通过这两个树，我们可以得到一个叫 Style Context Tree（样式上下文树），也就是下面这样（把 CSS Rule 节点附加到 DOM Tree 上）：</p><p><img src="data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="https://cdn.jsdelivr.net/gh/lp-Imagine/lp-Imagine@main/images/CSS-Content-Tree-Example.jpg"></p><p>所以，Firefox 基本上来说是通过 CSS 解析 生成 CSS Rule Tree，然后，通过比对 DOM 生成 Style Context Tree，然后 Firefox 通过把 Style Context Tree 和其 Render Tree（Frame Tree）关联上，就完成了。</p><div class="note warning modern"><p>注意：Render Tree 会把一些不可见的节点去除掉。而 Firefox 中所谓的 Frame 就是一个 DOM 节点，不要被其名字所迷惑了。</p></div><p><img src="data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="https://cdn.jsdelivr.net/gh/lp-Imagine/lp-Imagine@main/images/Firefox-style-context-tree.png"></p><blockquote><p>注：Webkit 不像 Firefox 要用两个树来干这个，Webkit 也有 Style 对象，它直接把这个 Style 对象存在了相应的 DOM 节点上了。</p></blockquote><hr><h2 id="渲染"><a href="#渲染" class="headerlink" title="渲染"></a>渲染</h2><p>渲染的流程基本上如下（黄色的四个步骤）：</p><ol><li>计算 CSS 样式</li><li>构建 Render Tree</li><li>Layout – 定位坐标和大小，是否换行，各种 position, overflow, z-index 属性 ……</li><li>正式开画</li></ol><p><img src="data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="https://cdn.jsdelivr.net/gh/lp-Imagine/lp-Imagine@main/images/Render-Process-Skipping-1024x282.jpg"></p><div class="note warning modern"><p>注意：上图流程中有很多连接线，这表示了 Javascript 动态修改了 DOM 属性或是 CSS 属会导致重新 Layout，有些改变不会，就是那些指到天上的箭头，比如，修改后的 CSS rule 没有被匹配到，等。</p></div><p>这里重要要说两个概念，一个是 Reflow（重排/回流），另一个是 Repaint（重绘）。这两个不是一回事。</p><div class="note info modern"><ul><li>Repaint（重排/回流）——屏幕的一部分要重画，比如某个 CSS 的背景色变了。但是元素的几何尺寸没有变。</li><li>Reflow（重绘）——意味着元件的几何尺寸变了，我们需要重新验证并计算 Render Tree。是 Render Tree 的一部分或全部发生了变化。这就是 Reflow，或是 Layout。（HTML 使用的是 flow based layout，也就是流式布局，所以，如果某元件的几何尺寸发生了变化，需要重新布局，也就叫 reflow）reflow 会从这个 root frame 开始递归往下，依次计算所有的节点几何尺寸和位置，在 reflow 过程中，可能会增加一些 frame，比如一个文本字符串必需被包装起来。</li></ul></div><p>Reflow 的成本比 Repaint 的成本高得多的多。DOM Tree 里的每个节点都会有 reflow 方法，一个节点的 reflow 很有可能导致子节点，甚至父节点以及同级节点的 reflow。在一些高性能的电脑上也许还没什么，但是如果 reflow 发生在手机上，那么这个过程是非常痛苦和耗电的。</p><p>所以，下面这些动作有很大可能会是成本比较高的。</p><ul><li>当你增加、删除、修改 DOM 节点时，会导致 Reflow 或 Repaint</li><li>当你移动 DOM 的位置，或是搞个动画的时候。</li><li>当你修改 CSS 样式的时候。</li><li>当你 Resize 窗口的时候（移动端没有这个问题），或是滚动的时候。</li><li>当你修改网页的默认字体时。</li></ul><blockquote><p>注：display:none 会触发 reflow，而 visibility:hidden 只会触发 repaint，因为没有发现位置变化。</p></blockquote><p>通常来说，如果在滚屏的时候，我们的页面上的所有的像素都会跟着滚动，那么性能上没什么问题，因为我们的显卡对于这种把全屏像素往上往下移的算法是很快。但是如果你有一个 fixed 的背景图，或是有些 Element 不跟着滚动，有些 Elment 是动画，那么这个滚动的动作对于浏览器来说会是相当相当痛苦的一个过程。你可以看到很多这样的网页在滚动的时候性能有多差。因为滚屏也有可能会造成 reflow。</p><p>基本上来说，reflow 有如下的几个原因：</p><ol><li>Initial。网页初始化的时候。</li><li>Incremental。一些 Javascript 在操作 DOM Tree 时。</li><li>Resize。其些元件的尺寸变了。</li><li>StyleChange。如果 CSS 的属性发生变化了。</li><li>Dirty。几个 Incremental 的 reflow 发生在同一个 frame 的子树上。</li></ol><p>看个例子：</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> bstyle = <span class="built_in">document</span>.body.style; <span class="comment">// cache</span></span><br><span class="line"></span><br><span class="line">bstyle.padding = <span class="string">&quot;20px&quot;</span>; <span class="comment">// reflow, repaint</span></span><br><span class="line">bstyle.border = <span class="string">&quot;10px solid red&quot;</span>; <span class="comment">//  再一次的 reflow 和 repaint</span></span><br><span class="line"></span><br><span class="line">bstyle.color = <span class="string">&quot;blue&quot;</span>; <span class="comment">// repaint</span></span><br><span class="line">bstyle.backgroundColor = <span class="string">&quot;#fad&quot;</span>; <span class="comment">// repaint</span></span><br><span class="line"></span><br><span class="line">bstyle.fontSize = <span class="string">&quot;2em&quot;</span>; <span class="comment">// reflow, repaint</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// new DOM element – reflow, repaint</span></span><br><span class="line"><span class="built_in">document</span>.body.appendChild(<span class="built_in">document</span>.createTextNode(<span class="string">&quot;dude&quot;</span>));</span><br></pre></td></tr></table></figure><p>当然，我们的浏览器是聪明的，它不会像上面那样，你每改一次样式，它就 reflow 或 repaint 一次。<strong>一般来说，浏览器会把这样的操作积攒一批，然后做一次 reflow，这又叫异步 reflow 或增量异步 reflow</strong>。但是有些情况浏览器是不会这么做的，比如：resize 窗口，改变了页面默认的字体，等。对于这些操作，浏览器会马上进行 reflow。</p><p>但是有些时候，我们的脚本会阻止浏览器这么干，比如：如果我们请求下面的一些 DOM 值：</p><ul><li>offsetTop, offsetLeft, offsetWidth, offsetHeight</li><li>scrollTop/Left/Width/Height</li><li>clientTop/Left/Width/Height</li><li>IE 中的 getComputedStyle(), 或 currentStyle</li></ul><p>因为，如果我们的程序需要这些值，那么浏览器需要返回最新的值，而这样一样会有一些样式的改变，从而造成频繁的 reflow/repaint。</p><hr><h2 id="减少重排-重绘"><a href="#减少重排-重绘" class="headerlink" title="减少重排/重绘"></a>减少重排/重绘</h2><ol><li>不要一条一条地修改 DOM 的样式。与其这样，还不如预先定义好 css 的 class，然后修改 DOM 的 className。</li></ol><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// bad</span></span><br><span class="line"><span class="keyword">var</span> left = <span class="number">10</span>,</span><br><span class="line">  top = <span class="number">10</span>;</span><br><span class="line">el.style.left = left + <span class="string">&quot;px&quot;</span>;</span><br><span class="line">el.style.top = top + <span class="string">&quot;px&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Good</span></span><br><span class="line">el.className += <span class="string">&quot;theclassname&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Good</span></span><br><span class="line">el.style.cssText += <span class="string">&quot;; left: &quot;</span> + left + <span class="string">&quot;px; top: &quot;</span> + top + <span class="string">&quot;px;&quot;</span>;</span><br></pre></td></tr></table></figure><ol start="2"><li>把 DOM 离线后修改。<br>如：<br>使用 documentFragment 对象在内存里操作 DOM<br>先把 DOM 给 display:none(有一次 reflow)，然后你想怎么改就怎么改。比如修改 100 次，然后再把他显示出来。<br>clone 一个 DOM 节点到内存里，然后想怎么改就怎么改，改完后，和在线的那个的交换一下。</li><li>不要把 DOM 节点的属性值放在一个循环里当成循环里的变量。不然这会导致大量地读写这个节点的属性。</li><li>尽可能的修改层级比较低的 DOM。当然，改变层级比较底的 DOM 有可能会造成大面积的 reflow，但是也可能影响范围很小。</li><li>为动画的 HTML 元件使用 fixed 或 absoult 的 position，那么修改他们的 CSS 是不会 reflow 的。</li><li>千万不要使用 table 布局。因为可能很小的一个小改动会造成整个 table 的重新布局。</li></ol><hr><p>转载自：<a target="_blank" rel="noopener" href="https://coolshell.cn/articles/9666.html">https://coolshell.cn/articles/9666.html</a><br>推荐文章：<a target="_blank" rel="noopener" href="http://taligarsiel.com/Projects/howbrowserswork1.htm">《How Browsers Work》</a></p></article><div class="post-copyright"><div class="post-copyright__title"><span class="post-copyright-info"><h>浏览器渲染过程简介</h></span></div><div class="post-copyright__type"><span class="post-copyright-info"><a href="http://imagineblog.host/gc6agg/">http://imagineblog.host/gc6agg/</a></span></div><div class="post-copyright-m"><div class="post-copyright-m-info"><div class="post-copyright-a" style="display:inline-block;width:120px"><h>作者</h><div class="post-copyright-cc-info"><h>Peng</h></div></div><div class="post-copyright-c" style="display:inline-block;width:120px"><h>发布于</h><div class="post-copyright-cc-info"><h>2021-04-29</h></div></div><div class="post-copyright-u" style="display:inline-block;width:120px"><h>更新于</h><div class="post-copyright-cc-info"><h>2022-08-31</h></div></div><div class="post-copyright-c" style="display:inline-block;width:120px"><h>许可协议</h><div class="post-copyright-cc-info"><a class="icon" rel="noopener" target="_blank" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a><a rel="noopener" target="_blank" title="CC BY 4.0" href="https://creativecommons.org/licenses/by/4.0/deed.zh">CC BY 4.0</a></div></div></div></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Browser/">Browser</a></div><div class="post_share"><div class="social-share" data-image="https://z3.ax1x.com/2021/07/20/WtGoXq.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload='this.media="all"'><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><div class="post-reward"><div class="reward-button button--animated"><i class="fas fa-qrcode"></i> 打赏</div><div class="reward-main"><ul class="reward-all"><li class="reward-item"><a href="/img/wechat.png" target="_blank"><img class="post-qr-code-img" data-lazy-src="/img/wechat.png" alt="wechat"></a><div class="post-qr-code-desc">wechat</div></li></ul></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/zw2gqe/"><img class="prev-cover" data-lazy-src="https://z3.ax1x.com/2021/07/20/WtG7n0.jpg" onerror='onerror=null,src="/img/banner/02.jpg"' alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">Axios 封装</div></div></a></div><div class="next-post pull-right"><a href="/xu4nht/"><img class="next-cover" data-lazy-src="https://z3.ax1x.com/2021/07/20/WN1nUg.jpg" onerror='onerror=null,src="/img/banner/02.jpg"' alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">React(一)：核心概念</div></div></a></div></nav><hr><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i> <span>评论</span></div></div><div class="comment-wrap"><div><div id="twikoo-wrap"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B5%8F%E8%A7%88%E5%99%A8%E5%B7%A5%E4%BD%9C%E6%B5%81%E7%A8%8B"><span class="toc-number">1.</span> <span class="toc-text">浏览器工作流程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#DOM-%E8%A7%A3%E6%9E%90"><span class="toc-number">2.</span> <span class="toc-text">DOM 解析</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#CSS-%E8%A7%A3%E6%9E%90"><span class="toc-number">3.</span> <span class="toc-text">CSS 解析</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B8%B2%E6%9F%93"><span class="toc-number">4.</span> <span class="toc-text">渲染</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%87%8F%E5%B0%91%E9%87%8D%E6%8E%92-%E9%87%8D%E7%BB%98"><span class="toc-number">5.</span> <span class="toc-text">减少重排&#x2F;重绘</span></a></li></ol></div></div></div></div></main><footer id="footer"><div class="github-div"><div></div><div class="github-badge"><a style="color:#fff" rel="external nofollow noopener noreferrer" href="https://hexo.io/" target="_blank" title="由 Hexo 强力驱动" data-pjax-state=""><span class="badge-subject">🌴Powered</span><span class="badge-value bg-blue">Hexo</span></a></div><div class="github-badge"><a style="color:#fff" rel="external nofollow noopener noreferrer" href="https://imgtu.com/" target="_blank" title="本站图片使用路过图床" data-pjax-state=""><span class="badge-subject">🌈Drawing bed</span><span class="badge-value bg-brightgreen">imagtu</span></a></div><div class="github-badge"><a style="color:#fff" rel="external nofollow noopener noreferrer" href="https://github.com/" target="_blank" title="静态网页托管于 GitHub Pages" data-pjax-state=""><span class="badge-subject">📖Pages</span><span class="badge-value bg-brightgreen">GitHub</span></a></div><div class="github-badge"><a style="color:#fff" rel="external nofollow noopener noreferrer" href="https://www.jsdelivr.com/" target="_blank" title="jsDelivr 提供 CDN 加速服务" data-pjax-state=""><span class="badge-subject">🎈CDN</span><span class="badge-value bg-orange">jsDelivr</span></a></div><div class="github-badge"><a style="color:#fff" rel="external nofollow noopener noreferrer" href="https://vercel.com/" target="_blank" title="vercel 提供 CDN 加速服务" data-pjax-state=""><span class="badge-subject">🎃Server</span><span class="badge-value bg-orange">vercel</span></a></div><div class="github-badge"><a style="color:#fff" rel="external nofollow noopener noreferrer" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" title="本站点采用知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议进行许可" data-pjax-state=""><span class="badge-subject"><i class="fa fa-copyright"></i></span><span class="badge-value bg-gradient">BY-NC-SA 4.0</span></a></div><div class="github-badge"><a style="color:#fff" rel="external nofollow noopener noreferrer" href="https://github.com/jerryc127/hexo-theme-butterfly" target="_blank" title="主题" data-pjax-state=""><span class="badge-subject">🎨Theme</span><span class="badge-value bg-blueviolet">Butterfly</span></a></div><div class="github-badge"><a style="color:#fff" rel="external nofollow noopener noreferrer" href="https://beian.miit.gov.cn/" target="_blank" title="本站点已通过工信部ICP备案" data-pjax-state=""><span class="badge-subject">赣ICP备</span><span class="badge-value bg-gradient">2022000236号-1</span></a></div><div class="github-badge"><a style="color:#fff" rel="external nofollow noopener noreferrer" href="http://imagineblog.host" target="_blank" title="copyright" data-pjax-state=""><span class="badge-subject">📑copyright</span><span class="badge-value bg-gradient"><div class="copyright">&copy;2020 - 2022<i id="heartbeat" class="fa fas fa-heartbeat"></i> Peng</div></span></a></div><div class="github-badge"><span class="badge-subject">安全运行</span><a style="text-decoration:none;color:#fff;padding:4px 4px 4px 6px;border-top-right-radius:4px;border-bottom-right-radius:4px;min-width:180px;display:inline-block" id="running-time" rel="external nofollow noopener noreferrer" href="" target="_blank" title="网站运行时间" data-pjax-state=""></a></div><div id="running-time"><script>//- setInterval(()=>{let create_time=Math.round(new Date('2020-02-18 00:00:00').getTime()/1000);let timestamp=Math.round((new Date().getTime()+8*60*60*1000)/1000);let second=timestamp-create_time;let time=new Array(0,0,0,0,0);if(second>=365*24*3600){time[0]=parseInt(second/(365*24*3600));second%=365*24*3600;}if(second>=24*3600){time[1]=parseInt(second/(24*3600));second%=24*3600;}if(second>=3600){time[2]=parseInt(second/3600);second%=3600;}if(second>=60){time[3]=parseInt(second/60);second%=60;}if(second>0){time[4]=second;}currentTimeHtml=time[0]+'年'+time[1]+'天'+time[2]+'时'+time[3]+'分'+time[4]+'秒';document.getElementById("running-time").innerHTML=currentTimeHtml;},1000);
+setInterval(()=>{
+  let create_time=Math.round(new Date('2020-01-03 00:00:00').getTime()/1000);
+  let timestamp=Math.round((new Date().getTime()+8*60*60*1000)/1000);
+  let second=timestamp-create_time;
+  let time=new Array(0,0,0,0,0);
+  if(second>=365*24*3600){
+    time[0]=parseInt(second/(365*24*3600));
+    second%=365*24*3600;
+  }
+  if(second>=24*3600){
+    time[1]=parseInt(second/(24*3600));
+    second%=24*3600;
+  }
+  if(second>=3600){
+    time[2]=parseInt(second/3600);second%=3600;
+  }
+  if(second>=60){
+    time[3]=parseInt(second/60);second%=60;
+  }
+  if(second>0){
+    time[4]=second;
+  }
+  currentTimeHtml=`<span style="color:#fff;"><span style="color:#000">${time[0]}</span> 年 <span style="color:#9253A8">${time[1]}</span> 天 <span style="color:#50ABF1">${time[2]}</span> 时<span style="color:#666">${time[3]}</span> 分<span style="color:red">${time[4]}</span> 秒</span>`;
+  document.getElementById("running-time").innerHTML=currentTimeHtml;
+},1000);</script></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="iconfont icon-yuedumoshi"></i></button><button id="font-plus" type="button" title="放大字体"><i class="fas fa-plus"></i></button><button id="font-minus" type="button" title="缩小字体"><i class="fas fa-minus"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="chat_btn" type="button" title="SMS"><i class="iconfont icon-sms"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="iconfont icon-pinglun"></i></a><button id="go-up" type="button" title="回到顶部"><i class="iconfont icon-backtop"></i></button></div></div><div id="local-search"><div class="search-dialog"><div class="search-dialog__title" id="local-search-title">本地搜索</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"></div></div></div><hr><div id="local-search-results"></div><span class="search-close-button"><i class="fas fa-times"></i></span></div><div id="search-mask"></div></div><div><script src="https://cdn.jsdelivr.net/npm/vue@2.6.11"></script><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/medium-zoom/dist/medium-zoom.min.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js"></script><script src="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.js"></script><script>function panguFn () {
+  if (typeof pangu === 'object') pangu.autoSpacingPage()
+  else {
+    getScript('https://cdn.jsdelivr.net/npm/pangu/dist/browser/pangu.min.js')
+      .then(() => {
+        pangu.autoSpacingPage()
+      })
+  }
+}
+
+function panguInit () {
+  if (true){
+    GLOBAL_CONFIG_SITE.isPost && panguFn()
+  } else {
+    panguFn()
+  }
+}
+
+document.addEventListener('DOMContentLoaded', panguInit)</script><script src="/js/search/local-search.js"></script><div class="js-pjax"><script>if (document.getElementsByClassName('mermaid').length) {
+  if (window.mermaidJsLoad) mermaid.init()
+  else {
+    getScript('https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js').then(() => {
+      window.mermaidJsLoad = true
+      mermaid.initialize({
+        theme: 'default',
+      })
+      true && mermaid.init()
+    })
+  }
+}</script><script>(()=>{
+  const $countDom = document.getElementById('twikoo-count')
+  const init = () => {
+    let initData = {
+      el: '#twikoo-wrap',
+      envId: 'https://twikoo-talks.vercel.app/',
+      region: ''
+    }
+
+    if (false) {
+      const otherData = false
+      initData = Object.assign(initData, otherData)
+    }
+    
+    twikoo.init(initData)
+  }
+
+  const getCount = () => {
+    twikoo.getCommentsCount({
+      envId: 'https://twikoo-talks.vercel.app/',
+      region: '',
+      urls: [window.location.pathname],
+      includeReply: false
+    }).then(function (res) {
+      $countDom.innerText = res[0].count
+    }).catch(function (err) {
+      console.error(err);
+    });
+  }
+
+  const loadTwikoo = (bool = false) => {
+    if (typeof twikoo === 'object') {
+      init()
+      bool && $countDom && setTimeout(getCount,0)
+    } else {
+      getScript('https://cdn.jsdelivr.net/npm/twikoo/dist/twikoo.all.min.js').then(()=> {
+        init()
+        bool && $countDom && setTimeout(getCount,0)
+      })
+    }
+  }
+
+  if ('Twikoo' === 'Twikoo' || !true) {
+    if (true) btf.loadComment(document.getElementById('twikoo-wrap'), loadTwikoo)
+    else loadTwikoo(true)
+  } else {
+    window.loadOtherComment = () => {
+      loadTwikoo()
+    }
+  }
+})()</script><script>var gitcalendar = new Vue({
+  el: '#gitcalendar',
+  data: {
+    simplemode: false,
+    user: 'lp-Imagine',
+    fixed: 'fixed',
+    px: 'px',
+    x: '',
+    y: '',
+    span1: '',
+    span2: '',
+    month: ['一月', '二月', '三月', '四月', '五月', '六月', '七月', '八月', '九月', '十月', '十一月', '十二月'],
+    monthchange: [],
+    oneyearbeforeday: '',
+    thisday: '',
+    amonthago: '',
+    aweekago: '',
+    weekdatacore: 0,
+    datacore: 0,
+    total: 0,
+    datadate: '',
+    data: [],
+    positionplusdata: [],
+    firstweek: [],
+    lastweek: [],
+    beforeweek: [],
+    thisweekdatacore: 0,
+    mounthbeforeday: 0,
+    mounthfirstindex: 0,
+    crispedges: 'crispedges',
+    thisdayindex: 0,
+    amonthagoindex: 0,
+    amonthagoweek: [],
+    firstdate: [],
+    first2date: [],
+    montharrbefore: [],
+    monthindex: 0,
+    color: ['rgb(145, 145, 145, 0.2)', '#c6ecc1', '#a0e2bb', '#81D8CF', '#70c5d3', '#60a2ce', '#507ac9', '#4356c5', '#423cc4', '#5b3abc', '#7138b6']
+  },
+  methods: {
+    selectStyle(data, event) {
+      document.querySelector('.angle-wrapper').style.display = 'block'
+      this.span1 = data.date;
+      this.span2 = data.count;
+      this.x = event.clientX - 100;
+      this.y = event.clientY - 60
+    },
+    outStyle() {
+      document.querySelector('.angle-wrapper').style.display = 'none'
+    },
+    thiscolor(x) {
+      if (x === 0) {
+        let i = parseInt(x / 2);
+        return this.color[0]
+      } else if (x < 2) {
+        return this.color[1]
+      } else if (x < 20) {
+        let i = parseInt(x / 2);
+        return this.color[i]
+      } else {
+        return this.color[9]
+      }
+    },
+  }
+});
+var apiurl = 'python-github-calendar-api-zfour.vercel.app' ? 'https://python-github-calendar-api-zfour.vercel.app/api?' : 'https://githubapi.ryanchristian.dev/user/'
+var githubapiurl = apiurl + gitcalendar.user;
+//canvas绘图
+function responsiveChart() {
+  let c = document.getElementById("gitcanvas");
+  if (c) {
+    let cmessage = document.getElementById("gitmessage");
+    let ctx = c.getContext("2d");
+    c.width = document.getElementById("gitcalendarcanvasbox").offsetWidth;
+    let linemaxwitdh = 0.96 * c.width / gitcalendar.data.length;
+    c.height = 9 * linemaxwitdh;
+    let lineminwitdh = 0.8 * linemaxwitdh;
+    let setposition = {
+      x: 0.02 * c.width,
+      y: 0.025 * c.width
+    };
+    for (let week in gitcalendar.data) {
+      weekdata = gitcalendar.data[week];
+      for (let day in weekdata) {
+        let dataitem = {
+          date: "",
+          count: "",
+          x: 0,
+          y: 0
+        };
+        gitcalendar.positionplusdata.push(dataitem);
+        ctx.fillStyle = gitcalendar.thiscolor(weekdata[day].count);
+        setposition.y = Math.round(setposition.y * 100) / 100;
+        dataitem.date = weekdata[day].date;
+        dataitem.count = weekdata[day].count;
+        dataitem.x = setposition.x;
+        dataitem.y = setposition.y;
+        ctx.fillRect(setposition.x, setposition.y, lineminwitdh, lineminwitdh);
+        setposition.y = setposition.y + linemaxwitdh
+      };
+      setposition.y = 0.025 * c.width;
+      setposition.x = setposition.x + linemaxwitdh
+    };
+    ctx.font = "600  Arial";
+    ctx.fillStyle = '#aaa';
+    ctx.fillText("日", 0, 1.9 * linemaxwitdh);
+    ctx.fillText("二", 0, 3.9 * linemaxwitdh);
+    ctx.fillText("四", 0, 5.9 * linemaxwitdh);
+    ctx.fillText("六", 0, 7.9 * linemaxwitdh);
+    let monthindexlist = c.width / 24;
+    for (let index in gitcalendar.monthchange) {
+      ctx.fillText(gitcalendar.monthchange[index], monthindexlist, 0.7 * linemaxwitdh);
+      monthindexlist = monthindexlist + c.width / 12
+    };
+    cmessage.onmousemove = function(event) {
+      document.querySelector('.angle-wrapper').style.display = 'none'
+    };
+    c.onmousemove = function(event) {
+      document.querySelector('.angle-wrapper').style.display = 'none'
+      getMousePos(c, event);
+    };
+
+    function getMousePos(canvas, event) {
+      var rect = canvas.getBoundingClientRect();
+      var x = event.clientX - rect.left * (canvas.width / rect.width);
+      var y = event.clientY - rect.top * (canvas.height / rect.height);
+      //console.log("x:"+x+",y:"+y);
+      for (let item of gitcalendar.positionplusdata) {
+        let lenthx = x - item.x;
+        let lenthy = y - item.y;
+        //console.log(lenthx,lenthy);
+        if (0 < lenthx && lenthx < lineminwitdh) {
+          if (0 < lenthy && lenthy < lineminwitdh) {
+            //console.log(item.date,item.count)
+            document.querySelector('.angle-wrapper').style.display = 'block'
+            gitcalendar.span1 = item.date;
+            gitcalendar.span2 = item.count;
+            gitcalendar.x = event.clientX - 100;
+            gitcalendar.y = event.clientY - 60
+          }
+        }
+        //if(0< x - item.x <lineminwitdh&&0< y - item.y <lineminwitdh){
+        //console.log(item.count,item.date);
+        //}
+      }
+    }
+  }
+}
+//数据统计算法
+function addlastmonth() {
+  if (gitcalendar.thisdayindex === 0) {
+    thisweekcore(52);
+    thisweekcore(51);
+    thisweekcore(50);
+    thisweekcore(49);
+    thisweekcore(48);
+    gitcalendar.thisweekdatacore += gitcalendar.firstdate[6].count;
+    gitcalendar.amonthago = gitcalendar.firstdate[6].date
+  } else {
+    thisweekcore(52);
+    thisweekcore(51);
+    thisweekcore(50);
+    thisweekcore(49);
+    thisweek2core();
+    gitcalendar.amonthago = gitcalendar.first2date[gitcalendar.thisdayindex - 1].date
+  }
+};
+
+function thisweek2core() {
+  for (let i = gitcalendar.thisdayindex - 1; i < gitcalendar.first2date.length; i++) {
+    gitcalendar.thisweekdatacore += gitcalendar.first2date[i].count
+  }
+};
+
+function thisweekcore(index) {
+  for (let item of gitcalendar.data[index]) {
+    gitcalendar.thisweekdatacore += item.count
+  }
+};
+
+function addlastweek() {
+  for (let item of gitcalendar.lastweek) {
+    gitcalendar.weekdatacore += item.count
+  }
+};
+
+function addbeforeweek() {
+  for (let i = gitcalendar.thisdayindex; i < gitcalendar.beforeweek.length; i++) {
+    gitcalendar.weekdatacore += gitcalendar.beforeweek[i].count
+  }
+};
+
+function addweek(data) {
+  if (gitcalendar.thisdayindex === 6) {
+    gitcalendar.aweekago = gitcalendar.lastweek[0].date;
+    addlastweek()
+  } else {
+    lastweek = data.contributions[51];
+    gitcalendar.aweekago = lastweek[gitcalendar.thisdayindex + 1].date;
+    addlastweek();
+    addbeforeweek()
+  }
+}
+
+fetch(githubapiurl)
+  .then(data => data.json())
+  .then(data => {
+    gitcalendar.data = data.contributions;
+    gitcalendar.total = data.total;
+    gitcalendar.first2date = gitcalendar.data[48];
+    gitcalendar.firstdate = gitcalendar.data[47];
+    gitcalendar.firstweek = data.contributions[0];
+    gitcalendar.lastweek = data.contributions[52];
+    gitcalendar.beforeweek = data.contributions[51];
+    gitcalendar.thisdayindex = gitcalendar.lastweek.length - 1;
+    gitcalendar.thisday = gitcalendar.lastweek[gitcalendar.thisdayindex].date;
+    gitcalendar.oneyearbeforeday = gitcalendar.firstweek[0].date;
+    gitcalendar.monthindex = gitcalendar.thisday.substring(5, 7) * 1;
+    gitcalendar.montharrbefore = gitcalendar.month.splice(gitcalendar.monthindex, 12 - gitcalendar.monthindex);
+    gitcalendar.monthchange = gitcalendar.montharrbefore.concat(gitcalendar.month);
+    addweek(data);
+    addlastmonth();
+    responsiveChart();
+  })
+  .catch(function(error) {
+    console.log(error);
+  });
+
+//手机版更换为svg绘制
+if (document.getElementById("gitcalendarcanvasbox") && document.getElementById("gitcalendarcanvasbox").offsetWidth < 500) {
+  gitcalendar.simplemode = false
+}
+
+//当改变窗口大小时重新绘制canvas
+window.onresize = function() {
+  if (gitcalendar.simplemode) responsiveChart()
+}
+
+//解决滚动滑轮时出现的标签显示
+window.onscroll = function() {
+  if (document.querySelector('.angle-wrapper')) {
+    document.querySelector('.angle-wrapper').style.display = 'none'
+  }
+};</script></div><script>window.addEventListener('load', () => {
+  const changeContent = (content) => {
+    if (content === '') return content
+
+    content = content.replace(/<img.*?src="(.*?)"?[^\>]+>/ig, '[图片]') // replace image link
+    content = content.replace(/<a[^>]+?href=["']?([^"']+)["']?[^>]*>([^<]+)<\/a>/gi, '[链接]') // replace url
+    content = content.replace(/<pre><code>.*?<\/pre>/gi, '[代码]') // replace code
+    content = content.replace(/<[^>]+>/g,"") // remove html tag
+
+    if (content.length > 150) {
+      content = content.substring(0,150) + '...'
+    }
+    return content
+  }
+
+  const getComment = () => {
+    const runTwikoo = () => {
+      twikoo.getRecentComments({
+        envId: 'https://twikoo-talks.vercel.app/',
+        region: '',
+        pageSize: 6,
+        includeReply: true
+      }).then(function (res) {
+        const twikooArray = res.map(e => {
+          return {
+            'content': changeContent(e.comment),
+            'avatar': e.avatar,
+            'nick': e.nick,
+            'url': e.url + '#' + e.id,
+            'date': new Date(e.created).toISOString()
+          }
+        })
+
+        saveToLocal.set('twikoo-newest-comments', JSON.stringify(twikooArray), 10/(60*24))
+        generateHtml(twikooArray)
+      }).catch(function (err) {
+        const $dom = document.querySelector('#card-newest-comments .aside-list')
+        $dom.innerHTML= "无法获取评论，请确认相关配置是否正确"
+      })
+    }
+
+    if (typeof twikoo === 'object') {
+      runTwikoo()
+    } else {
+      getScript('https://cdn.jsdelivr.net/npm/twikoo/dist/twikoo.all.min.js').then(runTwikoo)
+    }
+  }
+
+  const generateHtml = array => {
+    let result = ''
+
+    if (array.length) {
+      for (let i = 0; i < array.length; i++) {
+        result += '<div class=\'aside-list-item\'>'
+
+        if (true) {
+          const name = 'data-lazy-src'
+          result += `<a href='${array[i].url}' class='thumbnail'><img ${name}='${array[i].avatar}' alt='${array[i].nick}'></a>`
+        }
+        
+        result += `<div class='content'>
+        <a class='comment' href='${array[i].url}'>${array[i].content}</a>
+        <div class='name'><span>${array[i].nick} / </span><time datetime="${array[i].date}">${btf.diffDate(array[i].date, true)}</time></div>
+        </div></div>`
+      }
+    } else {
+      result += '没有评论'
+    }
+
+    let $dom = document.querySelector('#card-newest-comments .aside-list')
+    $dom.innerHTML= result
+    window.lazyLoadInstance && window.lazyLoadInstance.update()
+    window.pjax && window.pjax.refresh($dom)
+  }
+
+  const newestCommentInit = () => {
+    if (document.querySelector('#card-newest-comments .aside-list')) {
+      const data = saveToLocal.get('twikoo-newest-comments')
+      if (data) {
+        generateHtml(JSON.parse(data))
+      } else {
+        getComment()
+      }
+    }
+  }
+
+  newestCommentInit()
+  document.addEventListener('pjax:complete', newestCommentInit)
+})</script><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="/js/close.js"></script><script defer data-pjax src="/js/maopao.js"></script><script defer src="https://cdn.jsdelivr.net/gh/graingert/wow@1.3.0/dist/wow.min.js"></script><script defer data-pjax src="/js/wow-init.js"></script><script src="https://myhkw.cn/api/player/1618646380121" id="myhk" key="1618646380121" m="1"></script><script defer data-pjax src="https://cdn.jsdelivr.net/gh/xiabo2/CDN@latest/fishes.js"></script><script src="/js/moments.js"></script><canvas class="fireworks" mobile="false"></canvas><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/fireworks.min.js"></script><script id="canvas_nest" defer color="67,173,127" opacity="0.7" zindex="-1" count="99" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/canvas-nest.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful=!0,POWERMODE.shake=!1,POWERMODE.mobile=!1,document.body.addEventListener("input",POWERMODE)</script><script src="//code.tidio.co/bisrc3ghmylr0jd2ikrwcv8xp5i2nkwz.js" async></script><script>function onTidioChatApiReady() {
+  window.tidioChatApi.hide();
+  window.tidioChatApi.on("close", function() {
+    window.tidioChatApi.hide();
+  });
+}
+if (window.tidioChatApi) {
+  window.tidioChatApi.on("ready", onTidioChatApiReady);
+} else {
+  document.addEventListener("tidioChat-ready", onTidioChatApiReady);
+}
+
+var chatBtnFn = () => {
+  document.getElementById("chat_btn").addEventListener("click", function(){
+    window.tidioChatApi.show();
+    window.tidioChatApi.open();
+  });
+}
+chatBtnFn()</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css" media="print" onload='this.media="all"'><script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script><script src="https://cdn.jsdelivr.net/gh/metowolf/MetingJS@1.2/dist/Meting.min.js"></script><script src="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script><script>let pjaxSelectors = [
+  'title',
+  '#config-diff',
+  '#body-wrap',
+  '#rightside-config-hide',
+  '#rightside-config-show',
+  '#web_bg',
+  '.js-pjax'
+]
+
+if (false) {
+  pjaxSelectors.unshift('meta[property="og:image"]', 'meta[property="og:title"]', 'meta[property="og:url"]')
+}
+
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: false,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+  //- document.querySelectorAll("script[data-pjax], .pjax-reload script").forEach((item) => {
+  //-   const newScript = document.createElement("script");
+  //-   const content = item.text || item.textContent || item.innerHTML || "";
+  //-   Array.from(item.attributes).forEach((attr) =>
+  //-   newScript.setAttribute(attr.name, attr.value));
+  //-   newScript.appendChild(document.createTextNode(content));
+  //-   item.parentNode.replaceChild(newScript, item);
+  //- });
+
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+  typeof chatBtnFn === 'function' && chatBtnFn()
+  typeof panguInit === 'function' && panguInit()
+
+  if (typeof gtag === 'function') {
+    gtag('config', '', {'page_path': window.location.pathname});
+  }
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // Analytics
+  if (false) {
+    MtaH5.pgv()
+  }
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+
+  typeof preloader === 'object' && preloader.endLoading()
+})
+
+
+document.addEventListener('pjax:send', function () {
+  typeof preloader === 'object' && preloader.initLoading()
+  
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
+
+  typeof typed === 'object' && typed.destroy()
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+
+})
+
+document.addEventListener('pjax:error', (e) => {
+  if (e.request.status === 404) {
+    pjax.loadUrl('/404.html')
+  }
+})</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><script async src="//at.alicdn.com/t/font_2032782_8d5kxvn09md.js"></script></body></html>

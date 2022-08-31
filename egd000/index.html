@@ -1,0 +1,660 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>git 命令 | IMAGINE</title><meta name="keywords" content="git"><meta name="author" content="Peng"><meta name="copyright" content="Peng"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="一：Git 是什么？1Git是目前世界上最先进的分布式版本控制系统。   二：SVN 与 Git 的最主要的区别?SVN 为集中式版本控制系统，版本库是集中存放在中央服务器的单独搭建 SVN 服务器，不能离线工作操作简单，代码保密性较强 GIT 为分布式版本控制系统根本没有“中央服务器”，每个人的电脑上都是一个完整的版本库适合分布式开发，强调个体公共服务器压力和数据量都不会太大速度快灵活可以离线工"><meta property="og:type" content="article"><meta property="og:title" content="git 命令"><meta property="og:url" content="http://imagineblog.host/egd000/index.html"><meta property="og:site_name" content="IMAGINE"><meta property="og:description" content="一：Git 是什么？1Git是目前世界上最先进的分布式版本控制系统。   二：SVN 与 Git 的最主要的区别?SVN 为集中式版本控制系统，版本库是集中存放在中央服务器的单独搭建 SVN 服务器，不能离线工作操作简单，代码保密性较强 GIT 为分布式版本控制系统根本没有“中央服务器”，每个人的电脑上都是一个完整的版本库适合分布式开发，强调个体公共服务器压力和数据量都不会太大速度快灵活可以离线工"><meta property="og:locale" content="zh_CN"><meta property="og:image" content="https://z3.ax1x.com/2021/07/20/WN1u5Q.jpg"><meta property="article:published_time" content="2020-04-06T10:49:46.000Z"><meta property="article:modified_time" content="2022-08-31T08:04:19.373Z"><meta property="article:author" content="Peng"><meta property="article:tag" content="git"><meta name="twitter:card" content="summary"><meta name="twitter:image" content="https://z3.ax1x.com/2021/07/20/WN1u5Q.jpg"><link rel="shortcut icon" href="https://lovelijunyi.gitee.io/img/avatar.gif"><link rel="canonical" href="http://imagineblog.host/egd000/"><link rel="preconnect" href="//cdn.jsdelivr.net"><link rel="preconnect" href="//hm.baidu.com"><link rel="preconnect" href="//fonts.googleapis.com" crossorigin=""><link rel="preconnect" href="//busuanzi.ibruce.info"><meta name="google-site-verification" content="oUu4V6mTgP_CWLbYPUuUK0dzxO1r5vMPXCM6QXwiOv8"><meta name="baidu-site-verification" content="code-mOtCM04zOU"><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload='this.media="all"'><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.css" media="print" onload='this.media="all"'><script>var _hmt=_hmt||[];!function(){var e=document.createElement("script");e.src="https://hm.baidu.com/hm.js?6ede5b235a26f80d0b78937205b49f6f";var t=document.getElementsByTagName("script")[0];t.parentNode.insertBefore(e,t)}()</script><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Titillium+Web&amp;display=swap" media="print" onload='this.media="all"'><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":200},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"limitCount":50,"languages":{"author":"作者: Peng","link":"链接: ","source":"来源: IMAGINE","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。"}},
+  lightbox: 'mediumZoom',
+  Snackbar: {"chs_to_cht":"你已切换为繁体","cht_to_chs":"你已切换为简体","day_to_night":"你已切换为深色模式","night_to_day":"你已切换为浅色模式","bgLight":"#00c4b6","bgDark":"#121212","position":"top-right"},
+  source: {
+    jQuery: 'https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js',
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+    },
+    fancybox: {
+      js: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css'
+    }
+  },
+  isPhotoFigcaption: true,
+  islazyload: true,
+  isanchor: true
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE={isPost:!0,isHome:!1,isHighlightShrink:!1,isToc:!0,postUpdate:"2022-08-31 16:04:19"}</script><noscript><style>#nav{opacity:1}.justified-gallery img{opacity:1}#post-meta time,#recent-posts time{display:inline!important}</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          const now = new Date()
+          const hour = now.getHours()
+          const isNight = hour <= 6 || hour >= 18
+          if (t === undefined) isNight ? activateDarkMode() : activateLightMode()
+          else if (t === 'light') activateLightMode()
+          else activateDarkMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const fontSizeVal = saveToLocal.get('global-font-size')
+    if (fontSizeVal !== undefined) {
+      document.documentElement.style.setProperty('--global-font-size', fontSizeVal + 'px')
+    }
+    })(window)</script><link rel="stylesheet" href="/css/custom.css" media="defer" onload='this.media="all"'><link rel="stylesheet" href="//at.alicdn.com/t/font_2492407_3wz9sdgpeam.css"><style>#toggle-sidebar{bottom:80px}</style><link rel="stylesheet" href="/css/macblack.css"><link rel="stylesheet" href="/css/veditor.css"><link rel="stylesheet" href="/css/close.css"><link rel="stylesheet" href="/css/iconColor.css"><link rel="stylesheet" href="/css/copyright.css"><link rel="stylesheet" href="/css/notice.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/HexoPlusPlus/HexoPlusPlus@latest/talk.css"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" media="defer" onload='this.media="all"'><script src="https://cdn.jsdelivr.net/npm/echarts@4.7.0/dist/echarts.min.js"></script><script src="https://cdn.jsdelivr.net/npm/echarts@4.7.0/map/js/china.js"></script><script src="https://cdn.jsdelivr.net/gh/HexoPlusPlus/HexoPlusPlus@latest/talk_user.js"></script><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/l-lin/font-awesome-animation/dist/font-awesome-animation.min.css" media="defer" onload='this.media="all"'><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-butterfly-tag-plugins-plus@latest/lib/tag_plugins.min.css" media="defer" onload='this.media="all"'><script async src="https://cdn.jsdelivr.net/npm/hexo-butterfly-tag-plugins-plus@latest/lib/carousel-touch.min.js"></script><meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="IMAGINE" type="application/atom+xml"></head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="author-avatar"><img class="avatar-img" data-lazy-src="/img/avatar.jpg" onerror='onerror=null,src="/img/friend_404.gif"' alt="avatar"></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">37</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">标签</div><div class="length-num">20</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">分类</div><div class="length-num">14</div></a></div></div></div><hr><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw iconfont icon-zhuye"></i> <span>主页</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw iconfont icon-mulu1"></i> <span>目录</span><i class="fas fa-chevron-down expand hide"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/archives/"><i class="fa-fw iconfont icon-guidang1"></i> <span>归档</span></a></li><li><a class="site-page" href="/tags/"><i class="fa-fw iconfont icon-biaoqian"></i> <span>标签</span></a></li><li><a class="site-page" href="/categories/"><i class="fa-fw iconfont icon-category"></i> <span>分类</span></a></li><li><a class="site-page" href="/collect/"><i class="fa-fw iconfont icon-shoucang"></i> <span>收藏</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw iconfont icon-yule"></i> <span>清单</span><i class="fas fa-chevron-down expand hide"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/playlist/"><i class="fa-fw iconfont icon-gedan"></i> <span>歌单</span></a></li><li><a class="site-page" href="/books/"><i class="fa-fw iconfont icon-yuedumoshi"></i> <span>书单</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw iconfont icon-caozuojiemiantubiao---_gongju"></i> <span>工具</span><i class="fas fa-chevron-down expand hide"></i></a><ul class="menus_item_child"><li><a class="site-page" target="_blank" rel="noopener" href="https://imgtu.com/"><i class="fa-fw iconfont icon-cloud"></i> <span>imgtu</span></a></li><li><a class="site-page" target="_blank" rel="noopener" href="https://www.leancloud.cn/"><i class="fa-fw iconfont icon-pinglun"></i> <span>LeanCloud</span></a></li><li><a class="site-page" target="_blank" rel="noopener" href="https://www.cloudflare.com/zh-cn/"><i class="fa-fw iconfont icon-cloudcomputing"></i> <span>Cloudflare</span></a></li><li><a class="site-page" target="_blank" rel="noopener" href="https://vercel.com/lp-imagine"><i class="fa-fw iconfont icon-webx"></i> <span>Vercel</span></a></li><li><a class="site-page" target="_blank" rel="noopener" href="https://cloud.mongodb.com/v2#/org/610751ff4218af3732524482/projects"><i class="fa-fw iconfont icon-mongdbwapian"></i> <span>MongoDB</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw iconfont icon-guanyu"></i> <span>关于</span><i class="fas fa-chevron-down expand hide"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/about/"><i class="fa-fw iconfont icon-iconzhengli-"></i> <span>关于我</span></a></li><li><a class="site-page" href="/message/"><i class="fa-fw iconfont icon-liuyanmoban"></i> <span>留言板</span></a></li><li><a class="site-page" href="/talks/"><i class="fa-fw iconfont icon-fengche"></i> <span>说说</span></a></li><li><a class="site-page" href="/link/"><i class="fa-fw iconfont icon-youqinglianjie"></i> <span>友情链接</span></a></li><li><a class="site-page" href="/friends_link"><i class="fa-fw iconfont icon-pengyouquan"></i> <span>友链朋友圈</span></a></li><li><a class="site-page" target="_blank" rel="noopener" href="https://imagine-nav.vercel.app/"><i class="fa-fw iconfont icon-daohang1"></i> <span>导航站</span></a></li><li><a class="site-page" target="_blank" rel="noopener" href="https://imagine.imagineblog.workers.dev/hpp/admin/login"><i class="fa-fw iconfont icon-xiezuo"></i> <span>后台</span></a></li></ul></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image:url(https://z3.ax1x.com/2021/07/20/WN1u5Q.jpg)"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">IMAGINE</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw iconfont icon-zhuye"></i> <span>主页</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw iconfont icon-mulu1"></i> <span>目录</span><i class="fas fa-chevron-down expand hide"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/archives/"><i class="fa-fw iconfont icon-guidang1"></i> <span>归档</span></a></li><li><a class="site-page" href="/tags/"><i class="fa-fw iconfont icon-biaoqian"></i> <span>标签</span></a></li><li><a class="site-page" href="/categories/"><i class="fa-fw iconfont icon-category"></i> <span>分类</span></a></li><li><a class="site-page" href="/collect/"><i class="fa-fw iconfont icon-shoucang"></i> <span>收藏</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw iconfont icon-yule"></i> <span>清单</span><i class="fas fa-chevron-down expand hide"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/playlist/"><i class="fa-fw iconfont icon-gedan"></i> <span>歌单</span></a></li><li><a class="site-page" href="/books/"><i class="fa-fw iconfont icon-yuedumoshi"></i> <span>书单</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw iconfont icon-caozuojiemiantubiao---_gongju"></i> <span>工具</span><i class="fas fa-chevron-down expand hide"></i></a><ul class="menus_item_child"><li><a class="site-page" target="_blank" rel="noopener" href="https://imgtu.com/"><i class="fa-fw iconfont icon-cloud"></i> <span>imgtu</span></a></li><li><a class="site-page" target="_blank" rel="noopener" href="https://www.leancloud.cn/"><i class="fa-fw iconfont icon-pinglun"></i> <span>LeanCloud</span></a></li><li><a class="site-page" target="_blank" rel="noopener" href="https://www.cloudflare.com/zh-cn/"><i class="fa-fw iconfont icon-cloudcomputing"></i> <span>Cloudflare</span></a></li><li><a class="site-page" target="_blank" rel="noopener" href="https://vercel.com/lp-imagine"><i class="fa-fw iconfont icon-webx"></i> <span>Vercel</span></a></li><li><a class="site-page" target="_blank" rel="noopener" href="https://cloud.mongodb.com/v2#/org/610751ff4218af3732524482/projects"><i class="fa-fw iconfont icon-mongdbwapian"></i> <span>MongoDB</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw iconfont icon-guanyu"></i> <span>关于</span><i class="fas fa-chevron-down expand hide"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/about/"><i class="fa-fw iconfont icon-iconzhengli-"></i> <span>关于我</span></a></li><li><a class="site-page" href="/message/"><i class="fa-fw iconfont icon-liuyanmoban"></i> <span>留言板</span></a></li><li><a class="site-page" href="/talks/"><i class="fa-fw iconfont icon-fengche"></i> <span>说说</span></a></li><li><a class="site-page" href="/link/"><i class="fa-fw iconfont icon-youqinglianjie"></i> <span>友情链接</span></a></li><li><a class="site-page" href="/friends_link"><i class="fa-fw iconfont icon-pengyouquan"></i> <span>友链朋友圈</span></a></li><li><a class="site-page" target="_blank" rel="noopener" href="https://imagine-nav.vercel.app/"><i class="fa-fw iconfont icon-daohang1"></i> <span>导航站</span></a></li><li><a class="site-page" target="_blank" rel="noopener" href="https://imagine.imagineblog.workers.dev/hpp/admin/login"><i class="fa-fw iconfont icon-xiezuo"></i> <span>后台</span></a></li></ul></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">git 命令</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2020-04-06T10:49:46.000Z" title="发表于 2020-04-06 18:49:46">2020-04-06</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2022-08-31T08:04:19.373Z" title="更新于 2022-08-31 16:04:19">2022-08-31</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/git/">git</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">2.7k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>9分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="一：Git-是什么？"><a href="#一：Git-是什么？" class="headerlink" title="一：Git 是什么？"></a>一：Git 是什么？</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Git是目前世界上最先进的分布式版本控制系统。</span><br></pre></td></tr></table></figure><hr><h1 id="二：SVN-与-Git-的最主要的区别"><a href="#二：SVN-与-Git-的最主要的区别" class="headerlink" title="二：SVN 与 Git 的最主要的区别?"></a>二：SVN 与 Git 的最主要的区别?</h1><p>SVN 为集中式版本控制系统，版本库是集中存放在中央服务器的<br>单独搭建 SVN 服务器，不能离线工作<br>操作简单，代码保密性较强</p><p>GIT 为分布式版本控制系统根本没有“中央服务器”，每个人的电脑上都是一个完整的版本库<br>适合分布式开发，强调个体<br>公共服务器压力和数据量都不会太大<br>速度快灵活<br>可以离线工作<br>操作复杂，代码保密性差</p><p>GitHub,免费的远程仓库，如果是个人的开源项目，放到 GitHub 上是完全没有问题的。GitHub 还是一个开源协作社区，通过 GitHub，既可以让别人参与你的开源项目，也可以参与别人的开源项目。</p><p>SVN 的存储需要依赖一个服务器，而 git 所有的东西是放在线上的。节约成本，省时省力。</p><p>‘Please tell me who you are.’</p><p>查看全局配置   git config –global –list</p><p>命令   git config –global user.name “你的 git 名称”<br>命令   git config –global user.email “你的 git 验证邮箱”</p><p>git 命令行中的操作命令：<br>命令  cd D:   进入 相应的磁盘<br>命令  mkdir   创建目录<br>命令  cd 进入当前盘符中的文件夹<br>命令  pwd 显示当前工作目录的全路径<br>命令  rm   删除文件<br>命令  ls 查看文件夹下的子文件</p><p>然后！最重要的步骤来了！！git init</p><p>命令  git init<br>显示成功后去相应的文件夹中查看是不是多了一个.git 文件</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">这个文件夹就是你的版本库了，把项目放在文件夹下。</span><br></pre></td></tr></table></figure><hr><h1 id="三-将文件提交到-git-服务器。"><a href="#三-将文件提交到-git-服务器。" class="headerlink" title="三.将文件提交到 git 服务器。"></a>三.将文件提交到 git 服务器。</h1><p>你的本地仓库由 git 维护的三棵“树”组成：<br>　　第一个是你的 工作目录，它持有实际文件；<br>　　第二个是 暂存区（Index），临时保存你的改动；<br>　　最后是 HEAD，指向你最近一次提交后的结果。</p><h2 id="1-打开-Git-Bash"><a href="#1-打开-Git-Bash" class="headerlink" title="1.打开 Git Bash"></a>1.打开 Git Bash</h2><p>命令 git add ‘文件名’<br>git add -u   提交所有被修改(modified)和被删除(deleted)文件，不包括新文件(new)<br>git add .   提交所有新文件(new)和被修改(modified)文件，不包括被删除(deleted)文件<br>git add -A   提交所有变化</p><p>把咱们的文件存放在一个神秘的地方 &gt;&gt;&gt;&gt; 暂存区 （暂存区在本机）</p><h2 id="2-把文件提交到本地仓库中去。"><a href="#2-把文件提交到本地仓库中去。" class="headerlink" title="2.把文件提交到本地仓库中去。"></a>2.把文件提交到本地仓库中去。</h2><p>git commit -m ‘我提交时候的备注（注释）’</p><h2 id="3-查看-commit-状态"><a href="#3-查看-commit-状态" class="headerlink" title="3.查看 commit 状态"></a>3.查看 commit 状态</h2><p>git status   用于显示工作目录和暂存区的状态。</p><h2 id="4-查看修改内容。"><a href="#4-查看修改内容。" class="headerlink" title="4.查看修改内容。"></a>4.查看修改内容。</h2><p>git diff 你的文件名   会出现更改信息；<br>将更改后的东西提交上去，和之前一样。先 add 然后再 commit 。</p><h2 id="5-版本退回"><a href="#5-版本退回" class="headerlink" title="5.版本退回"></a>5.版本退回</h2><p>git log          （ 查看日志）<br>git reflog</p><p>git reset –hard HEAD^   退回到上个版本 如果需要退回好多版本就在后面加上 ^ 例： git reset –hard HEAD^^退回两个版本。<br>git reset –hard 191e0c7   回退到指定版本</p><h2 id="6-删除"><a href="#6-删除" class="headerlink" title="6.删除"></a>6.删除</h2><p>新建一个 b.txt，然后 commit 到库中。 并删除。</p><p>命令 1. git add</p><p>命令 2. git commit -m ‘备注’</p><p>命令 3. rm b.txt   这个是删除 b 文件的命令</p><p>回过头来看文件夹中的 b.txt</p><p>b.txt 不见了，查看下状态。<br>可以 commit，可以放弃修改  git reset –hard 版本号来回复文件。</p><h2 id="7-连接远程仓库"><a href="#7-连接远程仓库" class="headerlink" title="7.连接远程仓库"></a>7.连接远程仓库</h2><ol><li>git init   -&gt; 创建版本库</li><li>git add 文件名   -&gt; 添加到暂存区</li><li>git commit -m ‘提交注释’   -&gt;提交到本地仓库</li></ol><p>然后连接本地仓库，并将自己的库 push 到服务器中去。</p><ol><li>命令 1. git remote add origin https: // github.com/你的账号/你的项目名称   设置远程仓库地址</li><li>命令 2. git push -u origin master 将本地的库推送到 master 分支 （就是推送到服务器上）</li></ol><p>git push -u -f origin master(提交到远程仓库，这个命令中的 -f 是强制推送，因为远程仓库只有初始化的文件，所以强制推送上去就行了，不加-f 会报当前分支没有远程分支，强制推送可以覆盖 master，这样就完成了第一次提交的步骤)</p><p>git remote -v   查看远程仓库地址<br>git remote rm origin   删除远程仓库地址</p><p>在服务器上查看是否推送成功。</p><p>从现在开始，只需要 git push 就可以把本机的代码提交到远程仓库。<br>git push     (提交 master 分支 到远程仓库)<br>git push origin 分支名     (提交其他分支 到远程仓库)</p><p>获取远程仓库的更新数据：<br>git fetch：相当于是从远程获取最新到本地，不会自动 merge<br>git pull：相当于是从远程获取最新版本并 merge 到本地<br>git pull origin 分支名   更新某个远程分支到本地</p><p>从服务器克隆数据， git clone<br>git clone <a target="_blank" rel="noopener" href="https://github.com/yanghuaizhi1210/GitTest">https://github.com/yanghuaizhi1210/GitTest</a><br>将服务器端的数据克隆过来。</p><p>如果输入$ git remote add origin <a href="mailto:git@github.com">git@github.com</a>:djqiang（github 帐号名）/gitdemo（项目名）.git<br>提示出错信息：fatal: remote origin already exists.<br>解决办法如下：<br>1、先输入$ git remote rm origin<br>2、再输入$ git remote add origin <a href="mailto:git@github.com">git@github.com</a>:djqiang/gitdemo.git 就不会报错了！<br>3、如果输入$ git remote rm origin 还是报错的话，error: Could not remove config section ‘remote.origin’. 我们需要修改 gitconfig 文件的内容<br>4、找到你的 github 的安装路径，我的是 C:\Users\ASUS\AppData\Local\GitHub\PortableGit_ca477551eeb4aea0e4ae9fcd3358bd96720bb5c8\etc<br>5、找到一个名为 gitconfig 的文件，打开它把里面的[remote “origin”]那一行删掉就好了！</p><p>生成秘钥：<br>（1）首先检查电脑是否曾经生成过秘钥<br>cd <del>/.ssh<br>若打开该文件夹为空，则表示没有生成过秘钥，进入第二步。（</del>表示根目录）<br>(2) 生成秘钥<br>ssh-keygen -t rsa -C “your email”<br>命令要求输入密码，不用输，三个回车即可。<br>执行成功后，会在主目录.ssh 路径下生成两个文件：id_rsa 私钥文件；id_rsa.pub 公钥文件；</p><p>登陆 github 帐户点击头像，然后 Settings -&gt; 左栏点击 SSH and GPG keys -&gt; 点击 New SSH key<br>在远程仓库 gitlab 上添加 title 和 key，和本地的一致。title 可以自己取一个容易区分的名字，key 为 id_rsa.pub 中的内容（全部复制，可用 cat id_rsa.pub 命令打开）</p><p>配置了 ssh 秘钥，使用远程仓库的 ssh 地址提交<br><a target="_blank" rel="noopener" href="https://www.cnblogs.com/superGG1990/p/6844952.html">https://www.cnblogs.com/superGG1990/p/6844952.html</a></p><hr><h1 id="分支操作"><a href="#分支操作" class="headerlink" title="分支操作"></a>分支操作</h1><p>查看分支：git branch<br>当前分支前有 * 号</p><p>创建分支：git branch</p><p>切换分支：git checkout</p><p>创建+切换分支：git checkout -b</p><p>合并某分支到当前分支：git merge</p><p>删除分支：git branch -d</p><p><strong>合并分支：</strong></p><p>1、先建一个分支              git branch 分支名</p><p>2、切换到新建的分支          git checkout 分支名</p><p>3、提交分支上的代码          git add .    git commit -m “提交注释”</p><p>4、切换至主分支上            git checkout master</p><p>5、然后合并分支              git merge 分支<br>6、合并完以后就 push           最好先 pull 一次   然后 git push</p><p>7、切换到自己的分支          git merge 线上分支名称</p><p>设置 git 忽略文件： 1.创建文件：.gitignore 2.忽略文件列表</p><h1 id="gitignore-忽略文件列表"><a href="#gitignore-忽略文件列表" class="headerlink" title=".gitignore 忽略文件列表"></a>.gitignore 忽略文件列表</h1><p>.DS_Store<br>node_modules/<br>/dist/<br>npm-debug.log*<br>yarn-debug.log*<br>yarn-error.log*</p><h1 id="Editor-directories-and-files"><a href="#Editor-directories-and-files" class="headerlink" title="Editor directories and files"></a>Editor directories and files</h1><p>.idea<br>.vscode<br>_.suo<br><em>.ntvs</em><br>_.njsproj<br>*.sln</p><p>如果出现如：<br><strong>Please enter a commit message to explain why this merge is necessary,# especially if it merges an updated upstream into a topic branch.</strong></p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">“:wq”是Linux操作系统命令： 表示强制性写入文件并退出。</span><br><span class="line">输入“:wq”，注意是英文输入状态下的冒号，然后按下“Enter”键。</span><br></pre></td></tr></table></figure><hr><h1 id="Git-Submodule"><a href="#Git-Submodule" class="headerlink" title="Git Submodule"></a>Git Submodule</h1><p>有的时候我们会遇到仓库嵌套的问题，即一个仓库内部还有一个 git 仓库。这时就需要使用到 git submodule 模块化。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git submodule add 远程仓库地址  仓库名&#x2F;</span><br></pre></td></tr></table></figure><p>执行此命令后会在外层仓库根目录下生成<strong>一个.gitmodules 文件</strong><br>如果想删除模块的话，可以执行</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git rm -r --cached 远程仓库名&#x2F;，并删除对应的.gitmodules文件中的模块信息</span><br></pre></td></tr></table></figure><h1 id="git-push-时遇到：！-rejected-master-gt-master-non-fast-forward-的问题"><a href="#git-push-时遇到：！-rejected-master-gt-master-non-fast-forward-的问题" class="headerlink" title="git push 时遇到：！[rejected] master -&gt; master(non-fast-forward)的问题"></a>git push 时遇到：！[rejected] master -&gt; master(non-fast-forward)的问题</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">1. git pull origin master --allow-unrelated histories 把远程和本地同步，消除差异</span><br><span class="line">2. git add</span><br><span class="line">3. git commit -m</span><br><span class="line">4. git push origin master</span><br></pre></td></tr></table></figure><h1 id="git-stash"><a href="#git-stash" class="headerlink" title="git stash"></a>git stash</h1><h2 id="应用场景"><a href="#应用场景" class="headerlink" title="应用场景"></a>应用场景</h2><blockquote><ol><li>当正在dev分支上开发某个项目，这时项目中出现一个bug，需要紧急修复，但是正在开发的内容只是完成一半，还不想提交，这时可以用<span class="p red">git stash</span>命令将修改的内容保存至堆栈区，然后顺利切换到fix分支进行bug修复，修复完成后，再次切回到dev分支，从堆栈中恢复刚刚保存的内容。</li><li>由于疏忽，本应该在dev分支开发的内容，却在master上进行了开发，需要重新切回到dev分支上进行开发，可以用<span class="p red">git stash</span>将内容保存至堆栈中，切回到dev分支后，再次恢复内容即可。<br>总的来说，<span class="p red">git stash</span>命令的作用就是将目前还不想提交的但是已经修改的内容进行保存至堆栈中，后续可以在某个分支上恢复出堆栈中的内容。这也就是说，stash中的内容不仅仅可以恢复到原先开发的分支，也可以恢复到其他任意指定的分支上。<span class="p red">git stash</span>作用的范围包括工作区和暂存区中的内容，也就是说没有提交的内容都会保存至堆栈中。</li></ol></blockquote><h2 id="常用的用法"><a href="#常用的用法" class="headerlink" title="常用的用法"></a>常用的用法</h2><ol><li>git stash save “save message” : 执行存储时，添加备注，方便查找，只有git stash 也要可以的，但查找时不方便识别。</li><li>git stash list ：查看stash了哪些存储</li><li>git stash show ：显示做了哪些改动，默认show第一个存储,如果要显示其他存贮，后面加stash@{$num}，比如第二个 git stash show stash@{1}</li><li>git stash show -p : 显示第一个存储的改动，如果想显示其他存存储，命令：git stash show stash@{$num} -p ，比如第二个：git stash show stash@{1} -p</li><li>git stash apply :应用某个存储,但不会把存储从存储列表中删除，默认使用第一个存储,即stash@{0}，如果要使用其他个，git stash apply stash@{$num} ， 比如第二个：git stash apply stash@{1}</li><li>git stash pop ：命令恢复之前缓存的工作目录，将缓存堆栈中的对应stash删除，并将对应修改应用到当前的工作目录下,默认为第一个stash,即stash@{0}，如果要应用并删除其他stash，命令：git stash pop stash@{$num} ，比如应用并删除第二个：git stash pop stash@{1}</li><li>git stash drop stash@{$num} ：丢弃stash@{$num}存储，从列表中删除这个存储</li><li>git stash clear ：删除所有缓存的stash</li></ol><hr><h1 id="SVN-使用"><a href="#SVN-使用" class="headerlink" title="SVN 使用"></a>SVN 使用</h1><p>使用 VisualSVN Server 建立版本库<br><a target="_blank" rel="noopener" href="https://www.cnblogs.com/lcyuhe/p/4539696.html">https://www.cnblogs.com/lcyuhe/p/4539696.html</a></p></article><div class="post-copyright"><div class="post-copyright__title"><span class="post-copyright-info"><h>git 命令</h></span></div><div class="post-copyright__type"><span class="post-copyright-info"><a href="http://imagineblog.host/egd000/">http://imagineblog.host/egd000/</a></span></div><div class="post-copyright-m"><div class="post-copyright-m-info"><div class="post-copyright-a" style="display:inline-block;width:120px"><h>作者</h><div class="post-copyright-cc-info"><h>Peng</h></div></div><div class="post-copyright-c" style="display:inline-block;width:120px"><h>发布于</h><div class="post-copyright-cc-info"><h>2020-04-06</h></div></div><div class="post-copyright-u" style="display:inline-block;width:120px"><h>更新于</h><div class="post-copyright-cc-info"><h>2022-08-31</h></div></div><div class="post-copyright-c" style="display:inline-block;width:120px"><h>许可协议</h><div class="post-copyright-cc-info"><a class="icon" rel="noopener" target="_blank" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a><a rel="noopener" target="_blank" title="CC BY 4.0" href="https://creativecommons.org/licenses/by/4.0/deed.zh">CC BY 4.0</a></div></div></div></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/git/">git</a></div><div class="post_share"><div class="social-share" data-image="https://z3.ax1x.com/2021/07/20/WN1u5Q.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload='this.media="all"'><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><div class="post-reward"><div class="reward-button button--animated"><i class="fas fa-qrcode"></i> 打赏</div><div class="reward-main"><ul class="reward-all"><li class="reward-item"><a href="/img/wechat.png" target="_blank"><img class="post-qr-code-img" data-lazy-src="/img/wechat.png" alt="wechat"></a><div class="post-qr-code-desc">wechat</div></li></ul></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/ctko47/"><img class="prev-cover" data-lazy-src="https://z3.ax1x.com/2021/07/20/WttPYD.jpg" onerror='onerror=null,src="/img/banner/02.jpg"' alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">javascript 正则表达式校验</div></div></a></div><div class="next-post pull-right"><a href="/va1sn5/"><img class="next-cover" data-lazy-src="https://z3.ax1x.com/2021/07/20/WtYuRJ.jpg" onerror='onerror=null,src="/img/banner/02.jpg"' alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">js 深拷贝总结</div></div></a></div></nav><hr><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i> <span>评论</span></div></div><div class="comment-wrap"><div><div id="twikoo-wrap"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%80%EF%BC%9AGit-%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="toc-number">1.</span> <span class="toc-text">一：Git 是什么？</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BA%8C%EF%BC%9ASVN-%E4%B8%8E-Git-%E7%9A%84%E6%9C%80%E4%B8%BB%E8%A6%81%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="toc-number">2.</span> <span class="toc-text">二：SVN 与 Git 的最主要的区别?</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%89-%E5%B0%86%E6%96%87%E4%BB%B6%E6%8F%90%E4%BA%A4%E5%88%B0-git-%E6%9C%8D%E5%8A%A1%E5%99%A8%E3%80%82"><span class="toc-number">3.</span> <span class="toc-text">三.将文件提交到 git 服务器。</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E6%89%93%E5%BC%80-Git-Bash"><span class="toc-number">3.1.</span> <span class="toc-text">1.打开 Git Bash</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E6%8A%8A%E6%96%87%E4%BB%B6%E6%8F%90%E4%BA%A4%E5%88%B0%E6%9C%AC%E5%9C%B0%E4%BB%93%E5%BA%93%E4%B8%AD%E5%8E%BB%E3%80%82"><span class="toc-number">3.2.</span> <span class="toc-text">2.把文件提交到本地仓库中去。</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E6%9F%A5%E7%9C%8B-commit-%E7%8A%B6%E6%80%81"><span class="toc-number">3.3.</span> <span class="toc-text">3.查看 commit 状态</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-%E6%9F%A5%E7%9C%8B%E4%BF%AE%E6%94%B9%E5%86%85%E5%AE%B9%E3%80%82"><span class="toc-number">3.4.</span> <span class="toc-text">4.查看修改内容。</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-%E7%89%88%E6%9C%AC%E9%80%80%E5%9B%9E"><span class="toc-number">3.5.</span> <span class="toc-text">5.版本退回</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-%E5%88%A0%E9%99%A4"><span class="toc-number">3.6.</span> <span class="toc-text">6.删除</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-%E8%BF%9E%E6%8E%A5%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93"><span class="toc-number">3.7.</span> <span class="toc-text">7.连接远程仓库</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%88%86%E6%94%AF%E6%93%8D%E4%BD%9C"><span class="toc-number">4.</span> <span class="toc-text">分支操作</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#gitignore-%E5%BF%BD%E7%95%A5%E6%96%87%E4%BB%B6%E5%88%97%E8%A1%A8"><span class="toc-number">5.</span> <span class="toc-text">.gitignore 忽略文件列表</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Editor-directories-and-files"><span class="toc-number">6.</span> <span class="toc-text">Editor directories and files</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Git-Submodule"><span class="toc-number">7.</span> <span class="toc-text">Git Submodule</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#git-push-%E6%97%B6%E9%81%87%E5%88%B0%EF%BC%9A%EF%BC%81-rejected-master-gt-master-non-fast-forward-%E7%9A%84%E9%97%AE%E9%A2%98"><span class="toc-number">8.</span> <span class="toc-text">git push 时遇到：！[rejected] master -&gt; master(non-fast-forward)的问题</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#git-stash"><span class="toc-number">9.</span> <span class="toc-text">git stash</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF"><span class="toc-number">9.1.</span> <span class="toc-text">应用场景</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B8%B8%E7%94%A8%E7%9A%84%E7%94%A8%E6%B3%95"><span class="toc-number">9.2.</span> <span class="toc-text">常用的用法</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#SVN-%E4%BD%BF%E7%94%A8"><span class="toc-number">10.</span> <span class="toc-text">SVN 使用</span></a></li></ol></div></div></div></div></main><footer id="footer"><div class="github-div"><div></div><div class="github-badge"><a style="color:#fff" rel="external nofollow noopener noreferrer" href="https://hexo.io/" target="_blank" title="由 Hexo 强力驱动" data-pjax-state=""><span class="badge-subject">🌴Powered</span><span class="badge-value bg-blue">Hexo</span></a></div><div class="github-badge"><a style="color:#fff" rel="external nofollow noopener noreferrer" href="https://imgtu.com/" target="_blank" title="本站图片使用路过图床" data-pjax-state=""><span class="badge-subject">🌈Drawing bed</span><span class="badge-value bg-brightgreen">imagtu</span></a></div><div class="github-badge"><a style="color:#fff" rel="external nofollow noopener noreferrer" href="https://github.com/" target="_blank" title="静态网页托管于 GitHub Pages" data-pjax-state=""><span class="badge-subject">📖Pages</span><span class="badge-value bg-brightgreen">GitHub</span></a></div><div class="github-badge"><a style="color:#fff" rel="external nofollow noopener noreferrer" href="https://www.jsdelivr.com/" target="_blank" title="jsDelivr 提供 CDN 加速服务" data-pjax-state=""><span class="badge-subject">🎈CDN</span><span class="badge-value bg-orange">jsDelivr</span></a></div><div class="github-badge"><a style="color:#fff" rel="external nofollow noopener noreferrer" href="https://vercel.com/" target="_blank" title="vercel 提供 CDN 加速服务" data-pjax-state=""><span class="badge-subject">🎃Server</span><span class="badge-value bg-orange">vercel</span></a></div><div class="github-badge"><a style="color:#fff" rel="external nofollow noopener noreferrer" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" title="本站点采用知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议进行许可" data-pjax-state=""><span class="badge-subject"><i class="fa fa-copyright"></i></span><span class="badge-value bg-gradient">BY-NC-SA 4.0</span></a></div><div class="github-badge"><a style="color:#fff" rel="external nofollow noopener noreferrer" href="https://github.com/jerryc127/hexo-theme-butterfly" target="_blank" title="主题" data-pjax-state=""><span class="badge-subject">🎨Theme</span><span class="badge-value bg-blueviolet">Butterfly</span></a></div><div class="github-badge"><a style="color:#fff" rel="external nofollow noopener noreferrer" href="https://beian.miit.gov.cn/" target="_blank" title="本站点已通过工信部ICP备案" data-pjax-state=""><span class="badge-subject">赣ICP备</span><span class="badge-value bg-gradient">2022000236号-1</span></a></div><div class="github-badge"><a style="color:#fff" rel="external nofollow noopener noreferrer" href="http://imagineblog.host" target="_blank" title="copyright" data-pjax-state=""><span class="badge-subject">📑copyright</span><span class="badge-value bg-gradient"><div class="copyright">&copy;2020 - 2022<i id="heartbeat" class="fa fas fa-heartbeat"></i> Peng</div></span></a></div><div class="github-badge"><span class="badge-subject">安全运行</span><a style="text-decoration:none;color:#fff;padding:4px 4px 4px 6px;border-top-right-radius:4px;border-bottom-right-radius:4px;min-width:180px;display:inline-block" id="running-time" rel="external nofollow noopener noreferrer" href="" target="_blank" title="网站运行时间" data-pjax-state=""></a></div><div id="running-time"><script>//- setInterval(()=>{let create_time=Math.round(new Date('2020-02-18 00:00:00').getTime()/1000);let timestamp=Math.round((new Date().getTime()+8*60*60*1000)/1000);let second=timestamp-create_time;let time=new Array(0,0,0,0,0);if(second>=365*24*3600){time[0]=parseInt(second/(365*24*3600));second%=365*24*3600;}if(second>=24*3600){time[1]=parseInt(second/(24*3600));second%=24*3600;}if(second>=3600){time[2]=parseInt(second/3600);second%=3600;}if(second>=60){time[3]=parseInt(second/60);second%=60;}if(second>0){time[4]=second;}currentTimeHtml=time[0]+'年'+time[1]+'天'+time[2]+'时'+time[3]+'分'+time[4]+'秒';document.getElementById("running-time").innerHTML=currentTimeHtml;},1000);
+setInterval(()=>{
+  let create_time=Math.round(new Date('2020-01-03 00:00:00').getTime()/1000);
+  let timestamp=Math.round((new Date().getTime()+8*60*60*1000)/1000);
+  let second=timestamp-create_time;
+  let time=new Array(0,0,0,0,0);
+  if(second>=365*24*3600){
+    time[0]=parseInt(second/(365*24*3600));
+    second%=365*24*3600;
+  }
+  if(second>=24*3600){
+    time[1]=parseInt(second/(24*3600));
+    second%=24*3600;
+  }
+  if(second>=3600){
+    time[2]=parseInt(second/3600);second%=3600;
+  }
+  if(second>=60){
+    time[3]=parseInt(second/60);second%=60;
+  }
+  if(second>0){
+    time[4]=second;
+  }
+  currentTimeHtml=`<span style="color:#fff;"><span style="color:#000">${time[0]}</span> 年 <span style="color:#9253A8">${time[1]}</span> 天 <span style="color:#50ABF1">${time[2]}</span> 时<span style="color:#666">${time[3]}</span> 分<span style="color:red">${time[4]}</span> 秒</span>`;
+  document.getElementById("running-time").innerHTML=currentTimeHtml;
+},1000);</script></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="iconfont icon-yuedumoshi"></i></button><button id="font-plus" type="button" title="放大字体"><i class="fas fa-plus"></i></button><button id="font-minus" type="button" title="缩小字体"><i class="fas fa-minus"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="chat_btn" type="button" title="SMS"><i class="iconfont icon-sms"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="iconfont icon-pinglun"></i></a><button id="go-up" type="button" title="回到顶部"><i class="iconfont icon-backtop"></i></button></div></div><div id="local-search"><div class="search-dialog"><div class="search-dialog__title" id="local-search-title">本地搜索</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"></div></div></div><hr><div id="local-search-results"></div><span class="search-close-button"><i class="fas fa-times"></i></span></div><div id="search-mask"></div></div><div><script src="https://cdn.jsdelivr.net/npm/vue@2.6.11"></script><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/medium-zoom/dist/medium-zoom.min.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js"></script><script src="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.js"></script><script>function panguFn () {
+  if (typeof pangu === 'object') pangu.autoSpacingPage()
+  else {
+    getScript('https://cdn.jsdelivr.net/npm/pangu/dist/browser/pangu.min.js')
+      .then(() => {
+        pangu.autoSpacingPage()
+      })
+  }
+}
+
+function panguInit () {
+  if (true){
+    GLOBAL_CONFIG_SITE.isPost && panguFn()
+  } else {
+    panguFn()
+  }
+}
+
+document.addEventListener('DOMContentLoaded', panguInit)</script><script src="/js/search/local-search.js"></script><div class="js-pjax"><script>if (document.getElementsByClassName('mermaid').length) {
+  if (window.mermaidJsLoad) mermaid.init()
+  else {
+    getScript('https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js').then(() => {
+      window.mermaidJsLoad = true
+      mermaid.initialize({
+        theme: 'default',
+      })
+      true && mermaid.init()
+    })
+  }
+}</script><script>(()=>{
+  const $countDom = document.getElementById('twikoo-count')
+  const init = () => {
+    let initData = {
+      el: '#twikoo-wrap',
+      envId: 'https://twikoo-talks.vercel.app/',
+      region: ''
+    }
+
+    if (false) {
+      const otherData = false
+      initData = Object.assign(initData, otherData)
+    }
+    
+    twikoo.init(initData)
+  }
+
+  const getCount = () => {
+    twikoo.getCommentsCount({
+      envId: 'https://twikoo-talks.vercel.app/',
+      region: '',
+      urls: [window.location.pathname],
+      includeReply: false
+    }).then(function (res) {
+      $countDom.innerText = res[0].count
+    }).catch(function (err) {
+      console.error(err);
+    });
+  }
+
+  const loadTwikoo = (bool = false) => {
+    if (typeof twikoo === 'object') {
+      init()
+      bool && $countDom && setTimeout(getCount,0)
+    } else {
+      getScript('https://cdn.jsdelivr.net/npm/twikoo/dist/twikoo.all.min.js').then(()=> {
+        init()
+        bool && $countDom && setTimeout(getCount,0)
+      })
+    }
+  }
+
+  if ('Twikoo' === 'Twikoo' || !true) {
+    if (true) btf.loadComment(document.getElementById('twikoo-wrap'), loadTwikoo)
+    else loadTwikoo(true)
+  } else {
+    window.loadOtherComment = () => {
+      loadTwikoo()
+    }
+  }
+})()</script><script>var gitcalendar = new Vue({
+  el: '#gitcalendar',
+  data: {
+    simplemode: false,
+    user: 'lp-Imagine',
+    fixed: 'fixed',
+    px: 'px',
+    x: '',
+    y: '',
+    span1: '',
+    span2: '',
+    month: ['一月', '二月', '三月', '四月', '五月', '六月', '七月', '八月', '九月', '十月', '十一月', '十二月'],
+    monthchange: [],
+    oneyearbeforeday: '',
+    thisday: '',
+    amonthago: '',
+    aweekago: '',
+    weekdatacore: 0,
+    datacore: 0,
+    total: 0,
+    datadate: '',
+    data: [],
+    positionplusdata: [],
+    firstweek: [],
+    lastweek: [],
+    beforeweek: [],
+    thisweekdatacore: 0,
+    mounthbeforeday: 0,
+    mounthfirstindex: 0,
+    crispedges: 'crispedges',
+    thisdayindex: 0,
+    amonthagoindex: 0,
+    amonthagoweek: [],
+    firstdate: [],
+    first2date: [],
+    montharrbefore: [],
+    monthindex: 0,
+    color: ['rgb(145, 145, 145, 0.2)', '#c6ecc1', '#a0e2bb', '#81D8CF', '#70c5d3', '#60a2ce', '#507ac9', '#4356c5', '#423cc4', '#5b3abc', '#7138b6']
+  },
+  methods: {
+    selectStyle(data, event) {
+      document.querySelector('.angle-wrapper').style.display = 'block'
+      this.span1 = data.date;
+      this.span2 = data.count;
+      this.x = event.clientX - 100;
+      this.y = event.clientY - 60
+    },
+    outStyle() {
+      document.querySelector('.angle-wrapper').style.display = 'none'
+    },
+    thiscolor(x) {
+      if (x === 0) {
+        let i = parseInt(x / 2);
+        return this.color[0]
+      } else if (x < 2) {
+        return this.color[1]
+      } else if (x < 20) {
+        let i = parseInt(x / 2);
+        return this.color[i]
+      } else {
+        return this.color[9]
+      }
+    },
+  }
+});
+var apiurl = 'python-github-calendar-api-zfour.vercel.app' ? 'https://python-github-calendar-api-zfour.vercel.app/api?' : 'https://githubapi.ryanchristian.dev/user/'
+var githubapiurl = apiurl + gitcalendar.user;
+//canvas绘图
+function responsiveChart() {
+  let c = document.getElementById("gitcanvas");
+  if (c) {
+    let cmessage = document.getElementById("gitmessage");
+    let ctx = c.getContext("2d");
+    c.width = document.getElementById("gitcalendarcanvasbox").offsetWidth;
+    let linemaxwitdh = 0.96 * c.width / gitcalendar.data.length;
+    c.height = 9 * linemaxwitdh;
+    let lineminwitdh = 0.8 * linemaxwitdh;
+    let setposition = {
+      x: 0.02 * c.width,
+      y: 0.025 * c.width
+    };
+    for (let week in gitcalendar.data) {
+      weekdata = gitcalendar.data[week];
+      for (let day in weekdata) {
+        let dataitem = {
+          date: "",
+          count: "",
+          x: 0,
+          y: 0
+        };
+        gitcalendar.positionplusdata.push(dataitem);
+        ctx.fillStyle = gitcalendar.thiscolor(weekdata[day].count);
+        setposition.y = Math.round(setposition.y * 100) / 100;
+        dataitem.date = weekdata[day].date;
+        dataitem.count = weekdata[day].count;
+        dataitem.x = setposition.x;
+        dataitem.y = setposition.y;
+        ctx.fillRect(setposition.x, setposition.y, lineminwitdh, lineminwitdh);
+        setposition.y = setposition.y + linemaxwitdh
+      };
+      setposition.y = 0.025 * c.width;
+      setposition.x = setposition.x + linemaxwitdh
+    };
+    ctx.font = "600  Arial";
+    ctx.fillStyle = '#aaa';
+    ctx.fillText("日", 0, 1.9 * linemaxwitdh);
+    ctx.fillText("二", 0, 3.9 * linemaxwitdh);
+    ctx.fillText("四", 0, 5.9 * linemaxwitdh);
+    ctx.fillText("六", 0, 7.9 * linemaxwitdh);
+    let monthindexlist = c.width / 24;
+    for (let index in gitcalendar.monthchange) {
+      ctx.fillText(gitcalendar.monthchange[index], monthindexlist, 0.7 * linemaxwitdh);
+      monthindexlist = monthindexlist + c.width / 12
+    };
+    cmessage.onmousemove = function(event) {
+      document.querySelector('.angle-wrapper').style.display = 'none'
+    };
+    c.onmousemove = function(event) {
+      document.querySelector('.angle-wrapper').style.display = 'none'
+      getMousePos(c, event);
+    };
+
+    function getMousePos(canvas, event) {
+      var rect = canvas.getBoundingClientRect();
+      var x = event.clientX - rect.left * (canvas.width / rect.width);
+      var y = event.clientY - rect.top * (canvas.height / rect.height);
+      //console.log("x:"+x+",y:"+y);
+      for (let item of gitcalendar.positionplusdata) {
+        let lenthx = x - item.x;
+        let lenthy = y - item.y;
+        //console.log(lenthx,lenthy);
+        if (0 < lenthx && lenthx < lineminwitdh) {
+          if (0 < lenthy && lenthy < lineminwitdh) {
+            //console.log(item.date,item.count)
+            document.querySelector('.angle-wrapper').style.display = 'block'
+            gitcalendar.span1 = item.date;
+            gitcalendar.span2 = item.count;
+            gitcalendar.x = event.clientX - 100;
+            gitcalendar.y = event.clientY - 60
+          }
+        }
+        //if(0< x - item.x <lineminwitdh&&0< y - item.y <lineminwitdh){
+        //console.log(item.count,item.date);
+        //}
+      }
+    }
+  }
+}
+//数据统计算法
+function addlastmonth() {
+  if (gitcalendar.thisdayindex === 0) {
+    thisweekcore(52);
+    thisweekcore(51);
+    thisweekcore(50);
+    thisweekcore(49);
+    thisweekcore(48);
+    gitcalendar.thisweekdatacore += gitcalendar.firstdate[6].count;
+    gitcalendar.amonthago = gitcalendar.firstdate[6].date
+  } else {
+    thisweekcore(52);
+    thisweekcore(51);
+    thisweekcore(50);
+    thisweekcore(49);
+    thisweek2core();
+    gitcalendar.amonthago = gitcalendar.first2date[gitcalendar.thisdayindex - 1].date
+  }
+};
+
+function thisweek2core() {
+  for (let i = gitcalendar.thisdayindex - 1; i < gitcalendar.first2date.length; i++) {
+    gitcalendar.thisweekdatacore += gitcalendar.first2date[i].count
+  }
+};
+
+function thisweekcore(index) {
+  for (let item of gitcalendar.data[index]) {
+    gitcalendar.thisweekdatacore += item.count
+  }
+};
+
+function addlastweek() {
+  for (let item of gitcalendar.lastweek) {
+    gitcalendar.weekdatacore += item.count
+  }
+};
+
+function addbeforeweek() {
+  for (let i = gitcalendar.thisdayindex; i < gitcalendar.beforeweek.length; i++) {
+    gitcalendar.weekdatacore += gitcalendar.beforeweek[i].count
+  }
+};
+
+function addweek(data) {
+  if (gitcalendar.thisdayindex === 6) {
+    gitcalendar.aweekago = gitcalendar.lastweek[0].date;
+    addlastweek()
+  } else {
+    lastweek = data.contributions[51];
+    gitcalendar.aweekago = lastweek[gitcalendar.thisdayindex + 1].date;
+    addlastweek();
+    addbeforeweek()
+  }
+}
+
+fetch(githubapiurl)
+  .then(data => data.json())
+  .then(data => {
+    gitcalendar.data = data.contributions;
+    gitcalendar.total = data.total;
+    gitcalendar.first2date = gitcalendar.data[48];
+    gitcalendar.firstdate = gitcalendar.data[47];
+    gitcalendar.firstweek = data.contributions[0];
+    gitcalendar.lastweek = data.contributions[52];
+    gitcalendar.beforeweek = data.contributions[51];
+    gitcalendar.thisdayindex = gitcalendar.lastweek.length - 1;
+    gitcalendar.thisday = gitcalendar.lastweek[gitcalendar.thisdayindex].date;
+    gitcalendar.oneyearbeforeday = gitcalendar.firstweek[0].date;
+    gitcalendar.monthindex = gitcalendar.thisday.substring(5, 7) * 1;
+    gitcalendar.montharrbefore = gitcalendar.month.splice(gitcalendar.monthindex, 12 - gitcalendar.monthindex);
+    gitcalendar.monthchange = gitcalendar.montharrbefore.concat(gitcalendar.month);
+    addweek(data);
+    addlastmonth();
+    responsiveChart();
+  })
+  .catch(function(error) {
+    console.log(error);
+  });
+
+//手机版更换为svg绘制
+if (document.getElementById("gitcalendarcanvasbox") && document.getElementById("gitcalendarcanvasbox").offsetWidth < 500) {
+  gitcalendar.simplemode = false
+}
+
+//当改变窗口大小时重新绘制canvas
+window.onresize = function() {
+  if (gitcalendar.simplemode) responsiveChart()
+}
+
+//解决滚动滑轮时出现的标签显示
+window.onscroll = function() {
+  if (document.querySelector('.angle-wrapper')) {
+    document.querySelector('.angle-wrapper').style.display = 'none'
+  }
+};</script></div><script>window.addEventListener('load', () => {
+  const changeContent = (content) => {
+    if (content === '') return content
+
+    content = content.replace(/<img.*?src="(.*?)"?[^\>]+>/ig, '[图片]') // replace image link
+    content = content.replace(/<a[^>]+?href=["']?([^"']+)["']?[^>]*>([^<]+)<\/a>/gi, '[链接]') // replace url
+    content = content.replace(/<pre><code>.*?<\/pre>/gi, '[代码]') // replace code
+    content = content.replace(/<[^>]+>/g,"") // remove html tag
+
+    if (content.length > 150) {
+      content = content.substring(0,150) + '...'
+    }
+    return content
+  }
+
+  const getComment = () => {
+    const runTwikoo = () => {
+      twikoo.getRecentComments({
+        envId: 'https://twikoo-talks.vercel.app/',
+        region: '',
+        pageSize: 6,
+        includeReply: true
+      }).then(function (res) {
+        const twikooArray = res.map(e => {
+          return {
+            'content': changeContent(e.comment),
+            'avatar': e.avatar,
+            'nick': e.nick,
+            'url': e.url + '#' + e.id,
+            'date': new Date(e.created).toISOString()
+          }
+        })
+
+        saveToLocal.set('twikoo-newest-comments', JSON.stringify(twikooArray), 10/(60*24))
+        generateHtml(twikooArray)
+      }).catch(function (err) {
+        const $dom = document.querySelector('#card-newest-comments .aside-list')
+        $dom.innerHTML= "无法获取评论，请确认相关配置是否正确"
+      })
+    }
+
+    if (typeof twikoo === 'object') {
+      runTwikoo()
+    } else {
+      getScript('https://cdn.jsdelivr.net/npm/twikoo/dist/twikoo.all.min.js').then(runTwikoo)
+    }
+  }
+
+  const generateHtml = array => {
+    let result = ''
+
+    if (array.length) {
+      for (let i = 0; i < array.length; i++) {
+        result += '<div class=\'aside-list-item\'>'
+
+        if (true) {
+          const name = 'data-lazy-src'
+          result += `<a href='${array[i].url}' class='thumbnail'><img ${name}='${array[i].avatar}' alt='${array[i].nick}'></a>`
+        }
+        
+        result += `<div class='content'>
+        <a class='comment' href='${array[i].url}'>${array[i].content}</a>
+        <div class='name'><span>${array[i].nick} / </span><time datetime="${array[i].date}">${btf.diffDate(array[i].date, true)}</time></div>
+        </div></div>`
+      }
+    } else {
+      result += '没有评论'
+    }
+
+    let $dom = document.querySelector('#card-newest-comments .aside-list')
+    $dom.innerHTML= result
+    window.lazyLoadInstance && window.lazyLoadInstance.update()
+    window.pjax && window.pjax.refresh($dom)
+  }
+
+  const newestCommentInit = () => {
+    if (document.querySelector('#card-newest-comments .aside-list')) {
+      const data = saveToLocal.get('twikoo-newest-comments')
+      if (data) {
+        generateHtml(JSON.parse(data))
+      } else {
+        getComment()
+      }
+    }
+  }
+
+  newestCommentInit()
+  document.addEventListener('pjax:complete', newestCommentInit)
+})</script><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="/js/close.js"></script><script defer data-pjax src="/js/maopao.js"></script><script defer src="https://cdn.jsdelivr.net/gh/graingert/wow@1.3.0/dist/wow.min.js"></script><script defer data-pjax src="/js/wow-init.js"></script><script src="https://myhkw.cn/api/player/1618646380121" id="myhk" key="1618646380121" m="1"></script><script defer data-pjax src="https://cdn.jsdelivr.net/gh/xiabo2/CDN@latest/fishes.js"></script><script src="/js/moments.js"></script><canvas class="fireworks" mobile="false"></canvas><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/fireworks.min.js"></script><script id="canvas_nest" defer color="67,173,127" opacity="0.7" zindex="-1" count="99" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/canvas-nest.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful=!0,POWERMODE.shake=!1,POWERMODE.mobile=!1,document.body.addEventListener("input",POWERMODE)</script><script src="//code.tidio.co/bisrc3ghmylr0jd2ikrwcv8xp5i2nkwz.js" async></script><script>function onTidioChatApiReady() {
+  window.tidioChatApi.hide();
+  window.tidioChatApi.on("close", function() {
+    window.tidioChatApi.hide();
+  });
+}
+if (window.tidioChatApi) {
+  window.tidioChatApi.on("ready", onTidioChatApiReady);
+} else {
+  document.addEventListener("tidioChat-ready", onTidioChatApiReady);
+}
+
+var chatBtnFn = () => {
+  document.getElementById("chat_btn").addEventListener("click", function(){
+    window.tidioChatApi.show();
+    window.tidioChatApi.open();
+  });
+}
+chatBtnFn()</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css" media="print" onload='this.media="all"'><script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script><script src="https://cdn.jsdelivr.net/gh/metowolf/MetingJS@1.2/dist/Meting.min.js"></script><script src="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script><script>let pjaxSelectors = [
+  'title',
+  '#config-diff',
+  '#body-wrap',
+  '#rightside-config-hide',
+  '#rightside-config-show',
+  '#web_bg',
+  '.js-pjax'
+]
+
+if (false) {
+  pjaxSelectors.unshift('meta[property="og:image"]', 'meta[property="og:title"]', 'meta[property="og:url"]')
+}
+
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: false,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+  //- document.querySelectorAll("script[data-pjax], .pjax-reload script").forEach((item) => {
+  //-   const newScript = document.createElement("script");
+  //-   const content = item.text || item.textContent || item.innerHTML || "";
+  //-   Array.from(item.attributes).forEach((attr) =>
+  //-   newScript.setAttribute(attr.name, attr.value));
+  //-   newScript.appendChild(document.createTextNode(content));
+  //-   item.parentNode.replaceChild(newScript, item);
+  //- });
+
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+  typeof chatBtnFn === 'function' && chatBtnFn()
+  typeof panguInit === 'function' && panguInit()
+
+  if (typeof gtag === 'function') {
+    gtag('config', '', {'page_path': window.location.pathname});
+  }
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // Analytics
+  if (false) {
+    MtaH5.pgv()
+  }
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+
+  typeof preloader === 'object' && preloader.endLoading()
+})
+
+
+document.addEventListener('pjax:send', function () {
+  typeof preloader === 'object' && preloader.initLoading()
+  
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
+
+  typeof typed === 'object' && typed.destroy()
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+
+})
+
+document.addEventListener('pjax:error', (e) => {
+  if (e.request.status === 404) {
+    pjax.loadUrl('/404.html')
+  }
+})</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><script async src="//at.alicdn.com/t/font_2032782_8d5kxvn09md.js"></script></body></html>

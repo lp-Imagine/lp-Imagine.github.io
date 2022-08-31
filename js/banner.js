@@ -1,0 +1,1 @@
+"use strict";var webBg=document.getElementById("web_bg"),num=Math.floor(6*Math.random());webBg.style.backgroundImage="url(/img/banner/"+num+".jpg)";

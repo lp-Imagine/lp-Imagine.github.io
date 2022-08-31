@@ -1,0 +1,660 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>javascript 之 this 指向问题 | IMAGINE</title><meta name="keywords" content="javascript"><meta name="author" content="Peng"><meta name="copyright" content="Peng"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="前言关于 this 指向的问题，之前我一直都相信这样的说法：谁调用它，this 就指向谁。可是在开发中往往有一些不一样的情况；所以在这里说说我对 this 的一些认知和理解。 首先，我们要知道的是，this 的指向，是在函数被调用的时候被确定的。也就是在执行上下文被创建时确定的。  例 1： 123456function fn() &amp;#123;  var a &#x3D; 10;  console.log("><meta property="og:type" content="article"><meta property="og:title" content="javascript 之 this 指向问题"><meta property="og:url" content="http://imagineblog.host/vtadwe/index.html"><meta property="og:site_name" content="IMAGINE"><meta property="og:description" content="前言关于 this 指向的问题，之前我一直都相信这样的说法：谁调用它，this 就指向谁。可是在开发中往往有一些不一样的情况；所以在这里说说我对 this 的一些认知和理解。 首先，我们要知道的是，this 的指向，是在函数被调用的时候被确定的。也就是在执行上下文被创建时确定的。  例 1： 123456function fn() &amp;#123;  var a &#x3D; 10;  console.log("><meta property="og:locale" content="zh_CN"><meta property="og:image" content="https://z3.ax1x.com/2021/07/20/WttQfg.jpg"><meta property="article:published_time" content="2020-01-29T01:18:01.000Z"><meta property="article:modified_time" content="2022-08-31T08:04:19.377Z"><meta property="article:author" content="Peng"><meta property="article:tag" content="javascript"><meta name="twitter:card" content="summary"><meta name="twitter:image" content="https://z3.ax1x.com/2021/07/20/WttQfg.jpg"><link rel="shortcut icon" href="https://lovelijunyi.gitee.io/img/avatar.gif"><link rel="canonical" href="http://imagineblog.host/vtadwe/"><link rel="preconnect" href="//cdn.jsdelivr.net"><link rel="preconnect" href="//hm.baidu.com"><link rel="preconnect" href="//fonts.googleapis.com" crossorigin=""><link rel="preconnect" href="//busuanzi.ibruce.info"><meta name="google-site-verification" content="oUu4V6mTgP_CWLbYPUuUK0dzxO1r5vMPXCM6QXwiOv8"><meta name="baidu-site-verification" content="code-mOtCM04zOU"><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload='this.media="all"'><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.css" media="print" onload='this.media="all"'><script>var _hmt=_hmt||[];!function(){var e=document.createElement("script");e.src="https://hm.baidu.com/hm.js?6ede5b235a26f80d0b78937205b49f6f";var t=document.getElementsByTagName("script")[0];t.parentNode.insertBefore(e,t)}()</script><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Titillium+Web&amp;display=swap" media="print" onload='this.media="all"'><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":200},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"limitCount":50,"languages":{"author":"作者: Peng","link":"链接: ","source":"来源: IMAGINE","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。"}},
+  lightbox: 'mediumZoom',
+  Snackbar: {"chs_to_cht":"你已切换为繁体","cht_to_chs":"你已切换为简体","day_to_night":"你已切换为深色模式","night_to_day":"你已切换为浅色模式","bgLight":"#00c4b6","bgDark":"#121212","position":"top-right"},
+  source: {
+    jQuery: 'https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js',
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+    },
+    fancybox: {
+      js: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css'
+    }
+  },
+  isPhotoFigcaption: true,
+  islazyload: true,
+  isanchor: true
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE={isPost:!0,isHome:!1,isHighlightShrink:!1,isToc:!0,postUpdate:"2022-08-31 16:04:19"}</script><noscript><style>#nav{opacity:1}.justified-gallery img{opacity:1}#post-meta time,#recent-posts time{display:inline!important}</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          const now = new Date()
+          const hour = now.getHours()
+          const isNight = hour <= 6 || hour >= 18
+          if (t === undefined) isNight ? activateDarkMode() : activateLightMode()
+          else if (t === 'light') activateLightMode()
+          else activateDarkMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const fontSizeVal = saveToLocal.get('global-font-size')
+    if (fontSizeVal !== undefined) {
+      document.documentElement.style.setProperty('--global-font-size', fontSizeVal + 'px')
+    }
+    })(window)</script><link rel="stylesheet" href="/css/custom.css" media="defer" onload='this.media="all"'><link rel="stylesheet" href="//at.alicdn.com/t/font_2492407_3wz9sdgpeam.css"><style>#toggle-sidebar{bottom:80px}</style><link rel="stylesheet" href="/css/macblack.css"><link rel="stylesheet" href="/css/veditor.css"><link rel="stylesheet" href="/css/close.css"><link rel="stylesheet" href="/css/iconColor.css"><link rel="stylesheet" href="/css/copyright.css"><link rel="stylesheet" href="/css/notice.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/HexoPlusPlus/HexoPlusPlus@latest/talk.css"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" media="defer" onload='this.media="all"'><script src="https://cdn.jsdelivr.net/npm/echarts@4.7.0/dist/echarts.min.js"></script><script src="https://cdn.jsdelivr.net/npm/echarts@4.7.0/map/js/china.js"></script><script src="https://cdn.jsdelivr.net/gh/HexoPlusPlus/HexoPlusPlus@latest/talk_user.js"></script><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/l-lin/font-awesome-animation/dist/font-awesome-animation.min.css" media="defer" onload='this.media="all"'><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-butterfly-tag-plugins-plus@latest/lib/tag_plugins.min.css" media="defer" onload='this.media="all"'><script async src="https://cdn.jsdelivr.net/npm/hexo-butterfly-tag-plugins-plus@latest/lib/carousel-touch.min.js"></script><meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="IMAGINE" type="application/atom+xml"></head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="author-avatar"><img class="avatar-img" data-lazy-src="/img/avatar.jpg" onerror='onerror=null,src="/img/friend_404.gif"' alt="avatar"></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">37</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">标签</div><div class="length-num">20</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">分类</div><div class="length-num">14</div></a></div></div></div><hr><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw iconfont icon-zhuye"></i> <span>主页</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw iconfont icon-mulu1"></i> <span>目录</span><i class="fas fa-chevron-down expand hide"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/archives/"><i class="fa-fw iconfont icon-guidang1"></i> <span>归档</span></a></li><li><a class="site-page" href="/tags/"><i class="fa-fw iconfont icon-biaoqian"></i> <span>标签</span></a></li><li><a class="site-page" href="/categories/"><i class="fa-fw iconfont icon-category"></i> <span>分类</span></a></li><li><a class="site-page" href="/collect/"><i class="fa-fw iconfont icon-shoucang"></i> <span>收藏</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw iconfont icon-yule"></i> <span>清单</span><i class="fas fa-chevron-down expand hide"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/playlist/"><i class="fa-fw iconfont icon-gedan"></i> <span>歌单</span></a></li><li><a class="site-page" href="/books/"><i class="fa-fw iconfont icon-yuedumoshi"></i> <span>书单</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw iconfont icon-caozuojiemiantubiao---_gongju"></i> <span>工具</span><i class="fas fa-chevron-down expand hide"></i></a><ul class="menus_item_child"><li><a class="site-page" target="_blank" rel="noopener" href="https://imgtu.com/"><i class="fa-fw iconfont icon-cloud"></i> <span>imgtu</span></a></li><li><a class="site-page" target="_blank" rel="noopener" href="https://www.leancloud.cn/"><i class="fa-fw iconfont icon-pinglun"></i> <span>LeanCloud</span></a></li><li><a class="site-page" target="_blank" rel="noopener" href="https://www.cloudflare.com/zh-cn/"><i class="fa-fw iconfont icon-cloudcomputing"></i> <span>Cloudflare</span></a></li><li><a class="site-page" target="_blank" rel="noopener" href="https://vercel.com/lp-imagine"><i class="fa-fw iconfont icon-webx"></i> <span>Vercel</span></a></li><li><a class="site-page" target="_blank" rel="noopener" href="https://cloud.mongodb.com/v2#/org/610751ff4218af3732524482/projects"><i class="fa-fw iconfont icon-mongdbwapian"></i> <span>MongoDB</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw iconfont icon-guanyu"></i> <span>关于</span><i class="fas fa-chevron-down expand hide"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/about/"><i class="fa-fw iconfont icon-iconzhengli-"></i> <span>关于我</span></a></li><li><a class="site-page" href="/message/"><i class="fa-fw iconfont icon-liuyanmoban"></i> <span>留言板</span></a></li><li><a class="site-page" href="/talks/"><i class="fa-fw iconfont icon-fengche"></i> <span>说说</span></a></li><li><a class="site-page" href="/link/"><i class="fa-fw iconfont icon-youqinglianjie"></i> <span>友情链接</span></a></li><li><a class="site-page" href="/friends_link"><i class="fa-fw iconfont icon-pengyouquan"></i> <span>友链朋友圈</span></a></li><li><a class="site-page" target="_blank" rel="noopener" href="https://imagine-nav.vercel.app/"><i class="fa-fw iconfont icon-daohang1"></i> <span>导航站</span></a></li><li><a class="site-page" target="_blank" rel="noopener" href="https://imagine.imagineblog.workers.dev/hpp/admin/login"><i class="fa-fw iconfont icon-xiezuo"></i> <span>后台</span></a></li></ul></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image:url(https://z3.ax1x.com/2021/07/20/WttQfg.jpg)"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">IMAGINE</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw iconfont icon-zhuye"></i> <span>主页</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw iconfont icon-mulu1"></i> <span>目录</span><i class="fas fa-chevron-down expand hide"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/archives/"><i class="fa-fw iconfont icon-guidang1"></i> <span>归档</span></a></li><li><a class="site-page" href="/tags/"><i class="fa-fw iconfont icon-biaoqian"></i> <span>标签</span></a></li><li><a class="site-page" href="/categories/"><i class="fa-fw iconfont icon-category"></i> <span>分类</span></a></li><li><a class="site-page" href="/collect/"><i class="fa-fw iconfont icon-shoucang"></i> <span>收藏</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw iconfont icon-yule"></i> <span>清单</span><i class="fas fa-chevron-down expand hide"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/playlist/"><i class="fa-fw iconfont icon-gedan"></i> <span>歌单</span></a></li><li><a class="site-page" href="/books/"><i class="fa-fw iconfont icon-yuedumoshi"></i> <span>书单</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw iconfont icon-caozuojiemiantubiao---_gongju"></i> <span>工具</span><i class="fas fa-chevron-down expand hide"></i></a><ul class="menus_item_child"><li><a class="site-page" target="_blank" rel="noopener" href="https://imgtu.com/"><i class="fa-fw iconfont icon-cloud"></i> <span>imgtu</span></a></li><li><a class="site-page" target="_blank" rel="noopener" href="https://www.leancloud.cn/"><i class="fa-fw iconfont icon-pinglun"></i> <span>LeanCloud</span></a></li><li><a class="site-page" target="_blank" rel="noopener" href="https://www.cloudflare.com/zh-cn/"><i class="fa-fw iconfont icon-cloudcomputing"></i> <span>Cloudflare</span></a></li><li><a class="site-page" target="_blank" rel="noopener" href="https://vercel.com/lp-imagine"><i class="fa-fw iconfont icon-webx"></i> <span>Vercel</span></a></li><li><a class="site-page" target="_blank" rel="noopener" href="https://cloud.mongodb.com/v2#/org/610751ff4218af3732524482/projects"><i class="fa-fw iconfont icon-mongdbwapian"></i> <span>MongoDB</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw iconfont icon-guanyu"></i> <span>关于</span><i class="fas fa-chevron-down expand hide"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/about/"><i class="fa-fw iconfont icon-iconzhengli-"></i> <span>关于我</span></a></li><li><a class="site-page" href="/message/"><i class="fa-fw iconfont icon-liuyanmoban"></i> <span>留言板</span></a></li><li><a class="site-page" href="/talks/"><i class="fa-fw iconfont icon-fengche"></i> <span>说说</span></a></li><li><a class="site-page" href="/link/"><i class="fa-fw iconfont icon-youqinglianjie"></i> <span>友情链接</span></a></li><li><a class="site-page" href="/friends_link"><i class="fa-fw iconfont icon-pengyouquan"></i> <span>友链朋友圈</span></a></li><li><a class="site-page" target="_blank" rel="noopener" href="https://imagine-nav.vercel.app/"><i class="fa-fw iconfont icon-daohang1"></i> <span>导航站</span></a></li><li><a class="site-page" target="_blank" rel="noopener" href="https://imagine.imagineblog.workers.dev/hpp/admin/login"><i class="fa-fw iconfont icon-xiezuo"></i> <span>后台</span></a></li></ul></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">javascript 之 this 指向问题</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2020-01-29T01:18:01.000Z" title="发表于 2020-01-29 09:18:01">2020-01-29</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2022-08-31T08:04:19.377Z" title="更新于 2022-08-31 16:04:19">2022-08-31</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/javascript/">javascript</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">2k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>7分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>关于 this 指向的问题，之前我一直都相信这样的说法：谁调用它，this 就指向谁。可是在开发中往往有一些不一样的情况；所以在这里说说我对 this 的一些认知和理解。</p><p>首先，我们要知道的是，<strong>this 的指向，是在函数被调用的时候被确定的</strong>。也就是在执行上下文被创建时确定的。</p><hr><p><strong>例 1：</strong></p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fn</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> a = <span class="number">10</span>;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="built_in">this</span>); <span class="comment">// window</span></span><br><span class="line">  <span class="built_in">console</span>.log(<span class="built_in">this</span>.a); <span class="comment">// undefined</span></span><br><span class="line">&#125;</span><br><span class="line">fn();</span><br></pre></td></tr></table></figure><p>按照我们上面说的 this 最终指向的是调用它的对象，这里的函数 fn 实际是被 Window 对象所点出来的，如下代码可以得到证明。</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fn</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> a = <span class="number">10</span>;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="built_in">this</span>); <span class="comment">// window</span></span><br><span class="line">  <span class="built_in">console</span>.log(<span class="built_in">this</span>.a); <span class="comment">// undefined</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">window</span>.fn();</span><br></pre></td></tr></table></figure><p>其实 alert 也是 window 的一个属性，也是 window 点出来的。</p><hr><p><strong>例 2：</strong></p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> obj = &#123;</span><br><span class="line">	a = <span class="number">10</span>;</span><br><span class="line">	fn:<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">		<span class="built_in">console</span>.log(<span class="built_in">this</span>); <span class="comment">// &#123;a: 10, fn: ƒ&#125;</span></span><br><span class="line">		<span class="built_in">console</span>.log(<span class="built_in">this</span>.a); <span class="comment">// 10</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line">obj.fn();</span><br></pre></td></tr></table></figure><p>这里的 this 指向的对象是 obj,因为调用这个 fn 是通过 obj.fn()执行的，那么自然指向的就是对象 obj，还有就是，this 的指向在函数创建的时候是决定不了的，只有在调用的时候才能决定，谁调用的就指向谁。</p><p>其实上面两个例子也并不是很准确，下面看看接下来的几个例子。</p><hr><p><strong>例 3：</strong></p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> obj = &#123;</span><br><span class="line">	a = <span class="number">10</span>;</span><br><span class="line">	fn: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">		<span class="built_in">console</span>.log(<span class="built_in">this</span>.a); <span class="comment">// 10</span></span><br><span class="line">		<span class="built_in">console</span>.log(<span class="built_in">this</span>); <span class="comment">// &#123;a: 10, fn: ƒ&#125;</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">window</span>.obj.fn();</span><br></pre></td></tr></table></figure><p>例 3 和例 2 几乎是一样的，但是这里的 this 为什么不是指向 window，如果按照上面的理论，最终 this 指向的应该是调用它的对象 window,而不是 obj。<br>好，话不多说，暂且先不说为什么 this 没有指向 window，我们再来看一段代码。</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> obj = &#123;</span><br><span class="line">  a: <span class="number">10</span>,</span><br><span class="line">  b: &#123;</span><br><span class="line">    a: <span class="number">20</span>,</span><br><span class="line">    fn: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">      <span class="built_in">console</span>.log(<span class="built_in">this</span>); <span class="comment">// &#123;a: 20, fn: ƒ&#125;</span></span><br><span class="line">      <span class="built_in">console</span>.log(<span class="built_in">this</span>.a); <span class="comment">// 20</span></span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">obj.b.fn();</span><br></pre></td></tr></table></figure><p>这里同样也是对象 obj 点出来的，但是 this 并没有执行它，那是不是之前说的都是错误的呢？其实只能说一开始说的不准确；接下来要补充的才是重点。</p><p><strong>情况一</strong>：如果一个函数中有 this，但是它没有被上一级的对象所调用，在非严格模式下那么 this 指向的就是 window。<br><strong>情况二</strong>：如果一个函数中有 this，这个函数有被上一级的对象所调用，那么 this 指向的就是上一级的对象。<br><strong>情况三</strong>：如果一个函数中有 this，这个函数包含多个对象，<strong>尽管这个函数是被最外层的对象所调用，this 指向的也只是它上一级的对象</strong>，例 3 就可以证明这一点，接下来可以再来几个例子来说明。</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> obj = &#123;</span><br><span class="line">  a: <span class="number">10</span>,</span><br><span class="line">  b: &#123;</span><br><span class="line">    fn: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">      <span class="built_in">console</span>.log(<span class="built_in">this</span>); <span class="comment">// &#123;fn: ƒ&#125;</span></span><br><span class="line">      <span class="built_in">console</span>.log(<span class="built_in">this</span>.a); <span class="comment">// undefined</span></span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">obj.b.fn();</span><br></pre></td></tr></table></figure><p>尽管对象 b 中没有属性 a，这个 this 指向的也是对象 b，因为 this 只会指向它的上一级对象，不管这个对象中有没有 this 要的东西。</p><hr><p><strong>还有比较特殊的情况，例 4</strong>：</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> obj = &#123;</span><br><span class="line">  a: <span class="number">10</span>,</span><br><span class="line">  b: &#123;</span><br><span class="line">    a: <span class="number">20</span>,</span><br><span class="line">    fn: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">      <span class="built_in">console</span>.log(<span class="built_in">this</span>.a); <span class="comment">//undefined</span></span><br><span class="line">      <span class="built_in">console</span>.log(<span class="built_in">this</span>); <span class="comment">// window</span></span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> fun = obj.b.fn;</span><br><span class="line">fun();</span><br></pre></td></tr></table></figure><p>这里的 this 指向的是 window，到这里是不是搞得有些蒙了？其实就是还有句话，<strong>this 永远指向的是最后调用它的对象，也就是看它执行的时候是谁调用的</strong>；例 4 中虽然函数 fn 是被对象 b 所引用，但是在将 fn 赋值给变量 fun 的时候并没用执行，所以最终指向的是 window。</p><h2 id="构造函数-this"><a href="#构造函数-this" class="headerlink" title="构造函数 this"></a>构造函数 this</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">fnuction <span class="function"><span class="title">Fun</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">	<span class="built_in">this</span>.str = <span class="string">&quot;构造函数&quot;</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> a = <span class="keyword">new</span> Fun();</span><br><span class="line"><span class="built_in">console</span>.log(a.str);  <span class="comment">// 构造函数</span></span><br></pre></td></tr></table></figure><p>这里之所以对象 a 可以点出函数 Fun 里面的 str 是因为 new 关键字可以改变 this 的指向，将这个 this 指向对象 a，这里用变量 a 创建了一个 Fun 的实例，相当于复制了一份 Fun 到对象 a 里面，此时只是创建好，并没有执行，而调用这个函数 Fun 的是对象 a，那么 this 指向的自然就是对象 a，那么为什么对象 a 中会有 str，因为已经复制了一份 Fun 函数到对象 a 中，用了 new 关键字就相当于复制了一份。</p><hr><p>除此之外，我们还可以自行改变 this 的指向，在 javascript 中提供了<strong>call，apply，bind</strong>来解决，一般用来指定 this 的环境。<br>例如，我们通常会遇到这样的问题</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = &#123;</span><br><span class="line">  name: <span class="string">&quot;张三&quot;</span>,</span><br><span class="line">  fn: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="built_in">this</span>.name);</span><br><span class="line">    <span class="comment">// console.log(this);</span></span><br><span class="line">  &#125;,</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">var</span> b = a.fn;</span><br><span class="line"><span class="built_in">console</span>.log(b()); <span class="comment">// undefined</span></span><br></pre></td></tr></table></figure><p>我们想打印对象 a 里面的 name 却打印出来 undefined 是什么情况？如果直接执行 a.fn()是可以的。</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = &#123;</span><br><span class="line">  name: <span class="string">&quot;张三&quot;</span>,</span><br><span class="line">  fn: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="built_in">this</span>.name);</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;;</span><br><span class="line"><span class="built_in">console</span>.log(a.fn()); <span class="comment">// 张三</span></span><br></pre></td></tr></table></figure><p>这里能够打印是因为这里的 this 指向的是函数 a，那为什么上面的不是指向 a 呢？那么为了可以达到目的，就需要通过以下方法实现。</p><h2 id="1、call"><a href="#1、call" class="headerlink" title="1、call()"></a>1、call()</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = &#123;</span><br><span class="line">  name: <span class="string">&quot;张三&quot;</span>,</span><br><span class="line">  fn: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="built_in">this</span>.name); <span class="comment">// 张三</span></span><br><span class="line">  &#125;,</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">var</span> b = a.fn;</span><br><span class="line">b.call(a);</span><br></pre></td></tr></table></figure><p>通过 call 方法，给第一个参数添加要把 b 添加到哪个环境中，简单来说，this 就会指向那个对象。<br>call 方法除了第一个参数以外还可以添加多个参数，如下：</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = &#123;</span><br><span class="line">  name: <span class="string">&quot;张三&quot;</span>,</span><br><span class="line">  fn: <span class="function"><span class="keyword">function</span> (<span class="params">m, n</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="built_in">this</span>.name); <span class="comment">//张三</span></span><br><span class="line">    <span class="built_in">console</span>.log(m + n); <span class="comment">// 3</span></span><br><span class="line">  &#125;,</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">var</span> b = a.fn;</span><br><span class="line">b.call(a, <span class="number">1</span>, <span class="number">2</span>);</span><br></pre></td></tr></table></figure><hr><h2 id="2、apply"><a href="#2、apply" class="headerlink" title="2、apply()"></a>2、apply()</h2><p>apply 方法和 call 方法有些相似，它也可以改变 this 的指向</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = &#123;</span><br><span class="line">  name: <span class="string">&quot;张三&quot;</span>,</span><br><span class="line">  fn: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="built_in">this</span>.name); <span class="comment">//张三</span></span><br><span class="line">  &#125;,</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">var</span> b = a.fn;</span><br><span class="line">b.apply(a);</span><br></pre></td></tr></table></figure><p>同样 apply 也可以有多个参数，但是不同的是，第二个参数必须是一个数组，如下：</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = &#123;</span><br><span class="line">  name: <span class="string">&quot;张三&quot;</span>,</span><br><span class="line">  fn: <span class="function"><span class="keyword">function</span> (<span class="params">m, n</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="built_in">this</span>.name); <span class="comment">//张三</span></span><br><span class="line">    <span class="built_in">console</span>.log(m + n); <span class="comment">//30</span></span><br><span class="line">  &#125;,</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">var</span> b = a.fn;</span><br><span class="line">b.apply(a, [<span class="number">10</span>, <span class="number">20</span>]);</span><br></pre></td></tr></table></figure><p>或者</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = &#123;</span><br><span class="line">  name: <span class="string">&quot;张三&quot;</span>,</span><br><span class="line">  fn: <span class="function"><span class="keyword">function</span> (<span class="params">m, n</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="built_in">this</span>.name); <span class="comment">//张三</span></span><br><span class="line">    <span class="built_in">console</span>.log(m + n); <span class="comment">//30</span></span><br><span class="line">  &#125;,</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">var</span> b = a.fn;</span><br><span class="line"><span class="keyword">var</span> arr = [<span class="number">10</span>, <span class="number">20</span>];</span><br><span class="line">b.apply(a, arr);</span><br></pre></td></tr></table></figure><blockquote><p>注意：如果 call 和 apply 的第一个参数是 null,那么 this 指向的是 window 对象</p></blockquote><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = &#123;</span><br><span class="line">  name: <span class="string">&quot;张三&quot;</span>,</span><br><span class="line">  fn: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="built_in">this</span>); <span class="comment">//Window</span></span><br><span class="line">  &#125;,</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">var</span> b = a.fn;</span><br><span class="line">b.apply(<span class="literal">null</span>);</span><br></pre></td></tr></table></figure><hr><h2 id="3、bind"><a href="#3、bind" class="headerlink" title="3、bind()"></a>3、bind()</h2><p>bind 方法和 call、apply 方法有些不同，但不管怎么说它们都是用来改变 this 的指向。<br>先来说说它们的不同吧。</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = &#123;</span><br><span class="line">  name: <span class="string">&quot;张三&quot;</span>,</span><br><span class="line">  fn: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="built_in">this</span>.name);</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">var</span> b = a.fn;</span><br><span class="line">b.bind(a);</span><br></pre></td></tr></table></figure><p>我们发现代码没有打印，对，这就是 bind 和 call、apply 方法的不同，实际上 bind（）返回的是一个修改过后的函数。</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = &#123;</span><br><span class="line">  name: <span class="string">&quot;张三&quot;</span>,</span><br><span class="line">  fn: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="built_in">this</span>.name);</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">var</span> b = a.fn;</span><br><span class="line"><span class="keyword">var</span> c = b.bind(a);</span><br><span class="line"><span class="built_in">console</span>.log(c); <span class="comment">//ƒ ()&#123;console.log(this.name);&#125;</span></span><br></pre></td></tr></table></figure><p>那么我们现在执行一下函数 c 看看，能不能打印出对象 a 里面的 name</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = &#123;</span><br><span class="line">  name: <span class="string">&quot;张三&quot;</span>,</span><br><span class="line">  fn: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="built_in">this</span>.name); <span class="comment">// 张三</span></span><br><span class="line">  &#125;,</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">var</span> b = a.fn;</span><br><span class="line"><span class="keyword">var</span> c = b.bind(a);</span><br><span class="line">c();</span><br></pre></td></tr></table></figure><p>OK!同样 bind 也可以有多个参数，并且参数可以执行的时候再次添加，但是要注意的是，参数是按照形参的顺序进行的。</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = &#123;</span><br><span class="line">  name: <span class="string">&quot;张三&quot;</span>,</span><br><span class="line">  fn: <span class="function"><span class="keyword">function</span> (<span class="params">num1, num2, num3</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="built_in">this</span>.name); <span class="comment">//张三</span></span><br><span class="line">    <span class="built_in">console</span>.log(num1, num2, num3); <span class="comment">// 10  1  2</span></span><br><span class="line">  &#125;,</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">var</span> b = a.fn;</span><br><span class="line"><span class="keyword">var</span> c = b.bind(a, <span class="number">10</span>);</span><br><span class="line">c(<span class="number">1</span>, <span class="number">2</span>);</span><br></pre></td></tr></table></figure><hr><blockquote><p>总结：call 和 apply 都是改变上下文中的 this 并立即执行这个函数，bind 方法可以让对应的函数想什么时候调用就什么调用，并且可以将参数在执行的时候添加，这是它们的区别，根据自己实际情况来选择使用。</p></blockquote></article><div class="post-copyright"><div class="post-copyright__title"><span class="post-copyright-info"><h>javascript 之 this 指向问题</h></span></div><div class="post-copyright__type"><span class="post-copyright-info"><a href="http://imagineblog.host/vtadwe/">http://imagineblog.host/vtadwe/</a></span></div><div class="post-copyright-m"><div class="post-copyright-m-info"><div class="post-copyright-a" style="display:inline-block;width:120px"><h>作者</h><div class="post-copyright-cc-info"><h>Peng</h></div></div><div class="post-copyright-c" style="display:inline-block;width:120px"><h>发布于</h><div class="post-copyright-cc-info"><h>2020-01-29</h></div></div><div class="post-copyright-u" style="display:inline-block;width:120px"><h>更新于</h><div class="post-copyright-cc-info"><h>2022-08-31</h></div></div><div class="post-copyright-c" style="display:inline-block;width:120px"><h>许可协议</h><div class="post-copyright-cc-info"><a class="icon" rel="noopener" target="_blank" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a><a rel="noopener" target="_blank" title="CC BY 4.0" href="https://creativecommons.org/licenses/by/4.0/deed.zh">CC BY 4.0</a></div></div></div></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/javascript/">javascript</a></div><div class="post_share"><div class="social-share" data-image="https://z3.ax1x.com/2021/07/20/WttQfg.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload='this.media="all"'><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><div class="post-reward"><div class="reward-button button--animated"><i class="fas fa-qrcode"></i> 打赏</div><div class="reward-main"><ul class="reward-all"><li class="reward-item"><a href="/img/wechat.png" target="_blank"><img class="post-qr-code-img" data-lazy-src="/img/wechat.png" alt="wechat"></a><div class="post-qr-code-desc">wechat</div></li></ul></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-full"><a href="/hczb69/"><img class="prev-cover" data-lazy-src="https://z3.ax1x.com/2021/07/20/WttGXn.png" onerror='onerror=null,src="/img/banner/02.jpg"' alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">vue 组件—常用选项(methods、watch、filters、props、computed)</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i> <span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/ctko47/" title="javascript 正则表达式校验"><img class="cover" data-lazy-src="https://z3.ax1x.com/2021/07/20/WttPYD.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-04-20</div><div class="title">javascript 正则表达式校验</div></div></a></div><div><a href="/cy0ics/" title="使用 NProgress 为页面/接口添加加载进度条"><img class="cover" data-lazy-src="https://z3.ax1x.com/2021/07/20/Wtt86s.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-06-15</div><div class="title">使用 NProgress 为页面/接口添加加载进度条</div></div></a></div><div><a href="/ddv8fu/" title="Promise(三)：拓展方法实现"><img class="cover" data-lazy-src="https://z3.ax1x.com/2021/07/20/WttE6A.gif" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-04-14</div><div class="title">Promise(三)：拓展方法实现</div></div></a></div><div><a href="/df4477/" title="JS 声明提升"><img class="cover" data-lazy-src="https://z3.ax1x.com/2021/07/20/WttnTf.gif" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-02-24</div><div class="title">JS 声明提升</div></div></a></div><div><a href="/ehgc3o/" title="JS forEach 踩坑"><img class="cover" data-lazy-src="https://z3.ax1x.com/2021/07/20/WtYazd.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-04-21</div><div class="title">JS forEach 踩坑</div></div></a></div><div><a href="/lomf3x/" title="Chrome Extension（扩展程序）开发"><img class="cover" data-lazy-src="https://z3.ax1x.com/2021/07/20/WtYmiF.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-05-21</div><div class="title">Chrome Extension（扩展程序）开发</div></div></a></div></div></div><hr><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i> <span>评论</span></div></div><div class="comment-wrap"><div><div id="twikoo-wrap"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0-this"><span class="toc-number">2.</span> <span class="toc-text">构造函数 this</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1%E3%80%81call"><span class="toc-number">3.</span> <span class="toc-text">1、call()</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2%E3%80%81apply"><span class="toc-number">4.</span> <span class="toc-text">2、apply()</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3%E3%80%81bind"><span class="toc-number">5.</span> <span class="toc-text">3、bind()</span></a></li></ol></div></div></div></div></main><footer id="footer"><div class="github-div"><div></div><div class="github-badge"><a style="color:#fff" rel="external nofollow noopener noreferrer" href="https://hexo.io/" target="_blank" title="由 Hexo 强力驱动" data-pjax-state=""><span class="badge-subject">🌴Powered</span><span class="badge-value bg-blue">Hexo</span></a></div><div class="github-badge"><a style="color:#fff" rel="external nofollow noopener noreferrer" href="https://imgtu.com/" target="_blank" title="本站图片使用路过图床" data-pjax-state=""><span class="badge-subject">🌈Drawing bed</span><span class="badge-value bg-brightgreen">imagtu</span></a></div><div class="github-badge"><a style="color:#fff" rel="external nofollow noopener noreferrer" href="https://github.com/" target="_blank" title="静态网页托管于 GitHub Pages" data-pjax-state=""><span class="badge-subject">📖Pages</span><span class="badge-value bg-brightgreen">GitHub</span></a></div><div class="github-badge"><a style="color:#fff" rel="external nofollow noopener noreferrer" href="https://www.jsdelivr.com/" target="_blank" title="jsDelivr 提供 CDN 加速服务" data-pjax-state=""><span class="badge-subject">🎈CDN</span><span class="badge-value bg-orange">jsDelivr</span></a></div><div class="github-badge"><a style="color:#fff" rel="external nofollow noopener noreferrer" href="https://vercel.com/" target="_blank" title="vercel 提供 CDN 加速服务" data-pjax-state=""><span class="badge-subject">🎃Server</span><span class="badge-value bg-orange">vercel</span></a></div><div class="github-badge"><a style="color:#fff" rel="external nofollow noopener noreferrer" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" title="本站点采用知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议进行许可" data-pjax-state=""><span class="badge-subject"><i class="fa fa-copyright"></i></span><span class="badge-value bg-gradient">BY-NC-SA 4.0</span></a></div><div class="github-badge"><a style="color:#fff" rel="external nofollow noopener noreferrer" href="https://github.com/jerryc127/hexo-theme-butterfly" target="_blank" title="主题" data-pjax-state=""><span class="badge-subject">🎨Theme</span><span class="badge-value bg-blueviolet">Butterfly</span></a></div><div class="github-badge"><a style="color:#fff" rel="external nofollow noopener noreferrer" href="https://beian.miit.gov.cn/" target="_blank" title="本站点已通过工信部ICP备案" data-pjax-state=""><span class="badge-subject">赣ICP备</span><span class="badge-value bg-gradient">2022000236号-1</span></a></div><div class="github-badge"><a style="color:#fff" rel="external nofollow noopener noreferrer" href="http://imagineblog.host" target="_blank" title="copyright" data-pjax-state=""><span class="badge-subject">📑copyright</span><span class="badge-value bg-gradient"><div class="copyright">&copy;2020 - 2022<i id="heartbeat" class="fa fas fa-heartbeat"></i> Peng</div></span></a></div><div class="github-badge"><span class="badge-subject">安全运行</span><a style="text-decoration:none;color:#fff;padding:4px 4px 4px 6px;border-top-right-radius:4px;border-bottom-right-radius:4px;min-width:180px;display:inline-block" id="running-time" rel="external nofollow noopener noreferrer" href="" target="_blank" title="网站运行时间" data-pjax-state=""></a></div><div id="running-time"><script>//- setInterval(()=>{let create_time=Math.round(new Date('2020-02-18 00:00:00').getTime()/1000);let timestamp=Math.round((new Date().getTime()+8*60*60*1000)/1000);let second=timestamp-create_time;let time=new Array(0,0,0,0,0);if(second>=365*24*3600){time[0]=parseInt(second/(365*24*3600));second%=365*24*3600;}if(second>=24*3600){time[1]=parseInt(second/(24*3600));second%=24*3600;}if(second>=3600){time[2]=parseInt(second/3600);second%=3600;}if(second>=60){time[3]=parseInt(second/60);second%=60;}if(second>0){time[4]=second;}currentTimeHtml=time[0]+'年'+time[1]+'天'+time[2]+'时'+time[3]+'分'+time[4]+'秒';document.getElementById("running-time").innerHTML=currentTimeHtml;},1000);
+setInterval(()=>{
+  let create_time=Math.round(new Date('2020-01-03 00:00:00').getTime()/1000);
+  let timestamp=Math.round((new Date().getTime()+8*60*60*1000)/1000);
+  let second=timestamp-create_time;
+  let time=new Array(0,0,0,0,0);
+  if(second>=365*24*3600){
+    time[0]=parseInt(second/(365*24*3600));
+    second%=365*24*3600;
+  }
+  if(second>=24*3600){
+    time[1]=parseInt(second/(24*3600));
+    second%=24*3600;
+  }
+  if(second>=3600){
+    time[2]=parseInt(second/3600);second%=3600;
+  }
+  if(second>=60){
+    time[3]=parseInt(second/60);second%=60;
+  }
+  if(second>0){
+    time[4]=second;
+  }
+  currentTimeHtml=`<span style="color:#fff;"><span style="color:#000">${time[0]}</span> 年 <span style="color:#9253A8">${time[1]}</span> 天 <span style="color:#50ABF1">${time[2]}</span> 时<span style="color:#666">${time[3]}</span> 分<span style="color:red">${time[4]}</span> 秒</span>`;
+  document.getElementById("running-time").innerHTML=currentTimeHtml;
+},1000);</script></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="iconfont icon-yuedumoshi"></i></button><button id="font-plus" type="button" title="放大字体"><i class="fas fa-plus"></i></button><button id="font-minus" type="button" title="缩小字体"><i class="fas fa-minus"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="chat_btn" type="button" title="SMS"><i class="iconfont icon-sms"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="iconfont icon-pinglun"></i></a><button id="go-up" type="button" title="回到顶部"><i class="iconfont icon-backtop"></i></button></div></div><div id="local-search"><div class="search-dialog"><div class="search-dialog__title" id="local-search-title">本地搜索</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"></div></div></div><hr><div id="local-search-results"></div><span class="search-close-button"><i class="fas fa-times"></i></span></div><div id="search-mask"></div></div><div><script src="https://cdn.jsdelivr.net/npm/vue@2.6.11"></script><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/medium-zoom/dist/medium-zoom.min.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js"></script><script src="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.js"></script><script>function panguFn () {
+  if (typeof pangu === 'object') pangu.autoSpacingPage()
+  else {
+    getScript('https://cdn.jsdelivr.net/npm/pangu/dist/browser/pangu.min.js')
+      .then(() => {
+        pangu.autoSpacingPage()
+      })
+  }
+}
+
+function panguInit () {
+  if (true){
+    GLOBAL_CONFIG_SITE.isPost && panguFn()
+  } else {
+    panguFn()
+  }
+}
+
+document.addEventListener('DOMContentLoaded', panguInit)</script><script src="/js/search/local-search.js"></script><div class="js-pjax"><script>if (document.getElementsByClassName('mermaid').length) {
+  if (window.mermaidJsLoad) mermaid.init()
+  else {
+    getScript('https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js').then(() => {
+      window.mermaidJsLoad = true
+      mermaid.initialize({
+        theme: 'default',
+      })
+      true && mermaid.init()
+    })
+  }
+}</script><script>(()=>{
+  const $countDom = document.getElementById('twikoo-count')
+  const init = () => {
+    let initData = {
+      el: '#twikoo-wrap',
+      envId: 'https://twikoo-talks.vercel.app/',
+      region: ''
+    }
+
+    if (false) {
+      const otherData = false
+      initData = Object.assign(initData, otherData)
+    }
+    
+    twikoo.init(initData)
+  }
+
+  const getCount = () => {
+    twikoo.getCommentsCount({
+      envId: 'https://twikoo-talks.vercel.app/',
+      region: '',
+      urls: [window.location.pathname],
+      includeReply: false
+    }).then(function (res) {
+      $countDom.innerText = res[0].count
+    }).catch(function (err) {
+      console.error(err);
+    });
+  }
+
+  const loadTwikoo = (bool = false) => {
+    if (typeof twikoo === 'object') {
+      init()
+      bool && $countDom && setTimeout(getCount,0)
+    } else {
+      getScript('https://cdn.jsdelivr.net/npm/twikoo/dist/twikoo.all.min.js').then(()=> {
+        init()
+        bool && $countDom && setTimeout(getCount,0)
+      })
+    }
+  }
+
+  if ('Twikoo' === 'Twikoo' || !true) {
+    if (true) btf.loadComment(document.getElementById('twikoo-wrap'), loadTwikoo)
+    else loadTwikoo(true)
+  } else {
+    window.loadOtherComment = () => {
+      loadTwikoo()
+    }
+  }
+})()</script><script>var gitcalendar = new Vue({
+  el: '#gitcalendar',
+  data: {
+    simplemode: false,
+    user: 'lp-Imagine',
+    fixed: 'fixed',
+    px: 'px',
+    x: '',
+    y: '',
+    span1: '',
+    span2: '',
+    month: ['一月', '二月', '三月', '四月', '五月', '六月', '七月', '八月', '九月', '十月', '十一月', '十二月'],
+    monthchange: [],
+    oneyearbeforeday: '',
+    thisday: '',
+    amonthago: '',
+    aweekago: '',
+    weekdatacore: 0,
+    datacore: 0,
+    total: 0,
+    datadate: '',
+    data: [],
+    positionplusdata: [],
+    firstweek: [],
+    lastweek: [],
+    beforeweek: [],
+    thisweekdatacore: 0,
+    mounthbeforeday: 0,
+    mounthfirstindex: 0,
+    crispedges: 'crispedges',
+    thisdayindex: 0,
+    amonthagoindex: 0,
+    amonthagoweek: [],
+    firstdate: [],
+    first2date: [],
+    montharrbefore: [],
+    monthindex: 0,
+    color: ['rgb(145, 145, 145, 0.2)', '#c6ecc1', '#a0e2bb', '#81D8CF', '#70c5d3', '#60a2ce', '#507ac9', '#4356c5', '#423cc4', '#5b3abc', '#7138b6']
+  },
+  methods: {
+    selectStyle(data, event) {
+      document.querySelector('.angle-wrapper').style.display = 'block'
+      this.span1 = data.date;
+      this.span2 = data.count;
+      this.x = event.clientX - 100;
+      this.y = event.clientY - 60
+    },
+    outStyle() {
+      document.querySelector('.angle-wrapper').style.display = 'none'
+    },
+    thiscolor(x) {
+      if (x === 0) {
+        let i = parseInt(x / 2);
+        return this.color[0]
+      } else if (x < 2) {
+        return this.color[1]
+      } else if (x < 20) {
+        let i = parseInt(x / 2);
+        return this.color[i]
+      } else {
+        return this.color[9]
+      }
+    },
+  }
+});
+var apiurl = 'python-github-calendar-api-zfour.vercel.app' ? 'https://python-github-calendar-api-zfour.vercel.app/api?' : 'https://githubapi.ryanchristian.dev/user/'
+var githubapiurl = apiurl + gitcalendar.user;
+//canvas绘图
+function responsiveChart() {
+  let c = document.getElementById("gitcanvas");
+  if (c) {
+    let cmessage = document.getElementById("gitmessage");
+    let ctx = c.getContext("2d");
+    c.width = document.getElementById("gitcalendarcanvasbox").offsetWidth;
+    let linemaxwitdh = 0.96 * c.width / gitcalendar.data.length;
+    c.height = 9 * linemaxwitdh;
+    let lineminwitdh = 0.8 * linemaxwitdh;
+    let setposition = {
+      x: 0.02 * c.width,
+      y: 0.025 * c.width
+    };
+    for (let week in gitcalendar.data) {
+      weekdata = gitcalendar.data[week];
+      for (let day in weekdata) {
+        let dataitem = {
+          date: "",
+          count: "",
+          x: 0,
+          y: 0
+        };
+        gitcalendar.positionplusdata.push(dataitem);
+        ctx.fillStyle = gitcalendar.thiscolor(weekdata[day].count);
+        setposition.y = Math.round(setposition.y * 100) / 100;
+        dataitem.date = weekdata[day].date;
+        dataitem.count = weekdata[day].count;
+        dataitem.x = setposition.x;
+        dataitem.y = setposition.y;
+        ctx.fillRect(setposition.x, setposition.y, lineminwitdh, lineminwitdh);
+        setposition.y = setposition.y + linemaxwitdh
+      };
+      setposition.y = 0.025 * c.width;
+      setposition.x = setposition.x + linemaxwitdh
+    };
+    ctx.font = "600  Arial";
+    ctx.fillStyle = '#aaa';
+    ctx.fillText("日", 0, 1.9 * linemaxwitdh);
+    ctx.fillText("二", 0, 3.9 * linemaxwitdh);
+    ctx.fillText("四", 0, 5.9 * linemaxwitdh);
+    ctx.fillText("六", 0, 7.9 * linemaxwitdh);
+    let monthindexlist = c.width / 24;
+    for (let index in gitcalendar.monthchange) {
+      ctx.fillText(gitcalendar.monthchange[index], monthindexlist, 0.7 * linemaxwitdh);
+      monthindexlist = monthindexlist + c.width / 12
+    };
+    cmessage.onmousemove = function(event) {
+      document.querySelector('.angle-wrapper').style.display = 'none'
+    };
+    c.onmousemove = function(event) {
+      document.querySelector('.angle-wrapper').style.display = 'none'
+      getMousePos(c, event);
+    };
+
+    function getMousePos(canvas, event) {
+      var rect = canvas.getBoundingClientRect();
+      var x = event.clientX - rect.left * (canvas.width / rect.width);
+      var y = event.clientY - rect.top * (canvas.height / rect.height);
+      //console.log("x:"+x+",y:"+y);
+      for (let item of gitcalendar.positionplusdata) {
+        let lenthx = x - item.x;
+        let lenthy = y - item.y;
+        //console.log(lenthx,lenthy);
+        if (0 < lenthx && lenthx < lineminwitdh) {
+          if (0 < lenthy && lenthy < lineminwitdh) {
+            //console.log(item.date,item.count)
+            document.querySelector('.angle-wrapper').style.display = 'block'
+            gitcalendar.span1 = item.date;
+            gitcalendar.span2 = item.count;
+            gitcalendar.x = event.clientX - 100;
+            gitcalendar.y = event.clientY - 60
+          }
+        }
+        //if(0< x - item.x <lineminwitdh&&0< y - item.y <lineminwitdh){
+        //console.log(item.count,item.date);
+        //}
+      }
+    }
+  }
+}
+//数据统计算法
+function addlastmonth() {
+  if (gitcalendar.thisdayindex === 0) {
+    thisweekcore(52);
+    thisweekcore(51);
+    thisweekcore(50);
+    thisweekcore(49);
+    thisweekcore(48);
+    gitcalendar.thisweekdatacore += gitcalendar.firstdate[6].count;
+    gitcalendar.amonthago = gitcalendar.firstdate[6].date
+  } else {
+    thisweekcore(52);
+    thisweekcore(51);
+    thisweekcore(50);
+    thisweekcore(49);
+    thisweek2core();
+    gitcalendar.amonthago = gitcalendar.first2date[gitcalendar.thisdayindex - 1].date
+  }
+};
+
+function thisweek2core() {
+  for (let i = gitcalendar.thisdayindex - 1; i < gitcalendar.first2date.length; i++) {
+    gitcalendar.thisweekdatacore += gitcalendar.first2date[i].count
+  }
+};
+
+function thisweekcore(index) {
+  for (let item of gitcalendar.data[index]) {
+    gitcalendar.thisweekdatacore += item.count
+  }
+};
+
+function addlastweek() {
+  for (let item of gitcalendar.lastweek) {
+    gitcalendar.weekdatacore += item.count
+  }
+};
+
+function addbeforeweek() {
+  for (let i = gitcalendar.thisdayindex; i < gitcalendar.beforeweek.length; i++) {
+    gitcalendar.weekdatacore += gitcalendar.beforeweek[i].count
+  }
+};
+
+function addweek(data) {
+  if (gitcalendar.thisdayindex === 6) {
+    gitcalendar.aweekago = gitcalendar.lastweek[0].date;
+    addlastweek()
+  } else {
+    lastweek = data.contributions[51];
+    gitcalendar.aweekago = lastweek[gitcalendar.thisdayindex + 1].date;
+    addlastweek();
+    addbeforeweek()
+  }
+}
+
+fetch(githubapiurl)
+  .then(data => data.json())
+  .then(data => {
+    gitcalendar.data = data.contributions;
+    gitcalendar.total = data.total;
+    gitcalendar.first2date = gitcalendar.data[48];
+    gitcalendar.firstdate = gitcalendar.data[47];
+    gitcalendar.firstweek = data.contributions[0];
+    gitcalendar.lastweek = data.contributions[52];
+    gitcalendar.beforeweek = data.contributions[51];
+    gitcalendar.thisdayindex = gitcalendar.lastweek.length - 1;
+    gitcalendar.thisday = gitcalendar.lastweek[gitcalendar.thisdayindex].date;
+    gitcalendar.oneyearbeforeday = gitcalendar.firstweek[0].date;
+    gitcalendar.monthindex = gitcalendar.thisday.substring(5, 7) * 1;
+    gitcalendar.montharrbefore = gitcalendar.month.splice(gitcalendar.monthindex, 12 - gitcalendar.monthindex);
+    gitcalendar.monthchange = gitcalendar.montharrbefore.concat(gitcalendar.month);
+    addweek(data);
+    addlastmonth();
+    responsiveChart();
+  })
+  .catch(function(error) {
+    console.log(error);
+  });
+
+//手机版更换为svg绘制
+if (document.getElementById("gitcalendarcanvasbox") && document.getElementById("gitcalendarcanvasbox").offsetWidth < 500) {
+  gitcalendar.simplemode = false
+}
+
+//当改变窗口大小时重新绘制canvas
+window.onresize = function() {
+  if (gitcalendar.simplemode) responsiveChart()
+}
+
+//解决滚动滑轮时出现的标签显示
+window.onscroll = function() {
+  if (document.querySelector('.angle-wrapper')) {
+    document.querySelector('.angle-wrapper').style.display = 'none'
+  }
+};</script></div><script>window.addEventListener('load', () => {
+  const changeContent = (content) => {
+    if (content === '') return content
+
+    content = content.replace(/<img.*?src="(.*?)"?[^\>]+>/ig, '[图片]') // replace image link
+    content = content.replace(/<a[^>]+?href=["']?([^"']+)["']?[^>]*>([^<]+)<\/a>/gi, '[链接]') // replace url
+    content = content.replace(/<pre><code>.*?<\/pre>/gi, '[代码]') // replace code
+    content = content.replace(/<[^>]+>/g,"") // remove html tag
+
+    if (content.length > 150) {
+      content = content.substring(0,150) + '...'
+    }
+    return content
+  }
+
+  const getComment = () => {
+    const runTwikoo = () => {
+      twikoo.getRecentComments({
+        envId: 'https://twikoo-talks.vercel.app/',
+        region: '',
+        pageSize: 6,
+        includeReply: true
+      }).then(function (res) {
+        const twikooArray = res.map(e => {
+          return {
+            'content': changeContent(e.comment),
+            'avatar': e.avatar,
+            'nick': e.nick,
+            'url': e.url + '#' + e.id,
+            'date': new Date(e.created).toISOString()
+          }
+        })
+
+        saveToLocal.set('twikoo-newest-comments', JSON.stringify(twikooArray), 10/(60*24))
+        generateHtml(twikooArray)
+      }).catch(function (err) {
+        const $dom = document.querySelector('#card-newest-comments .aside-list')
+        $dom.innerHTML= "无法获取评论，请确认相关配置是否正确"
+      })
+    }
+
+    if (typeof twikoo === 'object') {
+      runTwikoo()
+    } else {
+      getScript('https://cdn.jsdelivr.net/npm/twikoo/dist/twikoo.all.min.js').then(runTwikoo)
+    }
+  }
+
+  const generateHtml = array => {
+    let result = ''
+
+    if (array.length) {
+      for (let i = 0; i < array.length; i++) {
+        result += '<div class=\'aside-list-item\'>'
+
+        if (true) {
+          const name = 'data-lazy-src'
+          result += `<a href='${array[i].url}' class='thumbnail'><img ${name}='${array[i].avatar}' alt='${array[i].nick}'></a>`
+        }
+        
+        result += `<div class='content'>
+        <a class='comment' href='${array[i].url}'>${array[i].content}</a>
+        <div class='name'><span>${array[i].nick} / </span><time datetime="${array[i].date}">${btf.diffDate(array[i].date, true)}</time></div>
+        </div></div>`
+      }
+    } else {
+      result += '没有评论'
+    }
+
+    let $dom = document.querySelector('#card-newest-comments .aside-list')
+    $dom.innerHTML= result
+    window.lazyLoadInstance && window.lazyLoadInstance.update()
+    window.pjax && window.pjax.refresh($dom)
+  }
+
+  const newestCommentInit = () => {
+    if (document.querySelector('#card-newest-comments .aside-list')) {
+      const data = saveToLocal.get('twikoo-newest-comments')
+      if (data) {
+        generateHtml(JSON.parse(data))
+      } else {
+        getComment()
+      }
+    }
+  }
+
+  newestCommentInit()
+  document.addEventListener('pjax:complete', newestCommentInit)
+})</script><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="/js/close.js"></script><script defer data-pjax src="/js/maopao.js"></script><script defer src="https://cdn.jsdelivr.net/gh/graingert/wow@1.3.0/dist/wow.min.js"></script><script defer data-pjax src="/js/wow-init.js"></script><script src="https://myhkw.cn/api/player/1618646380121" id="myhk" key="1618646380121" m="1"></script><script defer data-pjax src="https://cdn.jsdelivr.net/gh/xiabo2/CDN@latest/fishes.js"></script><script src="/js/moments.js"></script><canvas class="fireworks" mobile="false"></canvas><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/fireworks.min.js"></script><script id="canvas_nest" defer color="67,173,127" opacity="0.7" zindex="-1" count="99" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/canvas-nest.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful=!0,POWERMODE.shake=!1,POWERMODE.mobile=!1,document.body.addEventListener("input",POWERMODE)</script><script src="//code.tidio.co/bisrc3ghmylr0jd2ikrwcv8xp5i2nkwz.js" async></script><script>function onTidioChatApiReady() {
+  window.tidioChatApi.hide();
+  window.tidioChatApi.on("close", function() {
+    window.tidioChatApi.hide();
+  });
+}
+if (window.tidioChatApi) {
+  window.tidioChatApi.on("ready", onTidioChatApiReady);
+} else {
+  document.addEventListener("tidioChat-ready", onTidioChatApiReady);
+}
+
+var chatBtnFn = () => {
+  document.getElementById("chat_btn").addEventListener("click", function(){
+    window.tidioChatApi.show();
+    window.tidioChatApi.open();
+  });
+}
+chatBtnFn()</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css" media="print" onload='this.media="all"'><script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script><script src="https://cdn.jsdelivr.net/gh/metowolf/MetingJS@1.2/dist/Meting.min.js"></script><script src="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script><script>let pjaxSelectors = [
+  'title',
+  '#config-diff',
+  '#body-wrap',
+  '#rightside-config-hide',
+  '#rightside-config-show',
+  '#web_bg',
+  '.js-pjax'
+]
+
+if (false) {
+  pjaxSelectors.unshift('meta[property="og:image"]', 'meta[property="og:title"]', 'meta[property="og:url"]')
+}
+
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: false,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+  //- document.querySelectorAll("script[data-pjax], .pjax-reload script").forEach((item) => {
+  //-   const newScript = document.createElement("script");
+  //-   const content = item.text || item.textContent || item.innerHTML || "";
+  //-   Array.from(item.attributes).forEach((attr) =>
+  //-   newScript.setAttribute(attr.name, attr.value));
+  //-   newScript.appendChild(document.createTextNode(content));
+  //-   item.parentNode.replaceChild(newScript, item);
+  //- });
+
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+  typeof chatBtnFn === 'function' && chatBtnFn()
+  typeof panguInit === 'function' && panguInit()
+
+  if (typeof gtag === 'function') {
+    gtag('config', '', {'page_path': window.location.pathname});
+  }
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // Analytics
+  if (false) {
+    MtaH5.pgv()
+  }
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+
+  typeof preloader === 'object' && preloader.endLoading()
+})
+
+
+document.addEventListener('pjax:send', function () {
+  typeof preloader === 'object' && preloader.initLoading()
+  
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
+
+  typeof typed === 'object' && typed.destroy()
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+
+})
+
+document.addEventListener('pjax:error', (e) => {
+  if (e.request.status === 404) {
+    pjax.loadUrl('/404.html')
+  }
+})</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><script async src="//at.alicdn.com/t/font_2032782_8d5kxvn09md.js"></script></body></html>

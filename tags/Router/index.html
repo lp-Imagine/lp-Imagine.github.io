@@ -1,0 +1,610 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>标签: Router | IMAGINE</title><meta name="keywords" content="IMAGINE,Html,Css,JavaScript,Vue,React,NodeJs,Hexo,Butterfly"><meta name="author" content="Peng"><meta name="copyright" content="Peng"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="随笔记录搬砖日常"><meta property="og:type" content="website"><meta property="og:title" content="IMAGINE"><meta property="og:url" content="http://imagineblog.host/tags/Router/index.html"><meta property="og:site_name" content="IMAGINE"><meta property="og:description" content="随笔记录搬砖日常"><meta property="og:locale" content="zh_CN"><meta property="og:image" content="http://imagineblog.host/img/avatar.jpg"><meta property="article:author" content="Peng"><meta property="article:tag" content="IMAGINE,Html,Css,JavaScript,Vue,React,NodeJs,Hexo,Butterfly"><meta name="twitter:card" content="summary"><meta name="twitter:image" content="http://imagineblog.host/img/avatar.jpg"><link rel="shortcut icon" href="https://lovelijunyi.gitee.io/img/avatar.gif"><link rel="canonical" href="http://imagineblog.host/tags/Router/"><link rel="preconnect" href="//cdn.jsdelivr.net"><link rel="preconnect" href="//hm.baidu.com"><link rel="preconnect" href="//fonts.googleapis.com" crossorigin=""><link rel="preconnect" href="//busuanzi.ibruce.info"><meta name="google-site-verification" content="oUu4V6mTgP_CWLbYPUuUK0dzxO1r5vMPXCM6QXwiOv8"><meta name="baidu-site-verification" content="code-mOtCM04zOU"><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload='this.media="all"'><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.css" media="print" onload='this.media="all"'><script>var _hmt=_hmt||[];!function(){var e=document.createElement("script");e.src="https://hm.baidu.com/hm.js?6ede5b235a26f80d0b78937205b49f6f";var t=document.getElementsByTagName("script")[0];t.parentNode.insertBefore(e,t)}()</script><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Titillium+Web&amp;display=swap" media="print" onload='this.media="all"'><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":200},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"limitCount":50,"languages":{"author":"作者: Peng","link":"链接: ","source":"来源: IMAGINE","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。"}},
+  lightbox: 'mediumZoom',
+  Snackbar: {"chs_to_cht":"你已切换为繁体","cht_to_chs":"你已切换为简体","day_to_night":"你已切换为深色模式","night_to_day":"你已切换为浅色模式","bgLight":"#00c4b6","bgDark":"#121212","position":"top-right"},
+  source: {
+    jQuery: 'https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js',
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+    },
+    fancybox: {
+      js: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css'
+    }
+  },
+  isPhotoFigcaption: true,
+  islazyload: true,
+  isanchor: true
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE={isPost:!1,isHome:!1,isHighlightShrink:!1,isToc:!1,postUpdate:"2022-08-31 16:05:31"}</script><noscript><style>#nav{opacity:1}.justified-gallery img{opacity:1}#post-meta time,#recent-posts time{display:inline!important}</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          const now = new Date()
+          const hour = now.getHours()
+          const isNight = hour <= 6 || hour >= 18
+          if (t === undefined) isNight ? activateDarkMode() : activateLightMode()
+          else if (t === 'light') activateLightMode()
+          else activateDarkMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const fontSizeVal = saveToLocal.get('global-font-size')
+    if (fontSizeVal !== undefined) {
+      document.documentElement.style.setProperty('--global-font-size', fontSizeVal + 'px')
+    }
+    })(window)</script><link rel="stylesheet" href="/css/custom.css" media="defer" onload='this.media="all"'><link rel="stylesheet" href="//at.alicdn.com/t/font_2492407_3wz9sdgpeam.css"><style>#toggle-sidebar{bottom:80px}</style><link rel="stylesheet" href="/css/macblack.css"><link rel="stylesheet" href="/css/veditor.css"><link rel="stylesheet" href="/css/close.css"><link rel="stylesheet" href="/css/iconColor.css"><link rel="stylesheet" href="/css/copyright.css"><link rel="stylesheet" href="/css/notice.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/HexoPlusPlus/HexoPlusPlus@latest/talk.css"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" media="defer" onload='this.media="all"'><script src="https://cdn.jsdelivr.net/npm/echarts@4.7.0/dist/echarts.min.js"></script><script src="https://cdn.jsdelivr.net/npm/echarts@4.7.0/map/js/china.js"></script><script src="https://cdn.jsdelivr.net/gh/HexoPlusPlus/HexoPlusPlus@latest/talk_user.js"></script><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/l-lin/font-awesome-animation/dist/font-awesome-animation.min.css" media="defer" onload='this.media="all"'><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-butterfly-tag-plugins-plus@latest/lib/tag_plugins.min.css" media="defer" onload='this.media="all"'><script async src="https://cdn.jsdelivr.net/npm/hexo-butterfly-tag-plugins-plus@latest/lib/carousel-touch.min.js"></script><meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="IMAGINE" type="application/atom+xml"></head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="author-avatar"><img class="avatar-img" data-lazy-src="/img/avatar.jpg" onerror='onerror=null,src="/img/friend_404.gif"' alt="avatar"></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">37</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">标签</div><div class="length-num">20</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">分类</div><div class="length-num">14</div></a></div></div></div><hr><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw iconfont icon-zhuye"></i> <span>主页</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw iconfont icon-mulu1"></i> <span>目录</span><i class="fas fa-chevron-down expand hide"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/archives/"><i class="fa-fw iconfont icon-guidang1"></i> <span>归档</span></a></li><li><a class="site-page" href="/tags/"><i class="fa-fw iconfont icon-biaoqian"></i> <span>标签</span></a></li><li><a class="site-page" href="/categories/"><i class="fa-fw iconfont icon-category"></i> <span>分类</span></a></li><li><a class="site-page" href="/collect/"><i class="fa-fw iconfont icon-shoucang"></i> <span>收藏</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw iconfont icon-yule"></i> <span>清单</span><i class="fas fa-chevron-down expand hide"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/playlist/"><i class="fa-fw iconfont icon-gedan"></i> <span>歌单</span></a></li><li><a class="site-page" href="/books/"><i class="fa-fw iconfont icon-yuedumoshi"></i> <span>书单</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw iconfont icon-caozuojiemiantubiao---_gongju"></i> <span>工具</span><i class="fas fa-chevron-down expand hide"></i></a><ul class="menus_item_child"><li><a class="site-page" target="_blank" rel="noopener" href="https://imgtu.com/"><i class="fa-fw iconfont icon-cloud"></i> <span>imgtu</span></a></li><li><a class="site-page" target="_blank" rel="noopener" href="https://www.leancloud.cn/"><i class="fa-fw iconfont icon-pinglun"></i> <span>LeanCloud</span></a></li><li><a class="site-page" target="_blank" rel="noopener" href="https://www.cloudflare.com/zh-cn/"><i class="fa-fw iconfont icon-cloudcomputing"></i> <span>Cloudflare</span></a></li><li><a class="site-page" target="_blank" rel="noopener" href="https://vercel.com/lp-imagine"><i class="fa-fw iconfont icon-webx"></i> <span>Vercel</span></a></li><li><a class="site-page" target="_blank" rel="noopener" href="https://cloud.mongodb.com/v2#/org/610751ff4218af3732524482/projects"><i class="fa-fw iconfont icon-mongdbwapian"></i> <span>MongoDB</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw iconfont icon-guanyu"></i> <span>关于</span><i class="fas fa-chevron-down expand hide"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/about/"><i class="fa-fw iconfont icon-iconzhengli-"></i> <span>关于我</span></a></li><li><a class="site-page" href="/message/"><i class="fa-fw iconfont icon-liuyanmoban"></i> <span>留言板</span></a></li><li><a class="site-page" href="/talks/"><i class="fa-fw iconfont icon-fengche"></i> <span>说说</span></a></li><li><a class="site-page" href="/link/"><i class="fa-fw iconfont icon-youqinglianjie"></i> <span>友情链接</span></a></li><li><a class="site-page" href="/friends_link"><i class="fa-fw iconfont icon-pengyouquan"></i> <span>友链朋友圈</span></a></li><li><a class="site-page" target="_blank" rel="noopener" href="https://imagine-nav.vercel.app/"><i class="fa-fw iconfont icon-daohang1"></i> <span>导航站</span></a></li><li><a class="site-page" target="_blank" rel="noopener" href="https://imagine.imagineblog.workers.dev/hpp/admin/login"><i class="fa-fw iconfont icon-xiezuo"></i> <span>后台</span></a></li></ul></div></div></div></div><div class="page" id="body-wrap"><header class="not-home-page" id="page-header"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">IMAGINE</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw iconfont icon-zhuye"></i> <span>主页</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw iconfont icon-mulu1"></i> <span>目录</span><i class="fas fa-chevron-down expand hide"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/archives/"><i class="fa-fw iconfont icon-guidang1"></i> <span>归档</span></a></li><li><a class="site-page" href="/tags/"><i class="fa-fw iconfont icon-biaoqian"></i> <span>标签</span></a></li><li><a class="site-page" href="/categories/"><i class="fa-fw iconfont icon-category"></i> <span>分类</span></a></li><li><a class="site-page" href="/collect/"><i class="fa-fw iconfont icon-shoucang"></i> <span>收藏</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw iconfont icon-yule"></i> <span>清单</span><i class="fas fa-chevron-down expand hide"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/playlist/"><i class="fa-fw iconfont icon-gedan"></i> <span>歌单</span></a></li><li><a class="site-page" href="/books/"><i class="fa-fw iconfont icon-yuedumoshi"></i> <span>书单</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw iconfont icon-caozuojiemiantubiao---_gongju"></i> <span>工具</span><i class="fas fa-chevron-down expand hide"></i></a><ul class="menus_item_child"><li><a class="site-page" target="_blank" rel="noopener" href="https://imgtu.com/"><i class="fa-fw iconfont icon-cloud"></i> <span>imgtu</span></a></li><li><a class="site-page" target="_blank" rel="noopener" href="https://www.leancloud.cn/"><i class="fa-fw iconfont icon-pinglun"></i> <span>LeanCloud</span></a></li><li><a class="site-page" target="_blank" rel="noopener" href="https://www.cloudflare.com/zh-cn/"><i class="fa-fw iconfont icon-cloudcomputing"></i> <span>Cloudflare</span></a></li><li><a class="site-page" target="_blank" rel="noopener" href="https://vercel.com/lp-imagine"><i class="fa-fw iconfont icon-webx"></i> <span>Vercel</span></a></li><li><a class="site-page" target="_blank" rel="noopener" href="https://cloud.mongodb.com/v2#/org/610751ff4218af3732524482/projects"><i class="fa-fw iconfont icon-mongdbwapian"></i> <span>MongoDB</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw iconfont icon-guanyu"></i> <span>关于</span><i class="fas fa-chevron-down expand hide"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/about/"><i class="fa-fw iconfont icon-iconzhengli-"></i> <span>关于我</span></a></li><li><a class="site-page" href="/message/"><i class="fa-fw iconfont icon-liuyanmoban"></i> <span>留言板</span></a></li><li><a class="site-page" href="/talks/"><i class="fa-fw iconfont icon-fengche"></i> <span>说说</span></a></li><li><a class="site-page" href="/link/"><i class="fa-fw iconfont icon-youqinglianjie"></i> <span>友情链接</span></a></li><li><a class="site-page" href="/friends_link"><i class="fa-fw iconfont icon-pengyouquan"></i> <span>友链朋友圈</span></a></li><li><a class="site-page" target="_blank" rel="noopener" href="https://imagine-nav.vercel.app/"><i class="fa-fw iconfont icon-daohang1"></i> <span>导航站</span></a></li><li><a class="site-page" target="_blank" rel="noopener" href="https://imagine.imagineblog.workers.dev/hpp/admin/login"><i class="fa-fw iconfont icon-xiezuo"></i> <span>后台</span></a></li></ul></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="page-site-info"><h1 id="site-title">Router</h1></div></header><main class="layout" id="content-inner"><div id="tag"><div class="article-sort-title">标签 - Router</div><div class="article-sort"><div class="article-sort-item year">2020</div><div class="article-sort-item"><a class="article-sort-item-img" href="/bhkocy/" title="前端路由实现"><img data-lazy-src="https://z3.ax1x.com/2021/07/20/Wttemt.jpg" alt="前端路由实现" onerror='this.onerror=null,this.src="/img/banner/02.jpg"'></a><div class="article-sort-item-info"><div class="article-sort-item-time"><i class="far fa-calendar-alt"></i><time class="post-meta-date-created" datetime="2020-10-03T02:18:01.000Z" title="发表于 2020-10-03 10:18:01">2020-10-03</time></div><a class="article-sort-item-title" href="/bhkocy/" title="前端路由实现">前端路由实现</a></div></div></div><nav id="pagination"><div class="pagination"><span class="page-number current">1</span></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="card-info-avatar is-center"><img class="avatar-img" data-lazy-src="/img/avatar.jpg" onerror='this.onerror=null,this.src="/img/friend_404.gif"' alt="avatar"><div class="author-info__name">Peng</div><div class="author-info__description">随笔记录搬砖日常</div></div><div class="card-info-data"><div class="card-info-data-item is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">37</div></a></div><div class="card-info-data-item is-center"><a href="/tags/"><div class="headline">标签</div><div class="length-num">20</div></a></div><div class="card-info-data-item is-center"><a href="/categories/"><div class="headline">分类</div><div class="length-num">14</div></a></div></div><a class="button--animated" id="card-info-btn" href="http://imagineblog.host/about/"><i class="fas fa-heart"></i><span>About me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://www.cnblogs.com/imagine-lp/" target="_blank" title="博客园"><i class="iconfont icon-icon9-blog"></i></a><a class="social-icon" href="https://gitee.com/lp-Imagine" target="_blank" title="Gitee"><i class="iconfont icon-Gitee"></i></a><a class="social-icon" href="https://github.com/lp-Imagine" target="_blank" title="GitHub"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:luopeng101297@163.com" target="_blank" title="Email"><i class="iconfont icon-youxiang"></i></a></div></div><div class="sticky_layout"><div class="card-widget card-weibo"><div class="card-content"><div class="item-headline"><i class="fab fa-weibo"></i><span>微博热搜</span></div><div id="weibo-container" style="width:100%;height:150px;font-size:95%"></div></div></div><script defer data-pjax="data-pjax" src="/js/card_weibo.js"></script><div class="card-widget card-clock"><div id="clock"><img v-if="clockshow == &quot;false&quot;" alt="" src="https://i.loli.net/2021/04/01/JnT3Q8iq2plVdSM.gif" height="120px" width="100%"><table class="clock" v-if="clockshow"><tbody><tr><td class="clockdate">{{date}}</td><td class="weatherimg"><img id="weatherimg" :src="weatherimg" alt=""></td><td class="temperature">{{temperature}}</td><td class="humidityimg"><img id="humidityimg" :src="humidityimg" alt=""></td><td class="humidity">{{humidity}}</td></tr><tr class="time"><td colspan="5">{{time}}</td></tr><tr><td class="usaqi" colspan="1"><span>{{ip}}</span></td><td class="city" colspan="2">{{city}}</td><td class="daylight" colspan="2">{{daylight}}</td></tr></tbody></table></div></div><script defer data-pjax="data-pjax" src="/js/card_clock.js"></script><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/scroll_select/" title="解决Element-ui选择器（ElSelect）因数据量大导致页面卡顿的问题"><img data-lazy-src="/img/banner/02.jpg" onerror='this.onerror=null,this.src="/img/banner/02.jpg"' alt="解决Element-ui选择器（ElSelect）因数据量大导致页面卡顿的问题"></a><div class="content"><a class="title" href="/scroll_select/" title="解决Element-ui选择器（ElSelect）因数据量大导致页面卡顿的问题">解决Element-ui选择器（ElSelect）因数据量大导致页面卡顿的问题</a><time datetime="2022-08-31T07:30:45.000Z" title="发表于 2022-08-31 15:30:45">2022-08-31</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/form_component/" title="el-form表单封装"><img data-lazy-src="/img/banner/02.jpg" onerror='this.onerror=null,this.src="/img/banner/02.jpg"' alt="el-form表单封装"></a><div class="content"><a class="title" href="/form_component/" title="el-form表单封装">el-form表单封装</a><time datetime="2022-01-15T07:30:45.000Z" title="发表于 2022-01-15 15:30:45">2022-01-15</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/deploy/" title="Hexo部署到个人云服务器"><img data-lazy-src="https://cdn.jsdelivr.net/gh/lp-Imagine/lp-Imagine@main/images/1642055218000.jpeg" onerror='this.onerror=null,this.src="/img/banner/02.jpg"' alt="Hexo部署到个人云服务器"></a><div class="content"><a class="title" href="/deploy/" title="Hexo部署到个人云服务器">Hexo部署到个人云服务器</a><time datetime="2022-01-13T05:25:58.000Z" title="发表于 2022-01-13 13:25:58">2022-01-13</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/tagplus/" title="外挂标签"><img data-lazy-src="https://cdn.jsdelivr.net/gh/lp-Imagine/lp-Imagine@main/images/hexo.jpeg" onerror='this.onerror=null,this.src="/img/banner/02.jpg"' alt="外挂标签"></a><div class="content"><a class="title" href="/tagplus/" title="外挂标签">外挂标签</a><time datetime="2021-08-14T03:18:01.000Z" title="发表于 2021-08-14 11:18:01">2021-08-14</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/el/" title="Element-UI问题清单"><img data-lazy-src="https://cdn.jsdelivr.net/gh/lp-Imagine/lp-Imagine@main/images/1628838623000.jpeg" onerror='this.onerror=null,this.src="/img/banner/02.jpg"' alt="Element-UI问题清单"></a><div class="content"><a class="title" href="/el/" title="Element-UI问题清单">Element-UI问题清单</a><time datetime="2021-08-14T02:30:56.000Z" title="发表于 2021-08-14 10:30:56">2021-08-14</time></div></div></div></div><div class="card-widget" id="card-newest-comments"><div class="item-headline"><i class="fas fa-bolt"></i><span>最新评论</span></div><div class="aside-list"><span>正在加载中...</span></div></div><div class="card-widget card-categories"><div class="card-content"><div class="item-headline"><i class="fa fa-folder-open"></i><span>分类</span></div><ul class="card-category-list"><li class="card-category-list-item"><div class="card-category-list-link"><a class="card-category-list-name" href="/categories/CSS/">CSS</a><span class="card-category-list-count">2</span><i class="fa fa-chevron-left" onclick="classifyclick(this)"></i></div></li><ul class="card-post-list child card-category-list child"><li class="card-post-list-item card-category-list-item"><div class="card-post-list-link card-category-list-link"><a class="card-post-name" title="常用的一些CSS样式" href="/common-css/">常用的一些CSS样式</a></div></li><li class="card-post-list-item card-category-list-item"><div class="card-post-list-link card-category-list-link"><a class="card-post-name" title="css水平垂直居中" href="/gqs30l/">css水平垂直居中</a></div></li></ul><li class="card-category-list-item"><div class="card-category-list-link"><a class="card-category-list-name" href="/categories/Chrome/">Chrome</a><span class="card-category-list-count">1</span><i class="fa fa-chevron-left" onclick="classifyclick(this)"></i></div></li><ul class="card-post-list child card-category-list child"><li class="card-post-list-item card-category-list-item"><div class="card-post-list-link card-category-list-link"><a class="card-post-name" title="Chrome Extension（扩展程序）开发" href="/lomf3x/">Chrome Extension（扩展程序）开发</a></div></li></ul><li class="card-category-list-item"><div class="card-category-list-link"><a class="card-category-list-name" href="/categories/ES6/">ES6</a><span class="card-category-list-count">2</span><i class="fa fa-chevron-left" onclick="classifyclick(this)"></i></div></li><ul class="card-post-list child card-category-list child"><li class="card-post-list-item card-category-list-item"><div class="card-post-list-link card-category-list-link"><a class="card-post-name" title="ES6-ES12 特性" href="/eya8ra/">ES6-ES12 特性</a></div></li><li class="card-post-list-item card-category-list-item"><div class="card-post-list-link card-category-list-link"><a class="card-post-name" title="async/await" href="/ilr5wg/">async/await</a></div></li></ul><li class="card-category-list-item"><div class="card-category-list-link"><a class="card-category-list-name" href="/categories/Element-UI/">Element-UI</a><span class="card-category-list-count">1</span><i class="fa fa-chevron-left" onclick="classifyclick(this)"></i></div></li><ul class="card-post-list child card-category-list child"><li class="card-post-list-item card-category-list-item"><div class="card-post-list-link card-category-list-link"><a class="card-post-name" title="Element-UI问题清单" href="/el/">Element-UI问题清单</a></div></li></ul><li class="card-category-list-item"><div class="card-category-list-link"><a class="card-category-list-name" href="/categories/GitHub/">GitHub</a><span class="card-category-list-count">1</span><i class="fa fa-chevron-left" onclick="classifyclick(this)"></i></div></li><ul class="card-post-list child card-category-list child"><li class="card-post-list-item card-category-list-item"><div class="card-post-list-link card-category-list-link"><a class="card-post-name" title="GitHub 精选—前端" href="/ebgc4u/">GitHub 精选—前端</a></div></li></ul><li class="card-category-list-item"><div class="card-category-list-link"><a class="card-category-list-name" href="/categories/Markdown/">Markdown</a><span class="card-category-list-count">1</span><i class="fa fa-chevron-left" onclick="classifyclick(this)"></i></div></li><ul class="card-post-list child card-category-list child"><li class="card-post-list-item card-category-list-item"><div class="card-post-list-link card-category-list-link"><a class="card-post-name" title="Markdown基本语法" href="/ag8qtu/">Markdown基本语法</a></div></li></ul><li class="card-category-list-item"><div class="card-category-list-link"><a class="card-category-list-name" href="/categories/MySQL/">MySQL</a><span class="card-category-list-count">1</span><i class="fa fa-chevron-left" onclick="classifyclick(this)"></i></div></li><ul class="card-post-list child card-category-list child"><li class="card-post-list-item card-category-list-item"><div class="card-post-list-link card-category-list-link"><a class="card-post-name" title="MySQL 数据库常用操作" href="/wsh1gw/">MySQL 数据库常用操作</a></div></li></ul><li class="card-category-list-item"><div class="card-category-list-link"><a class="card-category-list-name" href="/categories/React/">React</a><span class="card-category-list-count">1</span><i class="fa fa-chevron-left" onclick="classifyclick(this)"></i></div></li><ul class="card-post-list child card-category-list child"><li class="card-post-list-item card-category-list-item"><div class="card-post-list-link card-category-list-link"><a class="card-post-name" title="React(一)：核心概念" href="/xu4nht/">React(一)：核心概念</a></div></li></ul><li class="card-category-list-item"><div class="card-category-list-link"><a class="card-category-list-name" href="/categories/Vue/">Vue</a><span class="card-category-list-count">4</span><i class="fa fa-chevron-left" onclick="classifyclick(this)"></i></div></li><ul class="card-post-list child card-category-list child"><li class="card-post-list-item card-category-list-item"><div class="card-post-list-link card-category-list-link"><a class="card-post-name" title="el-form表单封装" href="/form_component/">el-form表单封装</a></div></li><li class="card-post-list-item card-category-list-item"><div class="card-post-list-link card-category-list-link"><a class="card-post-name" title="vue 组件—常用选项(methods、watch、filters、props、computed)" href="/hczb69/">vue 组件—常用选项(methods、watch、filters、props、computed)</a></div></li><li class="card-post-list-item card-category-list-item"><div class="card-post-list-link card-category-list-link"><a class="card-post-name" title="解决 element 表格数据量过大导致页面渲染缓慢、卡顿问题" href="/np4k2h/">解决 element 表格数据量过大导致页面渲染缓慢、卡顿问题</a></div></li><li class="card-post-list-item card-category-list-item"><div class="card-post-list-link card-category-list-link"><a class="card-post-name" title="解决Element-ui选择器（ElSelect）因数据量大导致页面卡顿的问题" href="/scroll_select/">解决Element-ui选择器（ElSelect）因数据量大导致页面卡顿的问题</a></div></li></ul><li class="card-category-list-item"><div class="card-category-list-link"><a class="card-category-list-name" href="/categories/git/">git</a><span class="card-category-list-count">1</span><i class="fa fa-chevron-left" onclick="classifyclick(this)"></i></div></li><ul class="card-post-list child card-category-list child"><li class="card-post-list-item card-category-list-item"><div class="card-post-list-link card-category-list-link"><a class="card-post-name" title="git 命令" href="/egd000/">git 命令</a></div></li></ul><li class="card-category-list-item"><div class="card-category-list-link"><a class="card-category-list-name" href="/categories/hexo/">hexo</a><span class="card-category-list-count">2</span><i class="fa fa-chevron-left" onclick="classifyclick(this)"></i></div></li><ul class="card-post-list child card-category-list child"><li class="card-post-list-item card-category-list-item"><div class="card-post-list-link card-category-list-link"><a class="card-post-name" title="Hexo部署到个人云服务器" href="/deploy/">Hexo部署到个人云服务器</a></div></li><li class="card-post-list-item card-category-list-item"><div class="card-post-list-link card-category-list-link"><a class="card-post-name" title="外挂标签" href="/tagplus/">外挂标签</a></div></li></ul><li class="card-category-list-item"><div class="card-category-list-link"><a class="card-category-list-name" href="/categories/javascript/">javascript</a><span class="card-category-list-count">18</span><i class="fa fa-chevron-left" onclick="classifyclick(this)"></i></div></li><ul class="card-post-list child card-category-list child"><li class="card-post-list-item card-category-list-item"><div class="card-post-list-link card-category-list-link"><a class="card-post-name" title="js笛卡尔积算法" href="/Cartesian-product/">js笛卡尔积算法</a></div></li><li class="card-post-list-item card-category-list-item"><div class="card-post-list-link card-category-list-link"><a class="card-post-name" title="javascript 正则表达式校验" href="/ctko47/">javascript 正则表达式校验</a></div></li><li class="card-post-list-item card-category-list-item"><div class="card-post-list-link card-category-list-link"><a class="card-post-name" title="使用 NProgress 为页面/接口添加加载进度条" href="/cy0ics/">使用 NProgress 为页面/接口添加加载进度条</a></div></li><li class="card-post-list-item card-category-list-item"><div class="card-post-list-link card-category-list-link"><a class="card-post-name" title="Promise(三)：拓展方法实现" href="/ddv8fu/">Promise(三)：拓展方法实现</a></div></li><li class="card-post-list-item card-category-list-item"><div class="card-post-list-link card-category-list-link"><a class="card-post-name" title="JS 声明提升" href="/df4477/">JS 声明提升</a></div></li><li class="card-post-list-item card-category-list-item"><div class="card-post-list-link card-category-list-link"><a class="card-post-name" title="JS forEach 踩坑" href="/ehgc3o/">JS forEach 踩坑</a></div></li><li class="card-post-list-item card-category-list-item"><div class="card-post-list-link card-category-list-link"><a class="card-post-name" title="前端常用公共方法工具类" href="/fk3tzn/">前端常用公共方法工具类</a></div></li><li class="card-post-list-item card-category-list-item"><div class="card-post-list-link card-category-list-link"><a class="card-post-name" title="JS 循环遍历方法" href="/nn7ncb/">JS 循环遍历方法</a></div></li><li class="card-post-list-item card-category-list-item"><div class="card-post-list-link card-category-list-link"><a class="card-post-name" title="JS 合并数组对象中 key 值相同的数据" href="/nt8dtc/">JS 合并数组对象中 key 值相同的数据</a></div></li><li class="card-post-list-item card-category-list-item"><div class="card-post-list-link card-category-list-link"><a class="card-post-name" title="Promise(一)：Promise认识" href="/pnzuz1/">Promise(一)：Promise认识</a></div></li><li class="card-post-list-item card-category-list-item"><div class="card-post-list-link card-category-list-link"><a class="card-post-name" title="数组对象求和" href="/pt9g3x/">数组对象求和</a></div></li><li class="card-post-list-item card-category-list-item"><div class="card-post-list-link card-category-list-link"><a class="card-post-name" title="JavaScript 数组去重" href="/rs7zqd/">JavaScript 数组去重</a></div></li><li class="card-post-list-item card-category-list-item"><div class="card-post-list-link card-category-list-link"><a class="card-post-name" title="js对象排序" href="/sortObj/">js对象排序</a></div></li><li class="card-post-list-item card-category-list-item"><div class="card-post-list-link card-category-list-link"><a class="card-post-name" title="js if/else 语句优化策略" href="/sp8d6i/">js if/else 语句优化策略</a></div></li><li class="card-post-list-item card-category-list-item"><div class="card-post-list-link card-category-list-link"><a class="card-post-name" title="js 深拷贝总结" href="/va1sn5/">js 深拷贝总结</a></div></li><li class="card-post-list-item card-category-list-item"><div class="card-post-list-link card-category-list-link"><a class="card-post-name" title="javascript 之 this 指向问题" href="/vtadwe/">javascript 之 this 指向问题</a></div></li><li class="card-post-list-item card-category-list-item"><div class="card-post-list-link card-category-list-link"><a class="card-post-name" title="Promise(二)：手动实现一个 Promise" href="/ymm751/">Promise(二)：手动实现一个 Promise</a></div></li><li class="card-post-list-item card-category-list-item"><div class="card-post-list-link card-category-list-link"><a class="card-post-name" title="Axios 封装" href="/zw2gqe/">Axios 封装</a></div></li></ul><li class="card-category-list-item"><div class="card-category-list-link"><a class="card-category-list-name" href="/categories/%E6%B5%8F%E8%A7%88%E5%99%A8/">浏览器</a><span class="card-category-list-count">1</span><i class="fa fa-chevron-left" onclick="classifyclick(this)"></i></div></li><ul class="card-post-list child card-category-list child"><li class="card-post-list-item card-category-list-item"><div class="card-post-list-link card-category-list-link"><a class="card-post-name" title="浏览器渲染过程简介" href="/gc6agg/">浏览器渲染过程简介</a></div></li></ul><li class="card-category-list-item"><div class="card-category-list-link"><a class="card-category-list-name" href="/categories/%E8%B7%AF%E7%94%B1/">路由</a><span class="card-category-list-count">1</span><i class="fa fa-chevron-left" onclick="classifyclick(this)"></i></div></li><ul class="card-post-list child card-category-list child"><li class="card-post-list-item card-category-list-item"><div class="card-post-list-link card-category-list-link"><a class="card-post-name" title="前端路由实现" href="/bhkocy/">前端路由实现</a></div></li></ul></ul></div></div><div class="card-widget card-tags"><div class="item-headline"><i class="fas fa-tags"></i><span>标签</span></div><div class="card-tag-cloud"><a href="/tags/git/" style="font-size:1.1em;color:#25a93e">git<sup>1</sup></a><a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size:1.1em;color:#33aa9f">算法<sup>1</sup></a><a href="/tags/Markdown/" style="font-size:1.1em;color:#747f86">Markdown<sup>1</sup></a><a href="/tags/Router/" style="font-size:1.1em;color:#0ebf7b">Router<sup>1</sup></a><a href="/tags/CSS/" style="font-size:1.2em;color:#29569a">CSS<sup>2</sup></a><a href="/tags/javascript/" style="font-size:1.5em;color:#3f0e8e">javascript<sup>17</sup></a><a href="/tags/RegExp/" style="font-size:1.1em;color:#81a83a">RegExp<sup>1</sup></a><a href="/tags/Promise/" style="font-size:1.3em;color:#69af5c">Promise<sup>3</sup></a><a href="/tags/hexo/" style="font-size:1.2em;color:#3c1e2b">hexo<sup>2</sup></a><a href="/tags/GitHub/" style="font-size:1.1em;color:#39a672">GitHub<sup>1</sup></a><a href="/tags/Element-UI/" style="font-size:1.1em;color:#45c564">Element-UI<sup>1</sup></a><a href="/tags/ES6/" style="font-size:1.2em;color:#b71baa">ES6<sup>2</sup></a><a href="/tags/utils/" style="font-size:1.1em;color:#7b6657">utils<sup>1</sup></a><a href="/tags/Vue/" style="font-size:1.4em;color:#b63a72">Vue<sup>4</sup></a><a href="/tags/Browser/" style="font-size:1.1em;color:#4967af">Browser<sup>1</sup></a><a href="/tags/Chrome/" style="font-size:1.1em;color:#0100a6">Chrome<sup>1</sup></a><a href="/tags/Table/" style="font-size:1.1em;color:#1968b1">Table<sup>1</sup></a><a href="/tags/MySQL/" style="font-size:1.1em;color:#4f4608">MySQL<sup>1</sup></a><a href="/tags/React/" style="font-size:1.1em;color:#c4c6b1">React<sup>1</sup></a><a href="/tags/Axios/" style="font-size:1.1em;color:#bf4c12">Axios<sup>1</sup></a></div></div><div class="card-widget card-archives"><div class="item-headline"><i class="fas fa-archive"></i><span>归档</span><a class="card-more-btn" href="/archives/" title="查看更多"><i class="fas fa-angle-right"></i></a></div><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2022/08/"><span class="card-archive-list-date">八月 2022</span><span class="card-archive-list-count">1</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2022/01/"><span class="card-archive-list-date">一月 2022</span><span class="card-archive-list-count">2</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2021/08/"><span class="card-archive-list-date">八月 2021</span><span class="card-archive-list-count">3</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2021/07/"><span class="card-archive-list-date">七月 2021</span><span class="card-archive-list-count">2</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2021/06/"><span class="card-archive-list-date">六月 2021</span><span class="card-archive-list-count">3</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2021/05/"><span class="card-archive-list-date">五月 2021</span><span class="card-archive-list-count">5</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2021/04/"><span class="card-archive-list-date">四月 2021</span><span class="card-archive-list-count">8</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2021/03/"><span class="card-archive-list-date">三月 2021</span><span class="card-archive-list-count">1</span></a></li></ul></div><div class="card-widget card-webinfo"><div class="item-headline"><i class="fas fa-chart-line"></i><span>网站资讯</span></div><div class="webinfo"><div class="webinfo-item"><div class="item-name">文章数目 :</div><div class="item-count">37</div></div><div class="webinfo-item"><div class="item-name">本站总字数 :</div><div class="item-count">76.2k</div></div><div class="webinfo-item"><div class="item-name">本站访客数 :</div><div class="item-count" id="busuanzi_value_site_uv"></div></div><div class="webinfo-item"><div class="item-name">本站总访问量 :</div><div class="item-count" id="busuanzi_value_site_pv"></div></div><div class="webinfo-item"><div class="item-name">最后更新时间 :</div><div class="item-count" id="last-push-date" data-lastpushdate="2022-08-31T08:05:31.545Z"></div></div></div></div></div></div></main><footer id="footer"><div class="github-div"><div></div><div class="github-badge"><a style="color:#fff" rel="external nofollow noopener noreferrer" href="https://hexo.io/" target="_blank" title="由 Hexo 强力驱动" data-pjax-state=""><span class="badge-subject">🌴Powered</span><span class="badge-value bg-blue">Hexo</span></a></div><div class="github-badge"><a style="color:#fff" rel="external nofollow noopener noreferrer" href="https://imgtu.com/" target="_blank" title="本站图片使用路过图床" data-pjax-state=""><span class="badge-subject">🌈Drawing bed</span><span class="badge-value bg-brightgreen">imagtu</span></a></div><div class="github-badge"><a style="color:#fff" rel="external nofollow noopener noreferrer" href="https://github.com/" target="_blank" title="静态网页托管于 GitHub Pages" data-pjax-state=""><span class="badge-subject">📖Pages</span><span class="badge-value bg-brightgreen">GitHub</span></a></div><div class="github-badge"><a style="color:#fff" rel="external nofollow noopener noreferrer" href="https://www.jsdelivr.com/" target="_blank" title="jsDelivr 提供 CDN 加速服务" data-pjax-state=""><span class="badge-subject">🎈CDN</span><span class="badge-value bg-orange">jsDelivr</span></a></div><div class="github-badge"><a style="color:#fff" rel="external nofollow noopener noreferrer" href="https://vercel.com/" target="_blank" title="vercel 提供 CDN 加速服务" data-pjax-state=""><span class="badge-subject">🎃Server</span><span class="badge-value bg-orange">vercel</span></a></div><div class="github-badge"><a style="color:#fff" rel="external nofollow noopener noreferrer" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" title="本站点采用知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议进行许可" data-pjax-state=""><span class="badge-subject"><i class="fa fa-copyright"></i></span><span class="badge-value bg-gradient">BY-NC-SA 4.0</span></a></div><div class="github-badge"><a style="color:#fff" rel="external nofollow noopener noreferrer" href="https://github.com/jerryc127/hexo-theme-butterfly" target="_blank" title="主题" data-pjax-state=""><span class="badge-subject">🎨Theme</span><span class="badge-value bg-blueviolet">Butterfly</span></a></div><div class="github-badge"><a style="color:#fff" rel="external nofollow noopener noreferrer" href="https://beian.miit.gov.cn/" target="_blank" title="本站点已通过工信部ICP备案" data-pjax-state=""><span class="badge-subject">赣ICP备</span><span class="badge-value bg-gradient">2022000236号-1</span></a></div><div class="github-badge"><a style="color:#fff" rel="external nofollow noopener noreferrer" href="http://imagineblog.host" target="_blank" title="copyright" data-pjax-state=""><span class="badge-subject">📑copyright</span><span class="badge-value bg-gradient"><div class="copyright">&copy;2020 - 2022<i id="heartbeat" class="fa fas fa-heartbeat"></i> Peng</div></span></a></div><div class="github-badge"><span class="badge-subject">安全运行</span><a style="text-decoration:none;color:#fff;padding:4px 4px 4px 6px;border-top-right-radius:4px;border-bottom-right-radius:4px;min-width:180px;display:inline-block" id="running-time" rel="external nofollow noopener noreferrer" href="" target="_blank" title="网站运行时间" data-pjax-state=""></a></div><div id="running-time"><script>//- setInterval(()=>{let create_time=Math.round(new Date('2020-02-18 00:00:00').getTime()/1000);let timestamp=Math.round((new Date().getTime()+8*60*60*1000)/1000);let second=timestamp-create_time;let time=new Array(0,0,0,0,0);if(second>=365*24*3600){time[0]=parseInt(second/(365*24*3600));second%=365*24*3600;}if(second>=24*3600){time[1]=parseInt(second/(24*3600));second%=24*3600;}if(second>=3600){time[2]=parseInt(second/3600);second%=3600;}if(second>=60){time[3]=parseInt(second/60);second%=60;}if(second>0){time[4]=second;}currentTimeHtml=time[0]+'年'+time[1]+'天'+time[2]+'时'+time[3]+'分'+time[4]+'秒';document.getElementById("running-time").innerHTML=currentTimeHtml;},1000);
+setInterval(()=>{
+  let create_time=Math.round(new Date('2020-01-03 00:00:00').getTime()/1000);
+  let timestamp=Math.round((new Date().getTime()+8*60*60*1000)/1000);
+  let second=timestamp-create_time;
+  let time=new Array(0,0,0,0,0);
+  if(second>=365*24*3600){
+    time[0]=parseInt(second/(365*24*3600));
+    second%=365*24*3600;
+  }
+  if(second>=24*3600){
+    time[1]=parseInt(second/(24*3600));
+    second%=24*3600;
+  }
+  if(second>=3600){
+    time[2]=parseInt(second/3600);second%=3600;
+  }
+  if(second>=60){
+    time[3]=parseInt(second/60);second%=60;
+  }
+  if(second>0){
+    time[4]=second;
+  }
+  currentTimeHtml=`<span style="color:#fff;"><span style="color:#000">${time[0]}</span> 年 <span style="color:#9253A8">${time[1]}</span> 天 <span style="color:#50ABF1">${time[2]}</span> 时<span style="color:#666">${time[3]}</span> 分<span style="color:red">${time[4]}</span> 秒</span>`;
+  document.getElementById("running-time").innerHTML=currentTimeHtml;
+},1000);</script></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="font-plus" type="button" title="放大字体"><i class="fas fa-plus"></i></button><button id="font-minus" type="button" title="缩小字体"><i class="fas fa-minus"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="chat_btn" type="button" title="SMS"><i class="iconfont icon-sms"></i></button><button id="go-up" type="button" title="回到顶部"><i class="iconfont icon-backtop"></i></button></div></div><div id="local-search"><div class="search-dialog"><div class="search-dialog__title" id="local-search-title">本地搜索</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"></div></div></div><hr><div id="local-search-results"></div><span class="search-close-button"><i class="fas fa-times"></i></span></div><div id="search-mask"></div></div><div><script src="https://cdn.jsdelivr.net/npm/vue@2.6.11"></script><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/medium-zoom/dist/medium-zoom.min.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js"></script><script src="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.js"></script><script>function panguFn () {
+  if (typeof pangu === 'object') pangu.autoSpacingPage()
+  else {
+    getScript('https://cdn.jsdelivr.net/npm/pangu/dist/browser/pangu.min.js')
+      .then(() => {
+        pangu.autoSpacingPage()
+      })
+  }
+}
+
+function panguInit () {
+  if (true){
+    GLOBAL_CONFIG_SITE.isPost && panguFn()
+  } else {
+    panguFn()
+  }
+}
+
+document.addEventListener('DOMContentLoaded', panguInit)</script><script src="/js/search/local-search.js"></script><div class="js-pjax"><script>if (document.getElementsByClassName('mermaid').length) {
+  if (window.mermaidJsLoad) mermaid.init()
+  else {
+    getScript('https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js').then(() => {
+      window.mermaidJsLoad = true
+      mermaid.initialize({
+        theme: 'default',
+      })
+      true && mermaid.init()
+    })
+  }
+}</script><script>var gitcalendar = new Vue({
+  el: '#gitcalendar',
+  data: {
+    simplemode: false,
+    user: 'lp-Imagine',
+    fixed: 'fixed',
+    px: 'px',
+    x: '',
+    y: '',
+    span1: '',
+    span2: '',
+    month: ['一月', '二月', '三月', '四月', '五月', '六月', '七月', '八月', '九月', '十月', '十一月', '十二月'],
+    monthchange: [],
+    oneyearbeforeday: '',
+    thisday: '',
+    amonthago: '',
+    aweekago: '',
+    weekdatacore: 0,
+    datacore: 0,
+    total: 0,
+    datadate: '',
+    data: [],
+    positionplusdata: [],
+    firstweek: [],
+    lastweek: [],
+    beforeweek: [],
+    thisweekdatacore: 0,
+    mounthbeforeday: 0,
+    mounthfirstindex: 0,
+    crispedges: 'crispedges',
+    thisdayindex: 0,
+    amonthagoindex: 0,
+    amonthagoweek: [],
+    firstdate: [],
+    first2date: [],
+    montharrbefore: [],
+    monthindex: 0,
+    color: ['rgb(145, 145, 145, 0.2)', '#c6ecc1', '#a0e2bb', '#81D8CF', '#70c5d3', '#60a2ce', '#507ac9', '#4356c5', '#423cc4', '#5b3abc', '#7138b6']
+  },
+  methods: {
+    selectStyle(data, event) {
+      document.querySelector('.angle-wrapper').style.display = 'block'
+      this.span1 = data.date;
+      this.span2 = data.count;
+      this.x = event.clientX - 100;
+      this.y = event.clientY - 60
+    },
+    outStyle() {
+      document.querySelector('.angle-wrapper').style.display = 'none'
+    },
+    thiscolor(x) {
+      if (x === 0) {
+        let i = parseInt(x / 2);
+        return this.color[0]
+      } else if (x < 2) {
+        return this.color[1]
+      } else if (x < 20) {
+        let i = parseInt(x / 2);
+        return this.color[i]
+      } else {
+        return this.color[9]
+      }
+    },
+  }
+});
+var apiurl = 'python-github-calendar-api-zfour.vercel.app' ? 'https://python-github-calendar-api-zfour.vercel.app/api?' : 'https://githubapi.ryanchristian.dev/user/'
+var githubapiurl = apiurl + gitcalendar.user;
+//canvas绘图
+function responsiveChart() {
+  let c = document.getElementById("gitcanvas");
+  if (c) {
+    let cmessage = document.getElementById("gitmessage");
+    let ctx = c.getContext("2d");
+    c.width = document.getElementById("gitcalendarcanvasbox").offsetWidth;
+    let linemaxwitdh = 0.96 * c.width / gitcalendar.data.length;
+    c.height = 9 * linemaxwitdh;
+    let lineminwitdh = 0.8 * linemaxwitdh;
+    let setposition = {
+      x: 0.02 * c.width,
+      y: 0.025 * c.width
+    };
+    for (let week in gitcalendar.data) {
+      weekdata = gitcalendar.data[week];
+      for (let day in weekdata) {
+        let dataitem = {
+          date: "",
+          count: "",
+          x: 0,
+          y: 0
+        };
+        gitcalendar.positionplusdata.push(dataitem);
+        ctx.fillStyle = gitcalendar.thiscolor(weekdata[day].count);
+        setposition.y = Math.round(setposition.y * 100) / 100;
+        dataitem.date = weekdata[day].date;
+        dataitem.count = weekdata[day].count;
+        dataitem.x = setposition.x;
+        dataitem.y = setposition.y;
+        ctx.fillRect(setposition.x, setposition.y, lineminwitdh, lineminwitdh);
+        setposition.y = setposition.y + linemaxwitdh
+      };
+      setposition.y = 0.025 * c.width;
+      setposition.x = setposition.x + linemaxwitdh
+    };
+    ctx.font = "600  Arial";
+    ctx.fillStyle = '#aaa';
+    ctx.fillText("日", 0, 1.9 * linemaxwitdh);
+    ctx.fillText("二", 0, 3.9 * linemaxwitdh);
+    ctx.fillText("四", 0, 5.9 * linemaxwitdh);
+    ctx.fillText("六", 0, 7.9 * linemaxwitdh);
+    let monthindexlist = c.width / 24;
+    for (let index in gitcalendar.monthchange) {
+      ctx.fillText(gitcalendar.monthchange[index], monthindexlist, 0.7 * linemaxwitdh);
+      monthindexlist = monthindexlist + c.width / 12
+    };
+    cmessage.onmousemove = function(event) {
+      document.querySelector('.angle-wrapper').style.display = 'none'
+    };
+    c.onmousemove = function(event) {
+      document.querySelector('.angle-wrapper').style.display = 'none'
+      getMousePos(c, event);
+    };
+
+    function getMousePos(canvas, event) {
+      var rect = canvas.getBoundingClientRect();
+      var x = event.clientX - rect.left * (canvas.width / rect.width);
+      var y = event.clientY - rect.top * (canvas.height / rect.height);
+      //console.log("x:"+x+",y:"+y);
+      for (let item of gitcalendar.positionplusdata) {
+        let lenthx = x - item.x;
+        let lenthy = y - item.y;
+        //console.log(lenthx,lenthy);
+        if (0 < lenthx && lenthx < lineminwitdh) {
+          if (0 < lenthy && lenthy < lineminwitdh) {
+            //console.log(item.date,item.count)
+            document.querySelector('.angle-wrapper').style.display = 'block'
+            gitcalendar.span1 = item.date;
+            gitcalendar.span2 = item.count;
+            gitcalendar.x = event.clientX - 100;
+            gitcalendar.y = event.clientY - 60
+          }
+        }
+        //if(0< x - item.x <lineminwitdh&&0< y - item.y <lineminwitdh){
+        //console.log(item.count,item.date);
+        //}
+      }
+    }
+  }
+}
+//数据统计算法
+function addlastmonth() {
+  if (gitcalendar.thisdayindex === 0) {
+    thisweekcore(52);
+    thisweekcore(51);
+    thisweekcore(50);
+    thisweekcore(49);
+    thisweekcore(48);
+    gitcalendar.thisweekdatacore += gitcalendar.firstdate[6].count;
+    gitcalendar.amonthago = gitcalendar.firstdate[6].date
+  } else {
+    thisweekcore(52);
+    thisweekcore(51);
+    thisweekcore(50);
+    thisweekcore(49);
+    thisweek2core();
+    gitcalendar.amonthago = gitcalendar.first2date[gitcalendar.thisdayindex - 1].date
+  }
+};
+
+function thisweek2core() {
+  for (let i = gitcalendar.thisdayindex - 1; i < gitcalendar.first2date.length; i++) {
+    gitcalendar.thisweekdatacore += gitcalendar.first2date[i].count
+  }
+};
+
+function thisweekcore(index) {
+  for (let item of gitcalendar.data[index]) {
+    gitcalendar.thisweekdatacore += item.count
+  }
+};
+
+function addlastweek() {
+  for (let item of gitcalendar.lastweek) {
+    gitcalendar.weekdatacore += item.count
+  }
+};
+
+function addbeforeweek() {
+  for (let i = gitcalendar.thisdayindex; i < gitcalendar.beforeweek.length; i++) {
+    gitcalendar.weekdatacore += gitcalendar.beforeweek[i].count
+  }
+};
+
+function addweek(data) {
+  if (gitcalendar.thisdayindex === 6) {
+    gitcalendar.aweekago = gitcalendar.lastweek[0].date;
+    addlastweek()
+  } else {
+    lastweek = data.contributions[51];
+    gitcalendar.aweekago = lastweek[gitcalendar.thisdayindex + 1].date;
+    addlastweek();
+    addbeforeweek()
+  }
+}
+
+fetch(githubapiurl)
+  .then(data => data.json())
+  .then(data => {
+    gitcalendar.data = data.contributions;
+    gitcalendar.total = data.total;
+    gitcalendar.first2date = gitcalendar.data[48];
+    gitcalendar.firstdate = gitcalendar.data[47];
+    gitcalendar.firstweek = data.contributions[0];
+    gitcalendar.lastweek = data.contributions[52];
+    gitcalendar.beforeweek = data.contributions[51];
+    gitcalendar.thisdayindex = gitcalendar.lastweek.length - 1;
+    gitcalendar.thisday = gitcalendar.lastweek[gitcalendar.thisdayindex].date;
+    gitcalendar.oneyearbeforeday = gitcalendar.firstweek[0].date;
+    gitcalendar.monthindex = gitcalendar.thisday.substring(5, 7) * 1;
+    gitcalendar.montharrbefore = gitcalendar.month.splice(gitcalendar.monthindex, 12 - gitcalendar.monthindex);
+    gitcalendar.monthchange = gitcalendar.montharrbefore.concat(gitcalendar.month);
+    addweek(data);
+    addlastmonth();
+    responsiveChart();
+  })
+  .catch(function(error) {
+    console.log(error);
+  });
+
+//手机版更换为svg绘制
+if (document.getElementById("gitcalendarcanvasbox") && document.getElementById("gitcalendarcanvasbox").offsetWidth < 500) {
+  gitcalendar.simplemode = false
+}
+
+//当改变窗口大小时重新绘制canvas
+window.onresize = function() {
+  if (gitcalendar.simplemode) responsiveChart()
+}
+
+//解决滚动滑轮时出现的标签显示
+window.onscroll = function() {
+  if (document.querySelector('.angle-wrapper')) {
+    document.querySelector('.angle-wrapper').style.display = 'none'
+  }
+};</script></div><script>window.addEventListener('load', () => {
+  const changeContent = (content) => {
+    if (content === '') return content
+
+    content = content.replace(/<img.*?src="(.*?)"?[^\>]+>/ig, '[图片]') // replace image link
+    content = content.replace(/<a[^>]+?href=["']?([^"']+)["']?[^>]*>([^<]+)<\/a>/gi, '[链接]') // replace url
+    content = content.replace(/<pre><code>.*?<\/pre>/gi, '[代码]') // replace code
+    content = content.replace(/<[^>]+>/g,"") // remove html tag
+
+    if (content.length > 150) {
+      content = content.substring(0,150) + '...'
+    }
+    return content
+  }
+
+  const getComment = () => {
+    const runTwikoo = () => {
+      twikoo.getRecentComments({
+        envId: 'https://twikoo-talks.vercel.app/',
+        region: '',
+        pageSize: 6,
+        includeReply: true
+      }).then(function (res) {
+        const twikooArray = res.map(e => {
+          return {
+            'content': changeContent(e.comment),
+            'avatar': e.avatar,
+            'nick': e.nick,
+            'url': e.url + '#' + e.id,
+            'date': new Date(e.created).toISOString()
+          }
+        })
+
+        saveToLocal.set('twikoo-newest-comments', JSON.stringify(twikooArray), 10/(60*24))
+        generateHtml(twikooArray)
+      }).catch(function (err) {
+        const $dom = document.querySelector('#card-newest-comments .aside-list')
+        $dom.innerHTML= "无法获取评论，请确认相关配置是否正确"
+      })
+    }
+
+    if (typeof twikoo === 'object') {
+      runTwikoo()
+    } else {
+      getScript('https://cdn.jsdelivr.net/npm/twikoo/dist/twikoo.all.min.js').then(runTwikoo)
+    }
+  }
+
+  const generateHtml = array => {
+    let result = ''
+
+    if (array.length) {
+      for (let i = 0; i < array.length; i++) {
+        result += '<div class=\'aside-list-item\'>'
+
+        if (true) {
+          const name = 'data-lazy-src'
+          result += `<a href='${array[i].url}' class='thumbnail'><img ${name}='${array[i].avatar}' alt='${array[i].nick}'></a>`
+        }
+        
+        result += `<div class='content'>
+        <a class='comment' href='${array[i].url}'>${array[i].content}</a>
+        <div class='name'><span>${array[i].nick} / </span><time datetime="${array[i].date}">${btf.diffDate(array[i].date, true)}</time></div>
+        </div></div>`
+      }
+    } else {
+      result += '没有评论'
+    }
+
+    let $dom = document.querySelector('#card-newest-comments .aside-list')
+    $dom.innerHTML= result
+    window.lazyLoadInstance && window.lazyLoadInstance.update()
+    window.pjax && window.pjax.refresh($dom)
+  }
+
+  const newestCommentInit = () => {
+    if (document.querySelector('#card-newest-comments .aside-list')) {
+      const data = saveToLocal.get('twikoo-newest-comments')
+      if (data) {
+        generateHtml(JSON.parse(data))
+      } else {
+        getComment()
+      }
+    }
+  }
+
+  newestCommentInit()
+  document.addEventListener('pjax:complete', newestCommentInit)
+})</script><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="/js/close.js"></script><script defer data-pjax src="/js/maopao.js"></script><script defer src="https://cdn.jsdelivr.net/gh/graingert/wow@1.3.0/dist/wow.min.js"></script><script defer data-pjax src="/js/wow-init.js"></script><script src="https://myhkw.cn/api/player/1618646380121" id="myhk" key="1618646380121" m="1"></script><script defer data-pjax src="https://cdn.jsdelivr.net/gh/xiabo2/CDN@latest/fishes.js"></script><script src="/js/moments.js"></script><canvas class="fireworks" mobile="false"></canvas><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/fireworks.min.js"></script><script id="canvas_nest" defer color="67,173,127" opacity="0.7" zindex="-1" count="99" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/canvas-nest.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful=!0,POWERMODE.shake=!1,POWERMODE.mobile=!1,document.body.addEventListener("input",POWERMODE)</script><script src="//code.tidio.co/bisrc3ghmylr0jd2ikrwcv8xp5i2nkwz.js" async></script><script>function onTidioChatApiReady() {
+  window.tidioChatApi.hide();
+  window.tidioChatApi.on("close", function() {
+    window.tidioChatApi.hide();
+  });
+}
+if (window.tidioChatApi) {
+  window.tidioChatApi.on("ready", onTidioChatApiReady);
+} else {
+  document.addEventListener("tidioChat-ready", onTidioChatApiReady);
+}
+
+var chatBtnFn = () => {
+  document.getElementById("chat_btn").addEventListener("click", function(){
+    window.tidioChatApi.show();
+    window.tidioChatApi.open();
+  });
+}
+chatBtnFn()</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css" media="print" onload='this.media="all"'><script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script><script src="https://cdn.jsdelivr.net/gh/metowolf/MetingJS@1.2/dist/Meting.min.js"></script><script src="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script><script>let pjaxSelectors = [
+  'title',
+  '#config-diff',
+  '#body-wrap',
+  '#rightside-config-hide',
+  '#rightside-config-show',
+  '#web_bg',
+  '.js-pjax'
+]
+
+if (false) {
+  pjaxSelectors.unshift('meta[property="og:image"]', 'meta[property="og:title"]', 'meta[property="og:url"]')
+}
+
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: false,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+  //- document.querySelectorAll("script[data-pjax], .pjax-reload script").forEach((item) => {
+  //-   const newScript = document.createElement("script");
+  //-   const content = item.text || item.textContent || item.innerHTML || "";
+  //-   Array.from(item.attributes).forEach((attr) =>
+  //-   newScript.setAttribute(attr.name, attr.value));
+  //-   newScript.appendChild(document.createTextNode(content));
+  //-   item.parentNode.replaceChild(newScript, item);
+  //- });
+
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+  typeof chatBtnFn === 'function' && chatBtnFn()
+  typeof panguInit === 'function' && panguInit()
+
+  if (typeof gtag === 'function') {
+    gtag('config', '', {'page_path': window.location.pathname});
+  }
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // Analytics
+  if (false) {
+    MtaH5.pgv()
+  }
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+
+  typeof preloader === 'object' && preloader.endLoading()
+})
+
+
+document.addEventListener('pjax:send', function () {
+  typeof preloader === 'object' && preloader.initLoading()
+  
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
+
+  typeof typed === 'object' && typed.destroy()
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+
+})
+
+document.addEventListener('pjax:error', (e) => {
+  if (e.request.status === 404) {
+    pjax.loadUrl('/404.html')
+  }
+})</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><script async src="//at.alicdn.com/t/font_2032782_8d5kxvn09md.js"></script></body></html>
